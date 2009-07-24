@@ -29,6 +29,7 @@ Best practice is to pass a type name mapper object, implementing the interface I
 
 However if the prior version did not use a type name mapper for the changed namespace or type a mapping type finder can be passed to the reader to pass current application types when the old type name is found. The code below shows a sample mapping type finder that will return the current type MyOldNamespaceName.MyOldClassName when the old name MyOldNamespaceName.MyOldClassName is found in the file.
 
+{{{
 public class SampleReaderMappingTypeFinder : IReaderMappingTypeFinder
 {
     public bool CanHandle(string name)
@@ -41,7 +42,7 @@ public class SampleReaderMappingTypeFinder : IReaderMappingTypeFinder
         return typeof(MyNamespace.MyClass);
     }
 }
-
+}}}
 
 New fields
 
