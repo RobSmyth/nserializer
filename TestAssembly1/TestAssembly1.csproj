@@ -1,0 +1,69 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DC35C153-623F-403B-93AD-F39ED62201BD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NSerializer.TestAssembly1</RootNamespace>
+    <AssemblyName>NSerializer.TestAssembly1</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ClassUsingFieldSerialization.cs" />
+    <Compile Include="IMyInterface.cs" />
+    <Compile Include="SerializableClassWithAnInterface.cs" />
+    <Compile Include="SerializableClassWithArrayProperty.cs" />
+    <Compile Include="SerializableClassWithoutProperties.cs" />
+    <Compile Include="SerializableClassWithProperties.cs" />
+    <Compile Include="TestEnumA.cs" />
+    <Compile Include="TestTypeA1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NXmlSerializer\NSerializer.csproj">
+      <Project>{63DDD9CE-E7A7-454F-A0D4-24CF9ECAEFF5}</Project>
+      <Name>NSerializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestAssembly2\TestAssembly2.csproj">
+      <Project>{B158F176-304B-4533-AB92-8A4BFF1D3D24}</Project>
+      <Name>TestAssembly2</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

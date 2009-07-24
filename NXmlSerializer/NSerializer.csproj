@@ -1,0 +1,265 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{63DDD9CE-E7A7-454F-A0D4-24CF9ECAEFF5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NSerializer</RootNamespace>
+    <AssemblyName>NSerializer</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="XML\Readers\PayloadReader.cs" />
+    <Compile Include="XML\Readers\INXmlElementReader.cs" />
+    <Compile Include="XML\Readers\MetaDataReader.cs" />
+    <Compile Include="MigrationDefinitionFactory.cs" />
+    <Compile Include="Migration\Fields\FieldMigrator.cs" />
+    <Compile Include="Migration\Fields\IFieldAction.cs" />
+    <Compile Include="Migration\Fields\IgnoreFieldAction.cs" />
+    <Compile Include="Migration\Fields\SetFieldAction.cs" />
+    <Compile Include="Migration\Fields\IFieldMigrator.cs" />
+    <Compile Include="Migration\TypeNameMapper.cs" />
+    <Compile Include="Migration\Types\ITypeMigrator.cs" />
+    <Compile Include="Migration\MigrationConfigurationException.cs" />
+    <Compile Include="Migration\Fields\RenameFieldAction.cs" />
+    <Compile Include="Migration\Types\TypeMigrator.cs" />
+    <Compile Include="Migration\NullFoundDefinition.cs" />
+    <Compile Include="Migration\VersionComparer.cs" />
+    <Compile Include="Migration\VersionQualifierComparer.cs" />
+    <Compile Include="Properties\AssemblyInfoLocal.cs" />
+    <Compile Include="Framework\Migration\INSerializerMigrator.cs" />
+    <Compile Include="Migration\Fields\FieldDefinition.cs" />
+    <Compile Include="Migration\Fields\FieldRules.cs" />
+    <Compile Include="Migration\FromVersionQualifier.cs" />
+    <Compile Include="Migration\Fields\IFieldDefinition.cs" />
+    <Compile Include="Migration\Fields\IFieldRules.cs" />
+    <Compile Include="Migration\IMigrationDefinition.cs" />
+    <Compile Include="Migration\Types\ITypeDefinition.cs" />
+    <Compile Include="Migration\IVersionQualifier.cs" />
+    <Compile Include="Migration\MigrationRules.cs" />
+    <Compile Include="Migration\IMigrationRulesVerb.cs" />
+    <Compile Include="Migration\IMigrationRulesBuilder.cs" />
+    <Compile Include="Migration\Types\ITypeMigrationRules.cs" />
+    <Compile Include="Migration\Types\ITypeMigrationRulesVerb.cs" />
+    <Compile Include="Migration\IMigrationRules.cs" />
+    <Compile Include="Migration\MigrationScopeRulesVerb.cs" />
+    <Compile Include="Migration\MigrationDefinition.cs" />
+    <Compile Include="Migration\NotSupportedMigrationDefinition.cs" />
+    <Compile Include="Migration\NullMigrationRulesBuilder.cs" />
+    <Compile Include="Migration\PriorToAndIncludingVersionQualifier.cs" />
+    <Compile Include="Migration\Types\TypeDefinition.cs" />
+    <Compile Include="Migration\Types\TypeMigrationRules.cs" />
+    <Compile Include="Migration\NullFieldDefinition.cs" />
+    <Compile Include="NullMigrationDefinition.cs" />
+    <Compile Include="NullTypeDefinition.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Framework\IApplicationObjectsRepository.cs" />
+    <Compile Include="Framework\IDocumentObjectsRepository.cs" />
+    <Compile Include="Framework\IInstanceRepository.cs" />
+    <Compile Include="Framework\Document\IMetaData.cs" />
+    <Compile Include="Framework\IReaderMappingTypeFinder.cs" />
+    <Compile Include="Framework\ITypeNamesCache.cs" />
+    <Compile Include="Framework\ITypeNameMapper.cs" />
+    <Compile Include="Framework\Document\MetaData.cs" />
+    <Compile Include="Framework\NullApplicationObjectRepository.cs" />
+    <Compile Include="Framework\NullDocumentObjectRepository.cs" />
+    <Compile Include="Framework\NullInstanceRepository.cs" />
+    <Compile Include="Framework\NullReaderTypeNameMapper.cs" />
+    <Compile Include="Framework\NullWriterTypeNameMapper.cs" />
+    <Compile Include="Framework\NullTypeNamesCache.cs" />
+    <Compile Include="NXmlReader.cs" />
+    <Compile Include="NXmlWriter.cs" />
+    <Compile Include="Framework\Document\Payload.cs" />
+    <Compile Include="Framework\Document\IMemberValue.cs" />
+    <Compile Include="Wrappers\IStreamWriter.cs" />
+    <Compile Include="Wrappers\StreamWriter.cs" />
+    <Compile Include="XML\Document\Writers\IDocumentWriter.cs" />
+    <Compile Include="XML\Document\Writers\INodeWriter.cs" />
+    <Compile Include="XML\Document\ISerialiserXmlDocument.cs" />
+    <Compile Include="XML\Document\Writers\NXmlDocumentWriter.cs" />
+    <Compile Include="XML\Document\Writers\NXmlNodeWriter.cs" />
+    <Compile Include="XML\Document\Writers\NXmlTypedElementWriter.cs" />
+    <Compile Include="XML\Readers\Members\FieldValue.cs" />
+    <Compile Include="XML\Readers\Members\MembersValue.cs" />
+    <Compile Include="XML\Readers\NXmlCompactElementReader.cs" />
+    <Compile Include="XML\Readers\NXmlElementReader.cs" />
+    <Compile Include="XML\Readers\NXmlNodeAttributes.cs" />
+    <Compile Include="XML\Readers\XmlStreamReader.cs" />
+    <Compile Include="XML\Readers\Values\ArrayOfDoublesReader.cs" />
+    <Compile Include="XML\Readers\Values\NodeAttributesReader.cs" />
+    <Compile Include="XML\Readers\Values\CustomTypeReader.cs" />
+    <Compile Include="XML\Readers\Values\DateTimeReader.cs" />
+    <Compile Include="XML\Readers\Values\DictionaryReader.cs" />
+    <Compile Include="XML\Readers\Values\DoubleReader.cs" />
+    <Compile Include="XML\Readers\Values\EnumReader.cs" />
+    <Compile Include="XML\Readers\Values\AppObjectReader.cs" />
+    <Compile Include="XML\Readers\Values\GuidReader.cs" />
+    <Compile Include="Framework\Readers\IBaseTypeMembersReader.cs" />
+    <Compile Include="Framework\IReadObjectsCache.cs" />
+    <Compile Include="XML\Readers\Values\ListReader.cs" />
+    <Compile Include="XML\Readers\Values\NullReader.cs" />
+    <Compile Include="XML\Readers\Values\ReadObjectsCache.cs" />
+    <Compile Include="XML\Readers\Values\ValueTypeReader.cs" />
+    <Compile Include="XML\Readers\Values\TimeSpanReader.cs" />
+    <Compile Include="XML\Readers\Values\VersionReader.cs" />
+    <Compile Include="TypeFinders\SerializeNameAttribute.cs" />
+    <Compile Include="TypeFinders\CachedTypesFinder.cs" />
+    <Compile Include="TypeFinders\DefaultTypeFinder.cs" />
+    <Compile Include="TypeFinders\GenericTypeFinder.cs" />
+    <Compile Include="TypeFinders\ITypeFinder.cs" />
+    <Compile Include="TypeFinders\ITypesCache.cs" />
+    <Compile Include="Framework\PassOnceNameFilter.cs" />
+    <Compile Include="TypeFinders\TypeFinderConduit.cs" />
+    <Compile Include="TypeFinders\TypeFinder.cs" />
+    <Compile Include="TypeFinders\TypeInAssemblyFinder.cs" />
+    <Compile Include="TypeFinders\TypeInReferencedAssemblyFinder.cs" />
+    <Compile Include="TypeFinders\TypeNameDemangler.cs" />
+    <Compile Include="Exceptions\NXmlReaderFormatException.cs" />
+    <Compile Include="Exceptions\NXmlUnknownTypeException.cs" />
+    <Compile Include="Exceptions\TargetTypeIsNotXmlSerialisableException.cs" />
+    <Compile Include="Exceptions\UnableToReadXMLStreamException.cs" />
+    <Compile Include="Exceptions\UnableToReadXMLTextException.cs" />
+    <Compile Include="Exceptions\NXmlSerializerException.cs" />
+    <Compile Include="XML\Readers\Members\FieldReader.cs" />
+    <Compile Include="Framework\Readers\IMemberReader.cs" />
+    <Compile Include="XML\Readers\Members\MemberReader.cs" />
+    <Compile Include="XML\Readers\Values\ArrayOfObjectsReader.cs" />
+    <Compile Include="XML\Readers\Values\DefaultValueReader.cs" />
+    <Compile Include="TypeFinders\ReaderNameMappingTypeFinder.cs" />
+    <Compile Include="Framework\TypeNamesCache.cs" />
+    <Compile Include="XML\Readers\XmlElementReaderFactory.cs" />
+    <Compile Include="XML\Writers\Members\FieldWriter.cs" />
+    <Compile Include="Framework\Writers\IMemberWriter.cs" />
+    <Compile Include="Framework\Writers\IValueMemberWriter.cs" />
+    <Compile Include="XML\Writers\Members\MemberWriter.cs" />
+    <Compile Include="XML\Writers\Members\NullType.cs" />
+    <Compile Include="Framework\Writers\Values\ArrayOfObjectsWriter.cs" />
+    <Compile Include="Framework\Writers\Values\ClassBaseWriter.cs" />
+    <Compile Include="XML\Writers\Values\ArrayOfDoublesXmlWriter.cs" />
+    <Compile Include="XML\Writers\Values\DefaultValueWriterFactory.cs" />
+    <Compile Include="XML\Writers\Values\DictionaryWriter.cs" />
+    <Compile Include="XML\Writers\Values\DoubleXmlWriter.cs" />
+    <Compile Include="XML\Writers\Values\EnumXmlWriter.cs" />
+    <Compile Include="Framework\Writers\Values\AppObjectWriter.cs" />
+    <Compile Include="Framework\Writers\IBaseTypeMembersWriter.cs" />
+    <Compile Include="Framework\IValuesCache.cs" />
+    <Compile Include="Framework\Writers\Values\ListWriter.cs" />
+    <Compile Include="Framework\Writers\Values\NotSupportedTypesWriter.cs" />
+    <Compile Include="Framework\Writers\Values\NullValueWriter.cs" />
+    <Compile Include="XML\Writers\Values\PrimitiveValueTypeXmlWriter.cs" />
+    <Compile Include="XML\Writers\Values\CustomTypeXmlWriter.cs" />
+    <Compile Include="Framework\Writers\Values\ValueTypeWriter.cs" />
+    <Compile Include="Framework\ValuesCache.cs" />
+    <Compile Include="Framework\Writers\Values\ValueWriterConduit.cs" />
+    <Compile Include="XML\Document\ISerialiserDocument.cs" />
+    <Compile Include="Framework\Document\ISerialiserNode.cs" />
+    <Compile Include="Framework\NSerializerIgnoreAttribute.cs" />
+    <Compile Include="XML\Readers\Values\ClassReader.cs" />
+    <Compile Include="Framework\Readers\IObjectReader.cs" />
+    <Compile Include="Framework\Readers\Values\ObjectReferenceReader.cs" />
+    <Compile Include="XML\Readers\Values\NodeReader.cs" />
+    <Compile Include="Framework\Writers\Values\ClassWriter.cs" />
+    <Compile Include="Framework\Writers\IObjectWriter.cs" />
+    <Compile Include="Framework\Writers\Values\ObjectReferenceWriter.cs" />
+    <Compile Include="XML\NXmlSerializer.cs" />
+    <Compile Include="XML\Readers\Values\PrimitiveValueTypeReader.cs" />
+    <Compile Include="Framework\Writers\Values\ValueWriter.cs" />
+    <Compile Include="Framework\TypeAccessor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AssemblyInfo.cs.tmpl" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="XML\Document\Readers\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+  <Target Name="GetSubversionRevisionNumber">
+    <SvnVersion LocalPath="$(MSBuildProjectDirectory)">
+      <Output TaskParameter="Revision" PropertyName="Revision" />
+    </SvnVersion>
+  </Target>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>$(SolutionDir)..\Lib\TortoiseSVN\subwcrev.exe $(ProjectDir). $(ProjectDir)Properties\AssemblyInfo.cs.tmpl $(ProjectDir)Properties\AssemblyInfo.cs</PreBuildEvent>
+  </PropertyGroup>
+</Project>

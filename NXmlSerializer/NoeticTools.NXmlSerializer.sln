@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSerializer", "NSerializer.csproj", "{63DDD9CE-E7A7-454F-A0D4-24CF9ECAEFF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NXmlSerializer.UATs", "..\UATs\NXmlSerializer.UATs.csproj", "{77F04A17-CD7A-42F0-92B8-42BFB052DD22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSerializer.Tests", "Tests\NSerializer.Tests.csproj", "{1F8B3E5B-7130-4F28-AB02-10F7D6E3E992}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAssembly1", "..\TestAssembly1\TestAssembly1.csproj", "{DC35C153-623F-403B-93AD-F39ED62201BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAssembly2", "..\TestAssembly2\TestAssembly2.csproj", "{B158F176-304B-4533-AB92-8A4BFF1D3D24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAssembly3", "..\TestAssembly3\TestAssembly3.csproj", "{15E96E5A-322B-47A8-A4FC-9B9F94893970}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlSerializer.Tests", "..\XmlSerializer.Tests\XmlSerializer.Tests.csproj", "{12BE492C-097E-40BA-BFA0-1B64F13C32D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migration.Tests", "..\SandPit\Migration.Tests.csproj", "{A0D016CE-3D1F-49CA-84A5-F2BBB2F0AA4C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{63DDD9CE-E7A7-454F-A0D4-24CF9ECAEFF5} = {63DDD9CE-E7A7-454F-A0D4-24CF9ECAEFF5}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63DDD9CE-E7A7-454F-A0D4-24CF9ECAEFF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63DDD9CE-E7A7-454F-A0D4-24CF9ECAEFF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63DDD9CE-E7A7-454F-A0D4-24CF9ECAEFF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63DDD9CE-E7A7-454F-A0D4-24CF9ECAEFF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77F04A17-CD7A-42F0-92B8-42BFB052DD22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77F04A17-CD7A-42F0-92B8-42BFB052DD22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77F04A17-CD7A-42F0-92B8-42BFB052DD22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77F04A17-CD7A-42F0-92B8-42BFB052DD22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F8B3E5B-7130-4F28-AB02-10F7D6E3E992}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F8B3E5B-7130-4F28-AB02-10F7D6E3E992}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F8B3E5B-7130-4F28-AB02-10F7D6E3E992}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F8B3E5B-7130-4F28-AB02-10F7D6E3E992}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC35C153-623F-403B-93AD-F39ED62201BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC35C153-623F-403B-93AD-F39ED62201BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC35C153-623F-403B-93AD-F39ED62201BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC35C153-623F-403B-93AD-F39ED62201BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B158F176-304B-4533-AB92-8A4BFF1D3D24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B158F176-304B-4533-AB92-8A4BFF1D3D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B158F176-304B-4533-AB92-8A4BFF1D3D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B158F176-304B-4533-AB92-8A4BFF1D3D24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15E96E5A-322B-47A8-A4FC-9B9F94893970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15E96E5A-322B-47A8-A4FC-9B9F94893970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15E96E5A-322B-47A8-A4FC-9B9F94893970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15E96E5A-322B-47A8-A4FC-9B9F94893970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12BE492C-097E-40BA-BFA0-1B64F13C32D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12BE492C-097E-40BA-BFA0-1B64F13C32D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12BE492C-097E-40BA-BFA0-1B64F13C32D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12BE492C-097E-40BA-BFA0-1B64F13C32D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0D016CE-3D1F-49CA-84A5-F2BBB2F0AA4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0D016CE-3D1F-49CA-84A5-F2BBB2F0AA4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0D016CE-3D1F-49CA-84A5-F2BBB2F0AA4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0D016CE-3D1F-49CA-84A5-F2BBB2F0AA4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = ..\..
+	EndGlobalSection
+EndGlobal
