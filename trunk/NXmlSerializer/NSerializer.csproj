@@ -102,16 +102,16 @@
     <Compile Include="Framework\IDocumentObjectsRepository.cs" />
     <Compile Include="Framework\IInstanceRepository.cs" />
     <Compile Include="Framework\Document\IMetaData.cs" />
-    <Compile Include="Framework\IReaderMappingTypeFinder.cs" />
-    <Compile Include="Framework\ITypeNamesCache.cs" />
-    <Compile Include="Framework\ITypeNameMapper.cs" />
+    <Compile Include="TypeFinders\IReaderMappingTypeFinder.cs" />
+    <Compile Include="TypeFinders\ITypeNamesCache.cs" />
+    <Compile Include="TypeFinders\ITypeNameMapper.cs" />
     <Compile Include="Framework\Document\MetaData.cs" />
     <Compile Include="Framework\NullApplicationObjectRepository.cs" />
     <Compile Include="Framework\NullDocumentObjectRepository.cs" />
     <Compile Include="Framework\NullInstanceRepository.cs" />
-    <Compile Include="Framework\NullReaderTypeNameMapper.cs" />
-    <Compile Include="Framework\NullWriterTypeNameMapper.cs" />
-    <Compile Include="Framework\NullTypeNamesCache.cs" />
+    <Compile Include="TypeFinders\NullReaderTypeNameMapper.cs" />
+    <Compile Include="TypeFinders\NullWriterTypeNameMapper.cs" />
+    <Compile Include="TypeFinders\NullTypeNamesCache.cs" />
     <Compile Include="NXmlReader.cs" />
     <Compile Include="NXmlWriter.cs" />
     <Compile Include="Framework\Document\Payload.cs" />
@@ -171,7 +171,7 @@
     <Compile Include="XML\Readers\Values\ArrayOfObjectsReader.cs" />
     <Compile Include="XML\Readers\Values\DefaultValueReader.cs" />
     <Compile Include="TypeFinders\ReaderNameMappingTypeFinder.cs" />
-    <Compile Include="Framework\TypeNamesCache.cs" />
+    <Compile Include="TypeFinders\TypeNamesCache.cs" />
     <Compile Include="XML\Readers\XmlElementReaderFactory.cs" />
     <Compile Include="XML\Writers\Members\FieldWriter.cs" />
     <Compile Include="Framework\Writers\IMemberWriter.cs" />
@@ -209,7 +209,7 @@
     <Compile Include="XML\NXmlSerializer.cs" />
     <Compile Include="XML\Readers\Values\PrimitiveValueTypeReader.cs" />
     <Compile Include="Framework\Writers\Values\ValueWriter.cs" />
-    <Compile Include="Framework\TypeAccessor.cs" />
+    <Compile Include="TypeFinders\TypeAccessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AssemblyInfo.cs.tmpl" />
