@@ -21,7 +21,6 @@
 using System;
 using System.Reflection;
 using NSerializer.Exceptions;
-using NSerializer.Framework;
 
 
 namespace NSerializer.Types
