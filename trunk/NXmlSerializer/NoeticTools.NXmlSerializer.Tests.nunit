@@ -1,0 +1,12 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Debug" />
+  <Config name="Debug" binpathtype="Auto">
+    <assembly path="..\bin\NoeticTools.NXmlSerializer.dll" />
+    <assembly path="Tests\..\..\bin\Tests\NoeticTools.NXmlSerializer.Tests.dll" />
+    <assembly path="Tests\bin\Tests\NoeticTools.NXmlSerializer.Tests.dll" />
+  </Config>
+  <Config name="Release" binpathtype="Auto">
+    <assembly path="bin\NoeticTools.NXmlSerializer.dll" />
+    <assembly path="Tests\bin\Tests\NoeticTools.NXmlSerializer.Tests.dll" />
+  </Config>
+</NUnitProject>

@@ -1,0 +1,60 @@
+#region Copyright
+
+/*---------------------------------------------------------------------------
+ * The contents of this file are subject to the Mozilla Public License
+ * Version 1.1 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ * 
+ * http://www.mozilla.org/MPL/
+ * 
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+ * License for the specific language governing rights and limitations under 
+ * the License.
+ * 
+ * The Initial Developer of the Original Code is Robert Smyth.
+ * Portions created by Robert Smyth are Copyright (C) 2008.
+ * 
+ * All Rights Reserved.
+ *---------------------------------------------------------------------------*/
+
+#endregion Copyright
+
+using System.Reflection;
+using NXmlSerializer.XML;
+
+
+namespace NXmlSerializer.TypeHandling
+{
+    public class TypeOptions
+    {
+        private readonly SerializeOption options;
+
+        public TypeOptions(ICustomAttributeProvider type)
+        {
+            NXmlSerializableAttribute[] attributes = (NXmlSerializableAttribute[])
+                                                     type.GetCustomAttributes(typeof (NXmlSerializableAttribute), false);
+
+            options = SerializeOption.None;
+            foreach (NXmlSerializableAttribute attribute in attributes)
+            {
+                options |= attribute.Options;
+            }
+
+            if (options == SerializeOption.None)
+            {
+                options = SerializeOption.Fields;
+            }
+        }
+
+        public bool UsesFields
+        {
+            get { return (options & SerializeOption.Fields) != 0; }
+        }
+
+        public bool UsePublicProperties
+        {
+            get { return (options & SerializeOption.PublicProperties) != 0; }
+        }
+    }
+}

@@ -1,0 +1,106 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1F8B3E5B-7130-4F28-AB02-10F7D6E3E992}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NSerializer.Tests</RootNamespace>
+    <AssemblyName>Tests.NSerializer</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Tests\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Tests\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NMock2, Version=1.0.2313.18049, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\NMock2.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.0.2, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MockingTestFixture.cs" />
+    <Compile Include="NullInstanceRepositoryTests.cs" />
+    <Compile Include="NXmlTestFixtureBase.cs" />
+    <Compile Include="NXmlWriterTests.cs" />
+    <Compile Include="XML\Readers\MetaDataReaderTests.cs" />
+    <Compile Include="XML\Readers\NodeAttributesReaderTests.cs" />
+    <Compile Include="XML\Readers\NXmlStreamReaderTests.cs" />
+    <Compile Include="XML\Readers\PayloadReaderTests.cs" />
+    <Compile Include="XML\Readers\Values\ListReaderTests.cs" />
+    <Compile Include="XML\Readers\Values\ValueTypeReaderTests.cs" />
+    <Compile Include="TypeFinders\CachedTypesFinderTests.cs" />
+    <Compile Include="TypeFinders\GenericTypeFinderTests.cs" />
+    <Compile Include="TypeFinders\PassOnceNameFilterTests.cs" />
+    <Compile Include="TypeFinders\TypeFindersTests.cs" />
+    <Compile Include="TypeFinders\TypeInAssemblyFinderTests.cs" />
+    <Compile Include="TypeFinders\TypeInReferencedAssemblyFinderTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeFinders\TypeNameDemanglerTests.cs" />
+    <Compile Include="XML\TypeAccessorTests.cs" />
+    <Compile Include="XML\Writers\Members\MemberWriterTestFixture.cs" />
+    <Compile Include="XML\Writers\Members\FieldWriterTests.cs" />
+    <Compile Include="XML\Writers\Members\MemberWriterTests.cs" />
+    <Compile Include="XML\Writers\Values\ArrayOfObjectsWriterTests.cs" />
+    <Compile Include="XML\Writers\Values\DictionaryWriterTests.cs" />
+    <Compile Include="XML\Writers\Values\EnumXmlWriterTests.cs" />
+    <Compile Include="XML\Writers\Values\ClassWriterTests.cs" />
+    <Compile Include="XML\Writers\Values\AppObjectWriterTests.cs" />
+    <Compile Include="XML\Writers\Values\NullValueWriterTests.cs" />
+    <Compile Include="XML\Writers\Values\ObjectReferenceWriterTests.cs" />
+    <Compile Include="XML\Writers\Values\PrimitiveValueTypeXmlWriterTests.cs" />
+    <Compile Include="XML\Writers\Values\CustomTypeWriterTests.cs" />
+    <Compile Include="XML\Writers\Values\ValuesCacheTests.cs" />
+    <Compile Include="XML\ValueReaderTestFixture.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\TestAssembly1\TestAssembly1.csproj">
+      <Project>{DC35C153-623F-403B-93AD-F39ED62201BD}</Project>
+      <Name>TestAssembly1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NSerializer.csproj">
+      <Project>{63DDD9CE-E7A7-454F-A0D4-24CF9ECAEFF5}</Project>
+      <Name>NSerializer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Readers\" />
+    <Folder Include="Writers\" />
+    <Folder Include="XML\Readers\Members\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
