@@ -21,7 +21,7 @@
 using System;
 
 
-namespace NSerializer.Framework
+namespace NSerializer.Types
 {
     public class NullReaderTypeNameMapper : IReaderMappingTypeFinder
     {

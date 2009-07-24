@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using NSerializer.Framework;
+using NSerializer.Types;
 using NSerializer.XML;
 using NUnit.Framework;
 

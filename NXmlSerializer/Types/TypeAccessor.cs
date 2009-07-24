@@ -22,9 +22,10 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using NSerializer.Exceptions;
+using NSerializer.Framework;
 
 
-namespace NSerializer.Framework
+namespace NSerializer.Types
 {
     public class TypeAccessor
     {

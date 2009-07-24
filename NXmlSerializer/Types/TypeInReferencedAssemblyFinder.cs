@@ -24,7 +24,7 @@ using NSerializer.Exceptions;
 using NSerializer.Framework;
 
 
-namespace NSerializer.TypeFinders
+namespace NSerializer.Types
 {
     public class TypeInReferencedAssemblyFinder : ITypeFinder
     {

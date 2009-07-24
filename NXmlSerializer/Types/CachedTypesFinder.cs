@@ -22,7 +22,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace NSerializer.TypeFinders
+namespace NSerializer.Types
 {
     public class CachedTypesFinder : ITypesCache, ITypeFinder
     {

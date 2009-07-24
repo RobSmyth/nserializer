@@ -20,7 +20,7 @@
 
 using System;
 using NSerializer.Migration.Fields;
-using NSerializer.TypeFinders;
+using NSerializer.Types;
 
 
 namespace NSerializer.Migration.Types

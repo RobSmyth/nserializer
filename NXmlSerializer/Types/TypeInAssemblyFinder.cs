@@ -22,7 +22,7 @@ using System;
 using System.Reflection;
 
 
-namespace NSerializer.TypeFinders
+namespace NSerializer.Types
 {
     public class TypeInAssemblyFinder : ITypeFinder
     {

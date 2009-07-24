@@ -21,9 +21,9 @@
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
+using NSerializer.Types;
 using NSerializer.XML.Readers;
 using NUnit.Framework;
-using NSerializer.TypeFinders;
 using System.IO;
 using NMock2;
 using NSerializer.Framework.Document;

@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using NSerializer.Framework;
 using NSerializer.Framework.Readers;
 using NSerializer.Framework.Readers.Values;
-using NSerializer.TypeFinders;
+using NSerializer.Types;
 using NSerializer.XML.Readers.Members;
 
 

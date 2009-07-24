@@ -23,7 +23,7 @@ using NSerializer.Exceptions;
 using NSerializer.Framework;
 using NSerializer.Framework.Document;
 using NSerializer.Framework.Readers;
-using NSerializer.TypeFinders;
+using NSerializer.Types;
 using NSerializer.XML.Readers.Values;
 
 

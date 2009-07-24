@@ -21,7 +21,7 @@
 using System;
 using System.Collections.Generic;
 using NSerializer.Migration.Types;
-using NSerializer.TypeFinders;
+using NSerializer.Types;
 
 
 namespace NSerializer.Migration

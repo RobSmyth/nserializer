@@ -21,7 +21,7 @@
 using System;
 
 
-namespace NSerializer.TypeFinders
+namespace NSerializer.Types
 {
     public class ReaderNameMappingTypeFinder : ITypeFinder
     {
