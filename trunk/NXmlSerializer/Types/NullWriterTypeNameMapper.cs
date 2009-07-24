@@ -19,10 +19,9 @@
 #endregion
 
 using System;
-using NSerializer.TypeFinders;
 
 
-namespace NSerializer.Framework
+namespace NSerializer.Types
 {
     public class NullWriterTypeNameMapper : ITypeNameMapper
     {

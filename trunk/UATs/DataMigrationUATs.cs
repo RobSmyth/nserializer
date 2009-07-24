@@ -19,7 +19,7 @@
 #endregion
 
 using System;
-using NSerializer.Framework;
+using NSerializer.Types;
 using NUnit.Framework;
 
 

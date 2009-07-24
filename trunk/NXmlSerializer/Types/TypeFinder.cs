@@ -22,7 +22,7 @@ using System;
 using NSerializer.Exceptions;
 
 
-namespace NSerializer.TypeFinders
+namespace NSerializer.Types
 {
     public class TypeFinder : ITypeFinder
     {

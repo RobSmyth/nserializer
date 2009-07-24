@@ -22,7 +22,7 @@ using System;
 using System.Reflection;
 using NMock2;
 using NSerializer.TestAssembly1;
-using NSerializer.TypeFinders;
+using NSerializer.Types;
 using NUnit.Framework;
 
 

@@ -22,7 +22,7 @@ using System;
 using System.Text.RegularExpressions;
 
 
-namespace NSerializer.TypeFinders
+namespace NSerializer.Types
 {
     public class TypeNameDemangler
     {
