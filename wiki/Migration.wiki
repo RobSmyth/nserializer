@@ -1,13 +1,12 @@
 With each new product version the format of the saved XML file may change. This can be due to changed namespaces or class names. Data migration is to allow an application to read a prior version's file and convert it to the current application objects. This is a work in progress, not all migration scenarios are supported.
 
-Supported Migration
+=Supported Migration=
 
 Currently NXmlSerializer supports migration with the following changes to application data types:
 
     * Namespace
     * Type name
     * New fields
-
 
 Hopefully in future release:
 
@@ -16,12 +15,11 @@ Hopefully in future release:
     * Split class
     * Merged classes (consolidation?)
 
-
 Migration can be divided into either data movement (renaming, type splits/merging, deletion) or consolidation where data is processed to produce a new state. All of the above are the former.
 
-Types of Migration
+=Types of Migration=
 
-Changed type and/or namespace names
+==Changed type and/or namespace names==
 
 Currently supported.
 
@@ -44,19 +42,19 @@ public class SampleReaderMappingTypeFinder : IReaderMappingTypeFinder
 }
 }}}
 
-New fields
+==New fields==
 
 Currently supported.
 
 NXmlSerializer deserializes types that have fields. The new fields with have null or default values.
 
-Changed field names
+==Changed field names==
 
 Not supported. Work in progress.
 
 Approach being considered: Use type aliasing to provide an inhereted class that implements the field with the original name. This would require an initialise method. NSerializer may support this more directly by recongnizing an interface to invoke the initialize method after deserializing.
 
-Type refactored to multiple types
+==Type refactored to multiple types==
 
 Not supported. Work in progress.
 
@@ -69,7 +67,7 @@ Issue to solve:
 
 Approach being considered: Use type aliasing to provide a class that implements the original class's fields. Provide proxies for the new types. Reference mapping.
 
-Multiple types merged to another type
+==Multiple types merged to another type==
 
 Not supported. Work in progress.
 
@@ -83,7 +81,7 @@ Issue to solve:
 
 Probably an infrequent scenario so this will be a lower priority feature.
 
-Fields split/merged
+==Fields split/merged==
 
 Now partially supported. Work in progress.
 
