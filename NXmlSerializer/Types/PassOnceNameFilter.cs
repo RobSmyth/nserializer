@@ -21,9 +21,9 @@
 using System.Collections.Generic;
 
 
-namespace NSerializer.Framework
+namespace NSerializer.Types
 {
-    public class PassOnceNameFilter
+    internal class PassOnceNameFilter
     {
         private readonly Dictionary<string, bool> passedNames = new Dictionary<string, bool>();
 
