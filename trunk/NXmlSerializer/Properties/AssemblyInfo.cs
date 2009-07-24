@@ -18,15 +18,17 @@
 
 #endregion
 
-using System;
-using NSerializer.Framework.Document;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
-
-namespace NSerializer.Framework
-{
-    public interface IObjectWriter
-    {
-        bool CanWrite(object instance, Type referencedAsType);
-        void Write(object instance, ISerialiserNode parentNode, Type referencedAsType);
-    }
-}
+[assembly : AssemblyTitle("NXmlSerialize")]
+[assembly : AssemblyDescription("DotNet serializer")]
+[assembly : AssemblyConfiguration("")]
+[assembly : AssemblyCompany("Robert Smyth (NoeticTools) http://robsmyth.com")]
+[assembly : AssemblyProduct("NSerializer / NXmlSerializer https://sourceforge.net/projects/nxmlserializer")]
+[assembly : AssemblyCopyright("Copyright ©  2009")]
+[assembly : AssemblyTrademark("NSerializer, NXmlSerializer, NoeticTools")]
+[assembly : AssemblyCulture("")]
+[assembly : ComVisible(false)]
+[assembly : Guid("e4f5acd7-c9d7-495e-b2b3-7fa39c4c1cd7")]
+[assembly : AssemblyVersion("1.0.1.2")]
