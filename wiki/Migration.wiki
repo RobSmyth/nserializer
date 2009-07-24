@@ -85,4 +85,8 @@ Probably an infrequent scenario so this will be a lower priority feature.
 
 Fields split/merged
 
-Not supported. Work in progress.
+Now partially supported. Work in progress.
+
+=Links=
+ * [http://en.wikipedia.org/wiki/Data_conversion Data conversion]
+ * [http://en.wikipedia.org/wiki/Data_transformation Data transformation]
