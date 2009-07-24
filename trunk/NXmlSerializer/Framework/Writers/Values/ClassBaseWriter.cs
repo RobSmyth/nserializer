@@ -20,6 +20,7 @@
 
 using System;
 using NSerializer.Framework.Document;
+using NSerializer.TypeFinders;
 using NSerializer.XML.Document;
 
 

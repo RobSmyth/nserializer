@@ -19,7 +19,6 @@
 #endregion
 
 using System;
-using NSerializer.Framework;
 using NSerializer.Migration.Types;
 using NSerializer.TypeFinders;
 
