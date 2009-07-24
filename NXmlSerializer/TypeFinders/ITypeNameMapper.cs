@@ -21,7 +21,7 @@
 using System;
 
 
-namespace NSerializer.Framework
+namespace NSerializer.TypeFinders
 {
     public interface ITypeNameMapper
     {

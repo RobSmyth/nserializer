@@ -18,7 +18,7 @@
 
 #endregion
 
-using NSerializer.Framework;
+using NSerializer.TypeFinders;
 using NSerializer.XML.Document;
 using NUnit.Framework;
 

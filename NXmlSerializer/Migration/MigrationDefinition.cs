@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using NSerializer.Framework;
 using NSerializer.Migration.Types;
 using NSerializer.TypeFinders;
 

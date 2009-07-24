@@ -19,7 +19,7 @@
 #endregion
 
 using System;
-using NSerializer.Framework;
+using NSerializer.TypeFinders;
 
 
 namespace NSerializer.Migration
