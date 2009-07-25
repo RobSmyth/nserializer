@@ -156,10 +156,11 @@ namespace NSerializer.UATs
                                        ArrayOfDoubles = new[] {1.3d, 7.1d},
                                        ArrayOfSingles = new[] {-3f, 0f, 11.3f},
                                        K = TimeSpan.FromMilliseconds(123),
-                                       L = new DateTime(2010, 11, 30)
+                                       L = new DateTime(2010, 11, 30),
+                                       M = new List<ClassJ>() { new ClassJ { MyField = 7 }, new ClassJ { MyField = 11 } }
                                    };
             var xmlText = SerializeAsXml(sourceObject);
-            Assert.Less(xmlText.Length, 2500, xmlText);
+            Assert.Less(xmlText.Length, 3500, xmlText);
 
             var testedClass = ReadXmlText<ClassI>(xmlText);
             Assert.AreEqual(true, testedClass.A);
@@ -186,6 +187,9 @@ namespace NSerializer.UATs
 
             Assert.AreEqual(2010, testedClass.L.Year);
             Assert.AreEqual(30, testedClass.L.Day);
+
+            Assert.AreEqual(2, testedClass.M.Count);
+            Assert.AreEqual(11, testedClass.M[1].MyField);
         }
 
 #pragma warning disable UnusedMemberInPrivateClass
@@ -319,6 +323,13 @@ namespace NSerializer.UATs
             public TimeSpan K { get; set; }
 
             public DateTime L { get; set; }
+
+            public List<ClassJ> M { get; set;}
+        }
+
+        public class ClassJ
+        {
+            public int MyField { get; set; }
         }
 
 #pragma warning restore 168
