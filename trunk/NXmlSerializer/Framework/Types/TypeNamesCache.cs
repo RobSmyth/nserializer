@@ -61,7 +61,7 @@ namespace NSerializer.Framework.Types
 
         public string GetTypeName(Type type)
         {
-            Console.WriteLine("GetTypeName {0}", type.FullName);//>>>
+            //Console.WriteLine("GetTypeName {0}", type.FullName);//>>>
             int id;
             if (cache.ContainsKey(type))
             {
