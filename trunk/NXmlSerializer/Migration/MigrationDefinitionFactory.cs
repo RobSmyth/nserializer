@@ -19,10 +19,9 @@
 #endregion
 
 using System;
-using NSerializer.Migration;
 
 
-namespace NSerializer
+namespace NSerializer.Migration
 {
     internal class MigrationDefinitionFactory
     {

@@ -20,9 +20,10 @@
 
 using System;
 using NSerializer.Exceptions;
+using NSerializer.Types;
 
 
-namespace NSerializer.Types
+namespace NSerializer.Framework.Types
 {
     public class TypeFinder : ITypeFinder
     {

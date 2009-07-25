@@ -19,56 +19,58 @@
 #endregion
 
 using System;
-using NSerializer.Migration;
-using NSerializer.Migration.Fields;
+using NSerializer.Framework.Types;
 using NSerializer.Migration.Types;
+using NSerializer.Types;
 
 
-namespace NSerializer
+namespace NSerializer.Migration
 {
-    internal class NullTypeDefinition : ITypeDefinition
+    internal class NullMigrationDefinition : IMigrationDefinition
     {
-        public void SetAlias(string alias)
-        {
-        }
-
-        public void AddName(string matchingTypeName)
-        {
-        }
-
-        public bool HasFieldDefinition(string fieldName)
-        {
-            return true;
-        }
-
-        public void CreateFieldDefinition(string fieldName, IFieldDefinition parentFieldDefinition)
+        public ITypeMigrator GetTypeMigrator(ITypeFinder typeFinder)
         {
             throw new InvalidOperationException();
         }
 
-        public IFieldDefinition FindFieldDefinition(string fieldName)
+        public bool HasTypeDefinition<T>()
         {
-            return new NullFieldDefinition();
+            return false;
         }
 
-        public bool Matches(string name)
+        public void CreateTypeDefinition<T>(ITypeDefinition parentTypeDefinition)
         {
             throw new NotImplementedException();
         }
 
-        public string GetTypeName()
+        public void AddChild(IVersionQualifier qualifier, IMigrationDefinition childDefinition)
+        {
+            throw new InvalidOperationException();
+        }
+
+        public ITypeDefinition GetTypeDefinition(string name)
+        {
+            return null;
+        }
+
+        public ITypeDefinition GetTypeDefinition<T>()
+        {
+            return null;
+        }
+
+        public ITypeDefinition GetTypeDefinition(Type type)
+        {
+            return null;
+        }
+
+        public ITypeNameMapper GetTypeNameMapper()
         {
             throw new NotImplementedException();
         }
 
-        public IFieldDefinition GetFieldDefinition(string name)
+        public bool HasTypeDefinition(Type soughtType)
         {
-            throw new NotImplementedException();
-        }
-
-        public string GetMappedName()
-        {
-            throw new NotImplementedException();
+            return false;
         }
     }
 }

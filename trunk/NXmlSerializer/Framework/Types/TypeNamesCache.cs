@@ -20,10 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using NSerializer.Framework.Types;
 
 
-namespace NSerializer.Types
+namespace NSerializer.Framework.Types
 {
     public class TypeNamesCache : ITypeNamesCache
     {

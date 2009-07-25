@@ -40,6 +40,7 @@ namespace NSerializer.Framework.Types
 
             typeFinder =
                 new TypeFinder(typesCache, genericTypeFinder, typeInAssemblyFinder, typeInReferencedAssemblyFinder);
+
             typeFinderConduit.SetTarget(typeFinder);
         }
 

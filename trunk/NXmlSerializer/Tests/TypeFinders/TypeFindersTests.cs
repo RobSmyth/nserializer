@@ -20,6 +20,7 @@
 
 using NMock2;
 using NSerializer.Exceptions;
+using NSerializer.Framework.Types;
 using NSerializer.Types;
 using NUnit.Framework;
 

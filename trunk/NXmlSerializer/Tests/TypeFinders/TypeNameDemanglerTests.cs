@@ -18,6 +18,7 @@
 
 #endregion
 
+using NSerializer.Framework.Types;
 using NSerializer.Types;
 using NUnit.Framework;
 

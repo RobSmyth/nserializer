@@ -74,7 +74,7 @@ namespace NSerializer.Framework.Types
             var paramterTypes = new Type[parameterTypeNames.Length];
             for (var index = 0; index < paramterTypes.Length; index++)
             {
-                var parameterTypeName = parameterTypeNames[index].Trim(new char[] {' ', '[', ']'});
+                var parameterTypeName = parameterTypeNames[index].Trim(new[] {' ', '[', ']'});
                 paramterTypes[index] = typeFinder.Get(parameterTypeName);
             }
             return paramterTypes;
