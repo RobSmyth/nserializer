@@ -102,16 +102,16 @@
     <Compile Include="Framework\IDocumentObjectsRepository.cs" />
     <Compile Include="Framework\IInstanceRepository.cs" />
     <Compile Include="Framework\Document\IMetaData.cs" />
-    <Compile Include="Types\IReaderMappingTypeFinder.cs" />
-    <Compile Include="Types\ITypeNamesCache.cs" />
-    <Compile Include="Types\ITypeNameMapper.cs" />
+    <Compile Include="Framework\Types\IReaderMappingTypeFinder.cs" />
+    <Compile Include="Framework\Types\ITypeNamesCache.cs" />
+    <Compile Include="Framework\Types\ITypeNameMapper.cs" />
     <Compile Include="Framework\Document\MetaData.cs" />
     <Compile Include="Framework\NullApplicationObjectRepository.cs" />
     <Compile Include="Framework\NullDocumentObjectRepository.cs" />
     <Compile Include="Framework\NullInstanceRepository.cs" />
-    <Compile Include="Types\NullReaderTypeNameMapper.cs" />
-    <Compile Include="Types\NullWriterTypeNameMapper.cs" />
-    <Compile Include="Types\NullTypeNamesCache.cs" />
+    <Compile Include="Framework\Types\NullReaderTypeNameMapper.cs" />
+    <Compile Include="Framework\Types\NullWriterTypeNameMapper.cs" />
+    <Compile Include="Framework\Types\NullTypeNamesCache.cs" />
     <Compile Include="NXmlReader.cs" />
     <Compile Include="NXmlWriter.cs" />
     <Compile Include="Framework\Document\Payload.cs" />
@@ -147,18 +147,18 @@
     <Compile Include="XML\Readers\Values\ValueTypeReader.cs" />
     <Compile Include="XML\Readers\Values\TimeSpanReader.cs" />
     <Compile Include="XML\Readers\Values\VersionReader.cs" />
-    <Compile Include="Types\SerializeNameAttribute.cs" />
-    <Compile Include="Types\CachedTypesFinder.cs" />
-    <Compile Include="Types\DefaultTypeFinder.cs" />
-    <Compile Include="Types\GenericTypeFinder.cs" />
-    <Compile Include="Types\ITypeFinder.cs" />
-    <Compile Include="Types\ITypesCache.cs" />
-    <Compile Include="Types\PassOnceNameFilter.cs" />
-    <Compile Include="Types\TypeFinderConduit.cs" />
-    <Compile Include="Types\TypeFinder.cs" />
-    <Compile Include="Types\TypeInAssemblyFinder.cs" />
-    <Compile Include="Types\TypeInReferencedAssemblyFinder.cs" />
-    <Compile Include="Types\TypeNameDemangler.cs" />
+    <Compile Include="Framework\Types\SerializeNameAttribute.cs" />
+    <Compile Include="Framework\Types\CachedTypesFinder.cs" />
+    <Compile Include="Framework\Types\DefaultTypeFinder.cs" />
+    <Compile Include="Framework\Types\GenericTypeFinder.cs" />
+    <Compile Include="Framework\Types\ITypeFinder.cs" />
+    <Compile Include="Framework\Types\ITypesCache.cs" />
+    <Compile Include="Framework\Types\PassOnceNameFilter.cs" />
+    <Compile Include="Framework\Types\TypeFinderConduit.cs" />
+    <Compile Include="Framework\Types\TypeFinder.cs" />
+    <Compile Include="Framework\Types\TypeInAssemblyFinder.cs" />
+    <Compile Include="Framework\Types\TypeInReferencedAssemblyFinder.cs" />
+    <Compile Include="Framework\Types\TypeNameDemangler.cs" />
     <Compile Include="Exceptions\NXmlReaderFormatException.cs" />
     <Compile Include="Exceptions\NXmlUnknownTypeException.cs" />
     <Compile Include="Exceptions\TargetTypeIsNotXmlSerialisableException.cs" />
@@ -170,8 +170,8 @@
     <Compile Include="XML\Readers\Members\MemberReader.cs" />
     <Compile Include="XML\Readers\Values\ArrayOfObjectsReader.cs" />
     <Compile Include="XML\Readers\Values\DefaultValueReader.cs" />
-    <Compile Include="Types\ReaderNameMappingTypeFinder.cs" />
-    <Compile Include="Types\TypeNamesCache.cs" />
+    <Compile Include="Framework\Types\ReaderNameMappingTypeFinder.cs" />
+    <Compile Include="Framework\Types\TypeNamesCache.cs" />
     <Compile Include="XML\Readers\XmlElementReaderFactory.cs" />
     <Compile Include="XML\Writers\Members\FieldWriter.cs" />
     <Compile Include="Framework\Writers\IMemberWriter.cs" />
@@ -209,7 +209,7 @@
     <Compile Include="XML\NXmlSerializer.cs" />
     <Compile Include="XML\Readers\Values\PrimitiveValueTypeReader.cs" />
     <Compile Include="Framework\Writers\Values\ValueWriter.cs" />
-    <Compile Include="Types\TypeAccessor.cs" />
+    <Compile Include="Framework\Types\TypeAccessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AssemblyInfo.cs.tmpl" />
@@ -242,7 +242,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Framework\Types\" />
+    <Folder Include="Types\" />
     <Folder Include="XML\Document\Readers\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
