@@ -50,7 +50,6 @@
     <Compile Include="NullInstanceRepositoryTests.cs" />
     <Compile Include="NXmlTestFixtureBase.cs" />
     <Compile Include="NXmlWriterTests.cs" />
-    <Compile Include="XML\Readers\MetaDataReaderTests.cs" />
     <Compile Include="XML\Readers\NodeAttributesReaderTests.cs" />
     <Compile Include="XML\Readers\NXmlStreamReaderTests.cs" />
     <Compile Include="XML\Readers\PayloadReaderTests.cs" />

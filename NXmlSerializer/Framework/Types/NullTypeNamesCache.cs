@@ -20,23 +20,22 @@
 
 using System;
 using System.Collections.Generic;
-using NSerializer.Framework.Types;
 
 
-namespace NSerializer.Types
+namespace NSerializer.Framework.Types
 {
     public class NullTypeNamesCache : ITypeNamesCache
     {
         private readonly Dictionary<Type, string> cache = new Dictionary<Type, string>();
 
-        public string[] Names
+        public MetaDataTypeName[] Names
         {
             get
             {
-                var names = new List<string>();
+                var names = new List<MetaDataTypeName>();
                 foreach (var pair in cache)
                 {
-                    names.Add(pair.Value);
+                    names.Add(new MetaDataTypeName(names.Count, pair.Value));
                 }
                 return names.ToArray();
             }

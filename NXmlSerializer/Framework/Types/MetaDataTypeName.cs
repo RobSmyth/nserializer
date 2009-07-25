@@ -18,14 +18,17 @@
 
 #endregion
 
-using System;
-
-
 namespace NSerializer.Framework.Types
 {
-    public interface ITypeNamesCache
+    public class MetaDataTypeName
     {
-        MetaDataTypeName[] Names { get; }
-        string GetTypeName(Type type);
+        public MetaDataTypeName(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
+        public int Id { get; private set; }
+        public string Name { get; private set; }
     }
 }

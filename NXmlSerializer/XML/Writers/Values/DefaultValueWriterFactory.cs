@@ -99,6 +99,7 @@ namespace NSerializer.XML.Writers.Values
                                                        new ListWriter(typeof (ArrayList), document,
                                                                       valuesCache,
                                                                       valueWriterConduit, typeNamesCache),
+                                                       new MetaDataTypeNameWriter(document),
                                                        new ClassWriter(document, valuesCache, memberWriter,
                                                                        valueWriterConduit, typeNamesCache)
                                                    },
