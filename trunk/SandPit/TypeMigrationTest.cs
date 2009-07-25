@@ -18,6 +18,7 @@
 
 #endregion
 
+using System.Collections.Generic;
 using NSerializer.UATs.Contexts;
 using NUnit.Framework;
 
@@ -60,6 +61,20 @@ namespace NSerializer.Migration.Tests
 
             Assert.IsNotNull(readObject);
             Assert.AreEqual(1, readObject.FieldOne.FieldOne);
+        }
+
+        [Test]
+        [Ignore("WIP")]
+        public void TypeAlias_WithGenericList()
+        {
+            var xmlText = SerializeAsXml(new List<B1> {new B1()}, null, new MigrationBuilder_WithAliasB12());
+            Assert.IsFalse(xmlText.Contains("B1"));
+            Assert.IsTrue(xmlText.Contains("bonealias"));
+
+            var readObject = ReadXmlText<List<B1>>(xmlText, null, null, new MigrationBuilder_WithAliasB12());
+
+            Assert.IsNotNull(readObject);
+            Assert.AreEqual(1, readObject.Count);
         }
     }
 
