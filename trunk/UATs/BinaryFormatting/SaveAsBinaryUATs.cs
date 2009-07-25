@@ -29,7 +29,7 @@ namespace NSerializer.UATs.BinaryFormatting
 {
     [TestFixture]
     [Ignore("Performance test - spike")]
-    public class SaveAsBinaryUATs :  SerializeContext
+    public class SaveAsBinaryUATs : SerializeContext
     {
         [Test]
         public void MemoryUsageSpike_Binary_WriteOnly()
@@ -38,7 +38,7 @@ namespace NSerializer.UATs.BinaryFormatting
 
             IDocumentWriter document = new NXmlDocumentWriter();
             var xmlWriter = new NXmlWriter(document, null, null);
-            xmlWriter.Write(source, null);//>>>
+            xmlWriter.Write(source, null); //>>>
         }
 
         [Test]
@@ -58,21 +58,22 @@ namespace NSerializer.UATs.BinaryFormatting
 
         private B[] GetSource()
         {
-            var source = new B[2/*00*/];
+            var source = new B[2 /*00*/];
             for (var index = 0; index < source.Length; index++)
             {
-                source[index] = new B(new C[2/*10*/]);
+                source[index] = new B(new C[2 /*10*/]);
             }
             return source;
         }
 
         private class A
-        {}
+        {
+        }
 
         private class B
         {
             private C[] c;
-    
+
             public B(C[] c)
             {
                 this.c = c;
@@ -94,7 +95,7 @@ namespace NSerializer.UATs.BinaryFormatting
 
             public C()
             {
-                Data = new UInt32[5/*00*/];
+                Data = new UInt32[5 /*00*/];
                 for (var index = 0; index < Data.Length; index++)
                 {
                     Data[index] = 1000;

@@ -43,7 +43,7 @@ namespace NSerializer.Tests.Writers.Values
         [Test]
         public void Contains_ReturnsTrue_IfObjectAddedToCache()
         {
-            ClassA objA = new ClassA();
+            var objA = new ClassA();
             cache.Add(objA);
             Assert.IsTrue(cache.Contains(objA));
         }
@@ -51,8 +51,8 @@ namespace NSerializer.Tests.Writers.Values
         [Test]
         public void Contains_ReturnsFalse_ForObjectNotInCache()
         {
-            ClassA objA = new ClassA();
-            ClassA objB = new ClassA();
+            var objA = new ClassA();
+            var objB = new ClassA();
             cache.Add(objA);
             Assert.IsFalse(cache.Contains(objB));
         }
@@ -60,10 +60,10 @@ namespace NSerializer.Tests.Writers.Values
         [Test]
         public void Add_ReturnsUniqueId_ForEachObjectAdded()
         {
-            ClassA objA = new ClassA();
-            ClassA objB = new ClassA();
-            int idA = cache.Add(objA);
-            int idB = cache.Add(objB);
+            var objA = new ClassA();
+            var objB = new ClassA();
+            var idA = cache.Add(objA);
+            var idB = cache.Add(objB);
             Assert.AreNotEqual(idA, idB);
             Assert.AreEqual(idA, cache.GetID(objA));
             Assert.AreEqual(idB, cache.GetID(objB));

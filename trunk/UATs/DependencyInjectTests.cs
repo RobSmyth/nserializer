@@ -37,20 +37,20 @@ namespace NSerializer.UATs
         public void ApplicationScopeObjects_MembersAreNotSerialized()
         {
             ISystemDefinition writeTimeSystem = new SystemDefinition();
-            NDependencyInjectAdapter writeTimeAdapter = new NDependencyInjectAdapter(writeTimeSystem);
+            var writeTimeAdapter = new NDependencyInjectAdapter(writeTimeSystem);
             writeTimeSystem.HasInstance(new ClassB(1234))
                 .Provides<IClassB>();
-            ClassA writeObject = new ClassA(writeTimeSystem.Get<IClassB>());
-            string xmlText = SerializeAsXml(writeObject, writeTimeAdapter);
+            var writeObject = new ClassA(writeTimeSystem.Get<IClassB>());
+            var xmlText = SerializeAsXml(writeObject, writeTimeAdapter);
 
             Assert.IsFalse(xmlText.Contains("1234"));
 
             ISystemDefinition readTimeSystem = new SystemDefinition();
-            NDependencyInjectAdapter readTimeAdapter = new NDependencyInjectAdapter(readTimeSystem);
-            ClassB readTimeAppObject = new ClassB(3);
+            var readTimeAdapter = new NDependencyInjectAdapter(readTimeSystem);
+            var readTimeAppObject = new ClassB(3);
             readTimeSystem.HasInstance(readTimeAppObject)
                 .Provides<IClassB>();
-            ClassA readObject = ReadXmlText<ClassA>(xmlText, readTimeAdapter, null, null);
+            var readObject = ReadXmlText<ClassA>(xmlText, readTimeAdapter, null, null);
 
             Assert.AreSame(readTimeAppObject, readObject.Value);
             Assert.AreEqual(3, readObject.Value.ValueA);
@@ -69,16 +69,16 @@ namespace NSerializer.UATs
 
             public object Get(Type type)
             {
-                MethodInfo genericMethodInfo = getMethodInfo.MakeGenericMethod(new Type[] {type});
+                var genericMethodInfo = getMethodInfo.MakeGenericMethod(new Type[] {type});
                 return genericMethodInfo.Invoke(system, new object[0]);
             }
 
             public bool HasType(Type type)
             {
-                bool hasType = true;
+                var hasType = true;
                 try
                 {
-                    MethodInfo genericMethodInfo = getMethodInfo.MakeGenericMethod(new Type[] {type});
+                    var genericMethodInfo = getMethodInfo.MakeGenericMethod(new Type[] {type});
                     genericMethodInfo.Invoke(system, new object[0]);
                 }
                 catch (TargetInvocationException exception)

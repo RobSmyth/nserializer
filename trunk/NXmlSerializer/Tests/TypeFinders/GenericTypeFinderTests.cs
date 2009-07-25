@@ -18,7 +18,6 @@
 
 #endregion
 
-using System;
 using System.Collections.Generic;
 using NMock2;
 using NSerializer.TestAssembly1;
@@ -51,7 +50,7 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void CanFindGenericListTypeInReferencedAssemblyAndAddsTypeToCache()
         {
-            Type expectedType =
+            var expectedType =
                 typeof (List<SerializableClassWithProperties>);
 
             Expect.Once.On(typeFinder).Method("Get").With("System.Collections.Generic.List`1").Will(

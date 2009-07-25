@@ -32,7 +32,7 @@ namespace NSerializer.Tests.XML
 
         protected override void SetUp()
         {
-            ITypeFinder typeFinder = NewMock<ITypeFinder>();
+            var typeFinder = NewMock<ITypeFinder>();
             reader = new PrimitiveValueTypeReader(typeFinder);
         }
 

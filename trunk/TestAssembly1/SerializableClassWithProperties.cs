@@ -18,9 +18,6 @@
 
 #endregion
 
-using NSerializer.Framework;
-
-
 namespace NSerializer.TestAssembly1
 {
     public class SerializableClassWithProperties
@@ -67,7 +64,7 @@ namespace NSerializer.TestAssembly1
 
         public override bool Equals(object obj)
         {
-            SerializableClassWithProperties otherObj = (SerializableClassWithProperties) obj;
+            var otherObj = (SerializableClassWithProperties) obj;
             return
                 PropertyA == otherObj.PropertyA &&
                 PropertyB == otherObj.PropertyB;

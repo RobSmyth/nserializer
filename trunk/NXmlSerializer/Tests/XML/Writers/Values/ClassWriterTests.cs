@@ -21,7 +21,6 @@
 using System;
 using NMock2;
 using NSerializer.Framework;
-using NSerializer.Framework.Document;
 using NSerializer.Framework.Writers;
 using NSerializer.Framework.Writers.Values;
 using NSerializer.Types;
@@ -79,7 +78,8 @@ namespace NSerializer.Tests.XML.Writers.Values
 
             StubTypeMapper();
 
-            Expect.Once.On(document).Method("CreateClassElement").With(testObject.GetType().ToString(), 7, parentNode).Will(
+            Expect.Once.On(document).Method("CreateClassElement").With(testObject.GetType().ToString(), 7, parentNode).
+                Will(
                 Return.Value(classNode));
 
             Expect.Once.On(document).Method("CreateMembersElement").With(classNode).Will(Return.Value(membersNode));

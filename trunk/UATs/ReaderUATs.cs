@@ -18,9 +18,7 @@
 
 #endregion
 
-using System;
 using System.IO;
-using System.Xml;
 using NSerializer.Exceptions;
 using NSerializer.TestAssembly1;
 using NUnit.Framework;
@@ -38,7 +36,7 @@ namespace NSerializer.UATs
         }
 
         [Test]
-        [ExpectedException(typeof(UnableToReadXMLTextException))]
+        [ExpectedException(typeof (UnableToReadXMLTextException))]
         public void ThrowsExceptionIfReadingEmptyXmlString()
         {
             var xmlText = string.Empty;
@@ -50,7 +48,7 @@ namespace NSerializer.UATs
         }
 
         [Test]
-        [ExpectedException(typeof(UnableToReadXMLTextException))]
+        [ExpectedException(typeof (UnableToReadXMLTextException))]
         public void ThrowsExceptionIfReadingNullStream()
         {
             var reader = new NXmlReader(typeSeedAssembly);
@@ -59,7 +57,7 @@ namespace NSerializer.UATs
         }
 
         [Test]
-        [ExpectedException(typeof(UnableToReadXMLTextException))]
+        [ExpectedException(typeof (UnableToReadXMLTextException))]
         public void ThrowsExceptionOnInvalidXmlStringFormat()
         {
             ReadXmlText<object>("invalid xml content");

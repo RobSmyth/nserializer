@@ -19,7 +19,6 @@
 #endregion
 
 using NMock2;
-using NSerializer.Framework.Document;
 using NSerializer.Framework.Writers;
 using NSerializer.XML.Document;
 using NSerializer.XML.Document.Writers;

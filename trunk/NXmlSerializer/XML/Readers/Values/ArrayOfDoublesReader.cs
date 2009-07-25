@@ -45,7 +45,7 @@ namespace NSerializer.XML.Readers.Values
         public object Get(INXmlElementReader nodeReader)
         {
             object objectInstance;
-            
+
             using (var itemNodesReader = nodeReader.GetNextChildNode("items"))
             {
                 var innerText = itemNodesReader.GetPayload().Trim('\r', '\n', ',', '\t').Replace("\r\n", string.Empty);

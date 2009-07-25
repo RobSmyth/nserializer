@@ -18,6 +18,7 @@
 
 #endregion
 
+using System;
 using System.IO;
 using System.Text;
 using NMock2;
@@ -42,7 +43,8 @@ namespace NSerializer.Tests.XML.Readers
         {
             typeFinder = NewMock<ITypeFinder>();
 
-            reader = new PayloadReader(typeFinder, new NullApplicationObjectRepository(), new NullDocumentObjectRepository());
+            reader = new PayloadReader(typeFinder, new NullApplicationObjectRepository(),
+                                       new NullDocumentObjectRepository());
         }
 
         [Test]
@@ -59,15 +61,15 @@ namespace NSerializer.Tests.XML.Readers
 
             var stream = new MemoryStream(Encoding.ASCII.GetBytes(xml));
 
-            Stub.On(typeFinder).Method("Get").With(typeof(Payload).FullName).Will(Return.Value(typeof(Payload)));
-            Stub.On(typeFinder).Method("Get").With("System.String[]").Will(Return.Value(typeof(System.String[])));
-            Stub.On(typeFinder).Method("Get").With("_0").Will(Return.Value(typeof(Payload)));
-            Stub.On(typeFinder).Method("Get").With("_1").Will(Return.Value(typeof(A)));
+            Stub.On(typeFinder).Method("Get").With(typeof (Payload).FullName).Will(Return.Value(typeof (Payload)));
+            Stub.On(typeFinder).Method("Get").With("System.String[]").Will(Return.Value(typeof (String[])));
+            Stub.On(typeFinder).Method("Get").With("_0").Will(Return.Value(typeof (Payload)));
+            Stub.On(typeFinder).Method("Get").With("_1").Will(Return.Value(typeof (A)));
 
             var payload = reader.Read(new XmlStreamReader(stream));
 
             Assert.IsNotNull(payload);
-            Assert.AreEqual("My name", ((A)payload.Target).Name);
+            Assert.AreEqual("My name", ((A) payload.Target).Name);
         }
 
         private class A

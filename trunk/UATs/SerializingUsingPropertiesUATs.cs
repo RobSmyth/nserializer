@@ -19,7 +19,6 @@
 #endregion
 
 using System.Collections.Generic;
-using NSerializer.Framework;
 using NSerializer.TestAssembly1;
 using NSerializer.Tests.XML.Targets;
 using NUnit.Framework;

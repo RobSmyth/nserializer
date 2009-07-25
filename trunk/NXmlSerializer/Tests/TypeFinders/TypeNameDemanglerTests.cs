@@ -34,21 +34,21 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void ToString_GivesTypeNameOfInteger()
         {
-            TypeNameDemangler typeNameDemangler = new TypeNameDemangler(7.GetType());
+            var typeNameDemangler = new TypeNameDemangler(7.GetType());
             Assert.AreEqual("System.Int32", typeNameDemangler.ToString());
         }
 
         [Test]
         public void ToString_GivesTypeNameOfString()
         {
-            TypeNameDemangler typeNameDemangler = new TypeNameDemangler("77".GetType());
+            var typeNameDemangler = new TypeNameDemangler("77".GetType());
             Assert.AreEqual("System.String", typeNameDemangler.ToString());
         }
 
         [Test]
         public void ToString_GivesNameOfApplicationNestedClassInstance()
         {
-            TypeNameDemangler typeNameDemangler = new TypeNameDemangler(typeof (ClassA));
+            var typeNameDemangler = new TypeNameDemangler(typeof (ClassA));
             Assert.AreEqual("NSerializer.Tests.TypeFinders.TypeNameDemanglerTests+ClassA",
                             typeNameDemangler.ToString());
         }
@@ -56,7 +56,7 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void ToString_GivesNameOfApplicationNestedClassType()
         {
-            TypeNameDemangler typeNameDemangler = new TypeNameDemangler(typeof (ClassA));
+            var typeNameDemangler = new TypeNameDemangler(typeof (ClassA));
             Assert.AreEqual("NSerializer.Tests.TypeFinders.TypeNameDemanglerTests+ClassA",
                             typeNameDemangler.ToString());
         }
@@ -64,7 +64,7 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void ToString_GivesNameOfApplicationGenericClassType()
         {
-            TypeNameDemangler typeNameDemangler = new TypeNameDemangler(typeof (ClassB<int>));
+            var typeNameDemangler = new TypeNameDemangler(typeof (ClassB<int>));
             Assert.AreEqual("NSerializer.Tests.TypeFinders.TypeNameDemanglerTests+ClassB`1[[System.Int32]]",
                             typeNameDemangler.ToString());
         }
@@ -72,7 +72,7 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void ToString_GivesNameOfApplicationGenericClassTypeThatHasTwoGenericTypes()
         {
-            TypeNameDemangler typeNameDemangler = new TypeNameDemangler(typeof (ClassC<string[], bool>));
+            var typeNameDemangler = new TypeNameDemangler(typeof (ClassC<string[], bool>));
             Assert.AreEqual(
                 "NSerializer.Tests.TypeFinders.TypeNameDemanglerTests+ClassC`2[[System.String[]],[System.Boolean]]",
                 typeNameDemangler.ToString());
@@ -81,24 +81,24 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void ToString_GivesNameOfIntegerArray()
         {
-            int[] testArray = new int[0];
-            TypeNameDemangler typeNameDemangler = new TypeNameDemangler(testArray.GetType());
+            var testArray = new int[0];
+            var typeNameDemangler = new TypeNameDemangler(testArray.GetType());
             Assert.AreEqual("System.Int32[]", typeNameDemangler.ToString());
         }
 
         [Test]
         public void ToString_GivesNameOfIntegerTwoDimensionArray()
         {
-            int[][] testArray = new int[0][];
-            TypeNameDemangler typeNameDemangler = new TypeNameDemangler(testArray.GetType());
+            var testArray = new int[0][];
+            var typeNameDemangler = new TypeNameDemangler(testArray.GetType());
             Assert.AreEqual("System.Int32[][]", typeNameDemangler.ToString());
         }
 
         [Test]
         public void ToString_GivesNameOfAnArrayOfGenericTypes()
         {
-            ClassB<int>[] testArray = new ClassB<int>[0];
-            TypeNameDemangler typeNameDemangler = new TypeNameDemangler(testArray.GetType());
+            var testArray = new ClassB<int>[0];
+            var typeNameDemangler = new TypeNameDemangler(testArray.GetType());
             Assert.AreEqual("NSerializer.Tests.TypeFinders.TypeNameDemanglerTests+ClassB`1[[System.Int32]][]",
                             typeNameDemangler.ToString());
         }
@@ -106,7 +106,7 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void ToString_GivesAliasNameIfTypeHasAttribute()
         {
-            TypeNameDemangler typeNameDemangler = new TypeNameDemangler(typeof (ClassD));
+            var typeNameDemangler = new TypeNameDemangler(typeof (ClassD));
             Assert.AreEqual("ADifferentName", typeNameDemangler.ToString());
         }
 

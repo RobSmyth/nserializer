@@ -45,15 +45,15 @@ namespace NSerializer.XmlSerializer.Tests
         [Test]
         public void Value_1_23_DoesSerialize()
         {
-            double writtenValue = 1.23;
+            var writtenValue = 1.23;
 
-            System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof (double));
+            var writer = new System.Xml.Serialization.XmlSerializer(typeof (double));
             writer.Serialize(stringWriter, writtenValue);
             stringWriter.Close();
 
-            StringReader stringReader = new StringReader(stringBuilder.ToString());
-            System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof (double));
-            double readValue = (double) reader.Deserialize(stringReader);
+            var stringReader = new StringReader(stringBuilder.ToString());
+            var reader = new System.Xml.Serialization.XmlSerializer(typeof (double));
+            var readValue = (double) reader.Deserialize(stringReader);
 
             Assert.AreEqual(writtenValue, readValue);
         }
@@ -61,15 +61,15 @@ namespace NSerializer.XmlSerializer.Tests
         [Test]
         public void MaxValue_DoesSerialize()
         {
-            double writtenValue = double.MaxValue;
+            var writtenValue = double.MaxValue;
 
-            System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof (double));
+            var writer = new System.Xml.Serialization.XmlSerializer(typeof (double));
             writer.Serialize(stringWriter, writtenValue);
             stringWriter.Close();
 
-            StringReader stringReader = new StringReader(stringBuilder.ToString());
-            System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof (double));
-            double readValue = (double) reader.Deserialize(stringReader);
+            var stringReader = new StringReader(stringBuilder.ToString());
+            var reader = new System.Xml.Serialization.XmlSerializer(typeof (double));
+            var readValue = (double) reader.Deserialize(stringReader);
 
             Assert.AreEqual(writtenValue, readValue);
         }
@@ -77,15 +77,15 @@ namespace NSerializer.XmlSerializer.Tests
         [Test]
         public void Nan_DoesSerialize()
         {
-            double writtenValue = double.NaN;
+            var writtenValue = double.NaN;
 
-            System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof (double));
+            var writer = new System.Xml.Serialization.XmlSerializer(typeof (double));
             writer.Serialize(stringWriter, writtenValue);
             stringWriter.Close();
 
-            StringReader stringReader = new StringReader(stringBuilder.ToString());
-            System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof (double));
-            double readValue = (double) reader.Deserialize(stringReader);
+            var stringReader = new StringReader(stringBuilder.ToString());
+            var reader = new System.Xml.Serialization.XmlSerializer(typeof (double));
+            var readValue = (double) reader.Deserialize(stringReader);
 
             Assert.AreEqual(writtenValue, readValue);
         }
@@ -93,15 +93,15 @@ namespace NSerializer.XmlSerializer.Tests
         [Test]
         public void PositiveInfinity_DoesSerialize()
         {
-            double writtenValue = double.PositiveInfinity;
+            var writtenValue = double.PositiveInfinity;
 
-            System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof (double));
+            var writer = new System.Xml.Serialization.XmlSerializer(typeof (double));
             writer.Serialize(stringWriter, writtenValue);
             stringWriter.Close();
 
-            StringReader stringReader = new StringReader(stringBuilder.ToString());
-            System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof (double));
-            double readValue = (double) reader.Deserialize(stringReader);
+            var stringReader = new StringReader(stringBuilder.ToString());
+            var reader = new System.Xml.Serialization.XmlSerializer(typeof (double));
+            var readValue = (double) reader.Deserialize(stringReader);
 
             Assert.AreEqual(writtenValue, readValue);
         }
@@ -110,7 +110,7 @@ namespace NSerializer.XmlSerializer.Tests
         [ExpectedException(typeof (OverflowException))]
         public void MaxValue_ThrowsException_WhenParsing()
         {
-            double readValue = double.Parse(double.MaxValue.ToString());
+            var readValue = double.Parse(double.MaxValue.ToString());
             Assert.AreEqual(double.MaxValue, readValue);
         }
 
@@ -118,14 +118,14 @@ namespace NSerializer.XmlSerializer.Tests
         [ExpectedException(typeof (OverflowException))]
         public void MinValue_ThrowsException_WhenParsing()
         {
-            double readValue = double.Parse(double.MinValue.ToString());
+            var readValue = double.Parse(double.MinValue.ToString());
             Assert.AreEqual(double.MinValue, readValue);
         }
 
         [Test]
         public void NanValue_ThrowsException_WhenParsing()
         {
-            double readValue = double.Parse(double.NaN.ToString());
+            var readValue = double.Parse(double.NaN.ToString());
             Assert.AreEqual(double.NaN, readValue);
         }
     }

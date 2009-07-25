@@ -20,7 +20,6 @@
 
 using System;
 using NMock2;
-using NSerializer.Framework.Document;
 using NSerializer.Framework.Writers;
 using NSerializer.Types;
 using NSerializer.XML.Document;
@@ -68,7 +67,8 @@ namespace NSerializer.Tests.XML.Writers.Values
 
             StubTypeMapper();
 
-            Expect.Once.On(ownerDocument).Method("CreateTypedElement").With("enum", EnumA.ValueB.GetType().ToString(), parentNode).
+            Expect.Once.On(ownerDocument).Method("CreateTypedElement").With("enum", EnumA.ValueB.GetType().ToString(),
+                                                                            parentNode).
                 Will(Return.Value(valueNode));
             Expect.Once.On(valueNode).SetProperty("InnerText").To("ValueB");
             Expect.Once.On(valueNode).Method("Dispose").WithNoArguments();
