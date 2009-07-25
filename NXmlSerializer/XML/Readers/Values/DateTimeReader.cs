@@ -24,7 +24,7 @@ using NSerializer.Framework.Readers;
 
 namespace NSerializer.XML.Readers.Values
 {
-    public class DateTimeReader : IObjectReader
+    internal class DateTimeReader : IObjectReader
     {
         public bool CanRead(INXmlElementReader nodeReader)
         {

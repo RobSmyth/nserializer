@@ -25,7 +25,7 @@ using NSerializer.Framework.Readers;
 
 namespace NSerializer.XML.Readers.Values
 {
-    public class DoubleReader : IObjectReader
+    internal class DoubleReader : IObjectReader
     {
         public bool CanRead(INXmlElementReader nodeReader)
         {

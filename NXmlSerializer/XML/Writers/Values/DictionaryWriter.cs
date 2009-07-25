@@ -23,15 +23,15 @@ using System.Collections;
 using System.Collections.Generic;
 using NSerializer.Framework;
 using NSerializer.Framework.Document;
+using NSerializer.Framework.Types;
 using NSerializer.Framework.Writers;
-using NSerializer.Types;
 using NSerializer.XML.Document;
 using NSerializer.XML.Document.Writers;
 
 
 namespace NSerializer.XML.Writers.Values
 {
-    public class DictionaryWriter : IObjectWriter, IBaseTypeMembersWriter
+    internal class DictionaryWriter : IObjectWriter, IBaseTypeMembersWriter
     {
         private readonly IObjectWriter objectWriter;
         private readonly IDocumentWriter ownerDocument;

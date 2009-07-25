@@ -20,9 +20,10 @@
 
 using System;
 using System.Reflection;
+using NSerializer.Types;
 
 
-namespace NSerializer.Types
+namespace NSerializer.Framework.Types
 {
     public class DefaultTypeFinder : ITypeFinder
     {

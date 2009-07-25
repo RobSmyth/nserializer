@@ -19,8 +19,8 @@
 #endregion
 
 using System;
+using NSerializer.Framework.Types;
 using NSerializer.Framework.Writers;
-using NSerializer.Types;
 using NSerializer.XML.Document;
 using NSerializer.XML.Document.Writers;
 

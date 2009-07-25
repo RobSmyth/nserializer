@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using NMock2;
+using NSerializer.Framework.Types;
 using NSerializer.TestAssembly1;
 using NSerializer.Types;
 using NUnit.Framework;

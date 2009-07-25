@@ -24,7 +24,7 @@ using NSerializer.Exceptions;
 
 namespace NSerializer.XML.Readers.Values
 {
-    public class NodeAttributesReader
+    internal class NodeAttributesReader
     {
         private readonly Dictionary<string, string> attributes = new Dictionary<string, string>();
 

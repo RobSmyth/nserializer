@@ -25,7 +25,7 @@ using NSerializer.Types;
 
 namespace NSerializer.XML.Readers.Values
 {
-    public class EnumReader : IObjectReader
+    internal class EnumReader : IObjectReader
     {
         private readonly ITypeFinder typeFinder;
 
