@@ -23,6 +23,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using NSerializer.TestAssembly1;
+using NSerializer.UATs.Contexts;
 using NUnit.Framework;
 
 
@@ -151,7 +152,9 @@ namespace NSerializer.UATs
                                        G = -1,
                                        H = -7,
                                        I = 23,
-                                       J = 42
+                                       J = 42,
+                                       ArrayOfDoubles = new double[] {1.3d, 7.1d},
+                                       ArrayOfSingles = new Single[] { -3f, 0f, 11.3f },
                                    };
             var xmlText = SerializeAsXml(sourceObject);
             Assert.Less(xmlText.Length, 2500, xmlText);
@@ -167,6 +170,15 @@ namespace NSerializer.UATs
             Assert.AreEqual(-7, testedClass.H);
             Assert.AreEqual(23, testedClass.I);
             Assert.AreEqual(42, testedClass.J);
+
+            Assert.AreEqual(2, testedClass.ArrayOfDoubles.Length);
+            Assert.AreEqual(1.3d, testedClass.ArrayOfDoubles[0]);
+            Assert.AreEqual(7.1d, testedClass.ArrayOfDoubles[1]);
+
+            Assert.AreEqual(3, testedClass.ArrayOfSingles.Length);
+            Assert.AreEqual(-3f, testedClass.ArrayOfSingles[0]);
+            Assert.AreEqual(0f, testedClass.ArrayOfSingles[1]);
+            Assert.AreEqual(11.3f, testedClass.ArrayOfSingles[2]);
         }
 
 #pragma warning disable UnusedMemberInPrivateClass
@@ -276,6 +288,8 @@ namespace NSerializer.UATs
             private Int64 h = 0;
             private UInt32 i = 0;
             private UInt64 j = 0;
+            private double[] arrayOfDoubles = new double[0];
+            private Single[] arrayOfSingles = new Single[0];
 
             public bool A
             {
@@ -335,6 +349,18 @@ namespace NSerializer.UATs
             {
                 get { return j; }
                 set { j = value; }
+            }
+
+            public double[] ArrayOfDoubles
+            {
+                get { return arrayOfDoubles; }
+                set { arrayOfDoubles = value; }
+            }
+
+            public float[] ArrayOfSingles
+            {
+                get { return arrayOfSingles; }
+                set { arrayOfSingles = value; }
             }
         }
 

@@ -21,6 +21,7 @@
 using System.IO;
 using NSerializer.Exceptions;
 using NSerializer.TestAssembly1;
+using NSerializer.UATs.Contexts;
 using NUnit.Framework;
 
 

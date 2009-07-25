@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using NSerializer.Framework;
+using NSerializer.UATs.Contexts;
 using NUnit.Framework;
 
 

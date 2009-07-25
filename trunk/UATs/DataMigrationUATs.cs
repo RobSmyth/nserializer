@@ -20,6 +20,7 @@
 
 using System;
 using NSerializer.Types;
+using NSerializer.UATs.Contexts;
 using NUnit.Framework;
 
 

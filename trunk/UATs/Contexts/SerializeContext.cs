@@ -28,7 +28,7 @@ using NSerializer.XML.Document.Writers;
 using NUnit.Framework;
 
 
-namespace NSerializer.UATs
+namespace NSerializer.UATs.Contexts
 {
     public abstract class SerializeContext
     {

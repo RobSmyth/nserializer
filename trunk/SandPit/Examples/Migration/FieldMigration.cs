@@ -18,7 +18,7 @@
 
 #endregion
 
-using NSerializer.UATs;
+using NSerializer.UATs.Contexts;
 using NUnit.Framework;
 
 

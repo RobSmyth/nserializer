@@ -19,7 +19,7 @@
 #endregion
 
 using NSerializer.Migration;
-using NSerializer.UATs;
+using NSerializer.UATs.Contexts;
 using NUnit.Framework;
 
 
