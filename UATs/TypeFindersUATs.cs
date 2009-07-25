@@ -19,7 +19,6 @@
 #endregion
 
 using System;
-using System.Reflection;
 using NSerializer.Exceptions;
 using NSerializer.Types;
 using NUnit.Framework;
@@ -35,11 +34,11 @@ namespace NSerializer.UATs
         [SetUp]
         public void SetUp()
         {
-            Assembly seedAssembly = GetType().Assembly;
+            var seedAssembly = GetType().Assembly;
 
-            TypeFinderConduit typeFinderConduit = new TypeFinderConduit();
+            var typeFinderConduit = new TypeFinderConduit();
 
-            CachedTypesFinder typesCache = new CachedTypesFinder();
+            var typesCache = new CachedTypesFinder();
             ITypeFinder genericTypeFindeer = new GenericTypeFinder(typesCache, typeFinderConduit);
             ITypeFinder typeInAssemblyFinder = new TypeInAssemblyFinder(seedAssembly, typesCache);
             ITypeFinder typeInReferencedAssembliesFinder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache);
@@ -66,14 +65,14 @@ namespace NSerializer.UATs
         [Test]
         public void FindsTypeInReferencedAssembly100000TimesInLessThanOneSecond()
         {
-            DateTime startTime = DateTime.Now;
+            var startTime = DateTime.Now;
 
-            for (int count = 0; count < 100000; count++)
+            for (var count = 0; count < 100000; count++)
             {
                 Assert.IsNotNull(typeFinder.Get("System.Int32"));
             }
 
-            TimeSpan elapsedTime = DateTime.Now - startTime;
+            var elapsedTime = DateTime.Now - startTime;
             Assert.IsTrue(elapsedTime < TimeSpan.FromSeconds(1));
         }
     }

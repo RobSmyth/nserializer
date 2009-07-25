@@ -19,14 +19,14 @@
 #endregion
 
 using System;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using NMock2;
+using NSerializer.Framework.Document;
 using NSerializer.Types;
 using NSerializer.XML.Readers;
 using NUnit.Framework;
-using System.IO;
-using NMock2;
-using NSerializer.Framework.Document;
 
 
 namespace NSerializer.Tests.XML.Readers
@@ -173,8 +173,9 @@ namespace NSerializer.Tests.XML.Readers
 
             var stream = new MemoryStream(Encoding.ASCII.GetBytes(xml));
 
-            Expect.Once.On(typeFinder).Method("Get").With("NSerializer.Framework.Document.MetaData").Will(Return.Value(typeof(MetaData)));
-            Expect.Once.On(typeFinder).Method("Get").With("System.String[]").Will(Return.Value(typeof(System.String[])));
+            Expect.Once.On(typeFinder).Method("Get").With("NSerializer.Framework.Document.MetaData").Will(
+                Return.Value(typeof (MetaData)));
+            Expect.Once.On(typeFinder).Method("Get").With("System.String[]").Will(Return.Value(typeof (String[])));
 
             var metaData = reader.Read(new XmlStreamReader(stream));
 
@@ -187,7 +188,8 @@ namespace NSerializer.Tests.XML.Readers
         [Test]
         public void Spike()
         {
-            var regex = new Regex("(?<attributeAssignment> (?<name>[^\\s=]+) =\" (?<value>.+?) \" )", RegexOptions.IgnorePatternWhitespace);
+            var regex = new Regex("(?<attributeAssignment> (?<name>[^\\s=]+) =\" (?<value>.+?) \" )",
+                                  RegexOptions.IgnorePatternWhitespace);
 
             var matches = regex.Matches(" name='myName'  type='myType'>".Replace("'", "\""));
 

@@ -54,7 +54,7 @@ namespace NSerializer.XML.Writers.Values
             var typeName = typeNamesCache.GetTypeName(instance.GetType());
 
             using (var arrayNode = ownerDocument.CreateTypedElement("arrayOfDoubles",
-                                                             typeName, parentNode))
+                                                                    typeName, parentNode))
             {
                 arrayNode.AddAttribute("ID", valueID.ToString());
 

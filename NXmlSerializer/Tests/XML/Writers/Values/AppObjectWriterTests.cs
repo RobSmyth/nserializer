@@ -21,7 +21,6 @@
 using System;
 using NMock2;
 using NSerializer.Framework;
-using NSerializer.Framework.Document;
 using NSerializer.Framework.Writers.Values;
 using NSerializer.Types;
 using NSerializer.XML.Document;

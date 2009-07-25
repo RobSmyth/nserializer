@@ -18,12 +18,8 @@
 
 #endregion
 
-using System;
-using NMock2;
-using NSerializer.Framework.Document;
 using NSerializer.Framework.Readers;
 using NSerializer.Types;
-using NSerializer.XML.Document;
 using NSerializer.XML.Readers.Values;
 using NUnit.Framework;
 

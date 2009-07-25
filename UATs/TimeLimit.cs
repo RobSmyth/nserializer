@@ -37,7 +37,7 @@ namespace NSerializer.UATs
 
         public void Dispose()
         {
-            TimeSpan elapsedTime = DateTime.Now - startTime;
+            var elapsedTime = DateTime.Now - startTime;
             Assert.IsTrue(elapsedTime <= timeLimit, "Time limit exceeded. Took {0} seconds.", elapsedTime.TotalSeconds);
         }
     }

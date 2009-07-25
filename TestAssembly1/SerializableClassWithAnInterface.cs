@@ -18,21 +18,16 @@
 
 #endregion
 
-using NSerializer.Framework;
-
-
 namespace NSerializer.TestAssembly1
 {
     public class SerializableClassWithAnInterface : IMyInterface
     {
-        private int propertyA;
-
         /// <summary>
         /// Constructor that will be used when deserializing
         /// </summary>
         public SerializableClassWithAnInterface()
         {
-            propertyA = 0;
+            PropertyA = 0;
         }
 
         /// <summary>
@@ -41,7 +36,7 @@ namespace NSerializer.TestAssembly1
         /// <param name="dummyParam"></param>
         public SerializableClassWithAnInterface(bool dummyParam)
         {
-            propertyA = 6;
+            PropertyA = 6;
         }
 
         public string PropertyB
@@ -57,11 +52,7 @@ namespace NSerializer.TestAssembly1
 
         #region IMyInterface Members
 
-        public int PropertyA
-        {
-            get { return propertyA; }
-            set { propertyA = value; }
-        }
+        public int PropertyA { get; set; }
 
         #endregion
 
@@ -72,7 +63,7 @@ namespace NSerializer.TestAssembly1
 
         public override bool Equals(object obj)
         {
-            SerializableClassWithAnInterface otherObj = (SerializableClassWithAnInterface) obj;
+            var otherObj = (SerializableClassWithAnInterface) obj;
             return
                 PropertyA == otherObj.PropertyA &&
                 PropertyB == otherObj.PropertyB &&

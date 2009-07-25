@@ -22,7 +22,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using NSerializer.Framework;
 using NSerializer.TestAssembly1;
 using NUnit.Framework;
 
@@ -84,7 +83,7 @@ namespace NSerializer.UATs
         [Test]
         public void XmlTextSizeForClassInheritedFromAGenericDictionary()
         {
-            string xmlText = SerializeAsXml(new ClassF(true));
+            var xmlText = SerializeAsXml(new ClassF(true));
             Assert.Less(xmlText.Length, 2000);
         }
 
@@ -115,13 +114,13 @@ namespace NSerializer.UATs
         [Test]
         public void CanSerialiseClassInheritedFromAnArraList()
         {
-            ClassH sourceObject = new ClassH();
+            var sourceObject = new ClassH();
             sourceObject.Add(1);
             sourceObject.Add("two");
-            string xmlText = SerializeAsXml(sourceObject);
+            var xmlText = SerializeAsXml(sourceObject);
             Assert.Less(xmlText.Length, 2000);
 
-            ClassH testedClass = ReadXmlText<ClassH>(xmlText);
+            var testedClass = ReadXmlText<ClassH>(xmlText);
             Assert.AreEqual(2, testedClass.Count);
             Assert.AreEqual(1, testedClass[0]);
             Assert.AreEqual("two", testedClass[1]);

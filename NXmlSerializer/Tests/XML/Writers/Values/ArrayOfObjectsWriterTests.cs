@@ -23,7 +23,6 @@ using System.Collections;
 using System.Collections.Generic;
 using NMock2;
 using NSerializer.Framework;
-using NSerializer.Framework.Document;
 using NSerializer.Framework.Writers;
 using NSerializer.Framework.Writers.Values;
 using NSerializer.Types;
@@ -85,7 +84,8 @@ namespace NSerializer.Tests.XML.Writers.Values
 
             Expect.Once.On(valueCache).Method("Add").With(value).Will(Return.Value(23));
 
-            Expect.Once.On(ownerDocument).Method("CreateArrayElement").With(value.GetType().ToString(), 23, parentNode).Will(
+            Expect.Once.On(ownerDocument).Method("CreateArrayElement").With(value.GetType().ToString(), 23, parentNode).
+                Will(
                 Return.Value(arrayNode));
             Expect.Once.On(ownerDocument).Method("CreateItemsElement").With(arrayNode).Will(Return.Value(itemsNode));
 

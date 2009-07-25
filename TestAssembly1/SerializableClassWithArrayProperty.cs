@@ -18,7 +18,6 @@
 
 #endregion
 
-using NSerializer.Framework;
 using NSerializer.TestAssembly1;
 
 
@@ -26,9 +25,6 @@ namespace NSerializer.Tests.XML.Targets
 {
     public class SerializableClassWithArrayProperty
     {
-        private int[] propertyA;
-        private SerializableClassWithoutProperties[] propertyB;
-
         /// <summary>
         /// Constructor used to deserialise the class.
         /// </summary>
@@ -42,24 +38,16 @@ namespace NSerializer.Tests.XML.Targets
         /// <param name="dummyArg"></param>
         public SerializableClassWithArrayProperty(bool dummyArg)
         {
-            propertyA = new int[] {1, 2, 3};
-            propertyB = new SerializableClassWithoutProperties[]
+            PropertyA = new[] {1, 2, 3};
+            PropertyB = new[]
                             {
                                 new SerializableClassWithoutProperties(),
                                 new SerializableClassWithoutProperties(),
                             };
         }
 
-        public int[] PropertyA
-        {
-            get { return propertyA; }
-            set { propertyA = value; }
-        }
+        public int[] PropertyA { get; set; }
 
-        public SerializableClassWithoutProperties[] PropertyB
-        {
-            get { return propertyB; }
-            set { propertyB = value; }
-        }
+        public SerializableClassWithoutProperties[] PropertyB { get; set; }
     }
 }

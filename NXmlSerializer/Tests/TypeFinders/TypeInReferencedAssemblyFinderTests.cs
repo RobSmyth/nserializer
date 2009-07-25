@@ -77,12 +77,12 @@ namespace NSerializer.Tests.TypeFinders
         {
             Stub.On(typesCache).Method("Add").WithAnyArguments();
 
-            DateTime startTime = DateTime.Now;
+            var startTime = DateTime.Now;
 
             ITypeFinder finder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache);
             Assert.IsNotNull(finder.Get("NSerializer.TestAssembly3.TestTypeA3"));
 
-            TimeSpan expiredTime = DateTime.Now - startTime;
+            var expiredTime = DateTime.Now - startTime;
             Assert.IsTrue(expiredTime < TimeSpan.FromSeconds(2));
             // generous time allowance for test reliability, really a sanity check
         }
@@ -94,7 +94,7 @@ namespace NSerializer.Tests.TypeFinders
 
             ITypeFinder finder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache);
 
-            Type type = finder.Get("NSerializer.TestAssembly1.TestTypeA1[]");
+            var type = finder.Get("NSerializer.TestAssembly1.TestTypeA1[]");
             Assert.IsNotNull(type);
             Assert.IsTrue(type.IsArray);
         }
@@ -102,14 +102,14 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void CanFindStringType()
         {
-            Type soughtType = typeof (string);
+            var soughtType = typeof (string);
             CanFindType(soughtType);
         }
 
         [Test]
         public void CanFindEnumType()
         {
-            Type soughtType = typeof (TestEnumA);
+            var soughtType = typeof (TestEnumA);
             CanFindType(soughtType);
         }
 

@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using NSerializer.Framework;
 
 
 namespace NSerializer.TestAssembly1
