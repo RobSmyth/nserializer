@@ -49,6 +49,7 @@ namespace NSerializer.Framework.Types
                     }
                     else
                     {
+                        // >>> map embedded types (array and generics) here <<<
                         typeName = new TypeNameDemangler(pair.Key).ToString();
                     }
 
@@ -60,6 +61,7 @@ namespace NSerializer.Framework.Types
 
         public string GetTypeName(Type type)
         {
+            Console.WriteLine("GetTypeName {0}", type.FullName);//>>>
             int id;
             if (cache.ContainsKey(type))
             {

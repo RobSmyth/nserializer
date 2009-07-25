@@ -146,7 +146,6 @@
     <Compile Include="XML\Readers\Values\ValueTypeReader.cs" />
     <Compile Include="XML\Readers\Values\TimeSpanReader.cs" />
     <Compile Include="XML\Readers\Values\VersionReader.cs" />
-    <Compile Include="Framework\Types\SerializeNameAttribute.cs" />
     <Compile Include="Framework\Types\CachedTypesFinder.cs" />
     <Compile Include="Framework\Types\DefaultTypeFinder.cs" />
     <Compile Include="Framework\Types\GenericTypeFinder.cs" />

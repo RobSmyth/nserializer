@@ -104,13 +104,6 @@ namespace NSerializer.Tests.TypeFinders
                             typeNameDemangler.ToString());
         }
 
-        [Test]
-        public void ToString_GivesAliasNameIfTypeHasAttribute()
-        {
-            var typeNameDemangler = new TypeNameDemangler(typeof (ClassD));
-            Assert.AreEqual("ADifferentName", typeNameDemangler.ToString());
-        }
-
         private class ClassA
         {
         }
@@ -120,11 +113,6 @@ namespace NSerializer.Tests.TypeFinders
         }
 
         private class ClassC<T1, T2>
-        {
-        }
-
-        [SerializeName("ADifferentName")]
-        private class ClassD
         {
         }
     }

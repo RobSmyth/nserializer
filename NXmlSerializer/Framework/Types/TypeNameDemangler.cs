@@ -42,15 +42,7 @@ namespace NSerializer.Framework.Types
                 var regex = new Regex(@",[^\[]*?\]");
                 typeName = regex.Replace(typeName, "]");
             }
-            else
-            {
-                var attributes =
-                    (SerializeNameAttribute[]) type.GetCustomAttributes(typeof (SerializeNameAttribute), false);
-                if (attributes.Length == 1)
-                {
-                    typeName = attributes[0].Alias;
-                }
-            }
+
             return typeName;
         }
     }
