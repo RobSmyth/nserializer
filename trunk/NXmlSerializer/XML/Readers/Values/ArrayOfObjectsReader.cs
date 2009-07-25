@@ -26,7 +26,7 @@ using NSerializer.Types;
 
 namespace NSerializer.XML.Readers.Values
 {
-    public class ArrayOfObjectsReader : IObjectReader
+    internal class ArrayOfObjectsReader : IObjectReader
     {
         private readonly IObjectReader objectReader;
         private readonly IReadObjectsCache readObjects;

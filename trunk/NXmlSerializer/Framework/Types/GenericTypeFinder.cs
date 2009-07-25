@@ -20,11 +20,12 @@
 
 using System;
 using System.Text.RegularExpressions;
+using NSerializer.Types;
 
 
-namespace NSerializer.Types
+namespace NSerializer.Framework.Types
 {
-    public class GenericTypeFinder : ITypeFinder
+    internal class GenericTypeFinder : ITypeFinder
     {
         private readonly ITypeFinder typeFinder;
         private readonly ITypesCache typesCache;

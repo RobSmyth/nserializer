@@ -22,6 +22,7 @@ using System;
 using System.IO;
 using NSerializer.Framework;
 using NSerializer.Framework.Document;
+using NSerializer.Framework.Types;
 using NSerializer.Migration;
 using NSerializer.Types;
 using NSerializer.XML.Document;

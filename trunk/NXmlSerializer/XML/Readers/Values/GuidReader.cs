@@ -24,7 +24,7 @@ using NSerializer.Framework.Readers;
 
 namespace NSerializer.XML.Readers.Values
 {
-    public class GuidReader : IObjectReader
+    internal class GuidReader : IObjectReader
     {
         public bool CanRead(INXmlElementReader nodeReader)
         {

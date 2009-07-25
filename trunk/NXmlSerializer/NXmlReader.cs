@@ -23,6 +23,7 @@ using System.IO;
 using System.Reflection;
 using NSerializer.Exceptions;
 using NSerializer.Framework;
+using NSerializer.Framework.Types;
 using NSerializer.Migration;
 using NSerializer.Types;
 using NSerializer.XML.Readers;

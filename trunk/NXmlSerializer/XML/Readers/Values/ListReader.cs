@@ -27,7 +27,7 @@ using NSerializer.Types;
 
 namespace NSerializer.XML.Readers.Values
 {
-    public class ListReader : IObjectReader, IBaseTypeMembersReader
+    internal class ListReader : IObjectReader, IBaseTypeMembersReader
     {
         private readonly IInstanceRepository docObjectRepository;
         private readonly IObjectReader objectReader;

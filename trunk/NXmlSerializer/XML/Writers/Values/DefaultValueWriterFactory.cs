@@ -23,9 +23,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using NSerializer.Framework;
+using NSerializer.Framework.Types;
 using NSerializer.Framework.Writers;
 using NSerializer.Framework.Writers.Values;
-using NSerializer.Types;
 using NSerializer.XML.Document;
 using NSerializer.XML.Writers.Members;
 

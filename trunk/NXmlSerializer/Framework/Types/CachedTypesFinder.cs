@@ -20,11 +20,12 @@
 
 using System;
 using System.Collections.Generic;
+using NSerializer.Types;
 
 
-namespace NSerializer.Types
+namespace NSerializer.Framework.Types
 {
-    public class CachedTypesFinder : ITypesCache, ITypeFinder
+    internal class CachedTypesFinder : ITypesCache, ITypeFinder
     {
         private readonly Dictionary<string, Type> cachedTypes = new Dictionary<string, Type>();
 

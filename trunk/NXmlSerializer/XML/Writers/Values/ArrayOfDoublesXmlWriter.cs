@@ -21,8 +21,8 @@
 using System;
 using System.Text;
 using NSerializer.Framework;
+using NSerializer.Framework.Types;
 using NSerializer.Framework.Writers;
-using NSerializer.Types;
 using NSerializer.XML.Document;
 using NSerializer.XML.Document.Writers;
 
