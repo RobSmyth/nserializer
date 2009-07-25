@@ -56,7 +56,6 @@
     <Compile Include="DependencyInjectTests.cs" />
     <Compile Include="SampleTestFixture.cs" />
     <Compile Include="SerializeContext.cs" />
-    <Compile Include="SerializingUsingPropertiesUATs.cs" />
     <Compile Include="TimeLimit.cs" />
     <Compile Include="TypeFindersUATs.cs" />
     <Compile Include="ReaderUATs.cs" />
@@ -72,6 +71,9 @@
       <Project>{DC35C153-623F-403B-93AD-F39ED62201BD}</Project>
       <Name>TestAssembly1</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Contexts\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

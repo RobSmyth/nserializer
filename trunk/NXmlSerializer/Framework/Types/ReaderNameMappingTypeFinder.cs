@@ -19,9 +19,10 @@
 #endregion
 
 using System;
+using NSerializer.Types;
 
 
-namespace NSerializer.Types
+namespace NSerializer.Framework.Types
 {
     public class ReaderNameMappingTypeFinder : ITypeFinder
     {
