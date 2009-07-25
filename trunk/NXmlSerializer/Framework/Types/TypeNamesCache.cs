@@ -34,11 +34,11 @@ namespace NSerializer.Framework.Types
             this.typeNamesMapper = typeNamesMapper;
         }
 
-        public string[] Names
+        public MetaDataTypeName[] Names
         {
             get
             {
-                var names = new List<string>();
+                var names = new List<MetaDataTypeName>();
                 foreach (var pair in cache)
                 {
                     string typeName;
@@ -53,7 +53,7 @@ namespace NSerializer.Framework.Types
                         typeName = new TypeNameDemangler(pair.Key).ToString();
                     }
 
-                    names.Add(typeName);
+                    names.Add(new MetaDataTypeName(names.Count, typeName));
                 }
                 return names.ToArray();
             }

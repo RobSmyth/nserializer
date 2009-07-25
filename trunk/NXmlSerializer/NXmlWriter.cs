@@ -24,7 +24,6 @@ using NSerializer.Framework;
 using NSerializer.Framework.Document;
 using NSerializer.Framework.Types;
 using NSerializer.Migration;
-using NSerializer.Types;
 using NSerializer.XML.Document;
 using NSerializer.XML.Writers.Values;
 

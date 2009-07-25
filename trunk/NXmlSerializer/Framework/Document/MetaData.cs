@@ -19,6 +19,8 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
+using NSerializer.Framework.Types;
 
 
 namespace NSerializer.Framework.Document
@@ -29,11 +31,11 @@ namespace NSerializer.Framework.Document
         private readonly string machineName;
         private readonly Version serializerVersion;
         private readonly Version targetVersion;
-        private readonly string[] typeNames;
+        private readonly MetaDataTypeName[] metaDataTypeNames;
 
-        public MetaData(string[] typeNames, Version targetVersion)
+        public MetaData(MetaDataTypeName[] metaDataTypeNames, Version targetVersion)
         {
-            this.typeNames = typeNames;
+            this.metaDataTypeNames = metaDataTypeNames;
             this.targetVersion = targetVersion;
 
             machineName = Environment.MachineName;
@@ -43,7 +45,15 @@ namespace NSerializer.Framework.Document
 
         public string[] TypeNames
         {
-            get { return typeNames; }
+            get
+            {
+                var names = new List<string>();
+                foreach (var typeName in metaDataTypeNames)
+                {
+                    names.Add(typeName.Name);
+                }
+                return names.ToArray();
+            }
         }
 
         public Version PayloadVersion

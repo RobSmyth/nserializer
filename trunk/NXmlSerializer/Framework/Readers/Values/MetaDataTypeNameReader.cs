@@ -1,4 +1,4 @@
-#region Copyright
+﻿#region Copyright
 
 // The contents of this file are subject to the Mozilla Public License
 //  Version 1.1 (the "License"); you may not use this file except in compliance
@@ -18,14 +18,24 @@
 
 #endregion
 
-using System;
+using NSerializer.Framework.Types;
+using NSerializer.XML.Readers;
 
 
-namespace NSerializer.Framework.Types
+namespace NSerializer.Framework.Readers.Values
 {
-    public interface ITypeNamesCache
+    public class MetaDataTypeNameReader : IObjectReader
     {
-        MetaDataTypeName[] Names { get; }
-        string GetTypeName(Type type);
+        public bool CanRead(INXmlElementReader nodeReader)
+        {
+            return nodeReader.Name == "typename";
+        }
+
+        public object Get(INXmlElementReader nodeReader)
+        {
+            return new MetaDataTypeName(
+                nodeReader.Attributes.GetInteger("typeid"),
+                nodeReader.Attributes.Get("name"));
+        }
     }
 }
