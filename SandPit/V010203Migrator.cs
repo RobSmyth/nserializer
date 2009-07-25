@@ -1,4 +1,4 @@
-﻿#region Copyright
+#region Copyright
 
 // The contents of this file are subject to the Mozilla Public License
 //  Version 1.1 (the "License"); you may not use this file except in compliance
@@ -18,17 +18,12 @@
 
 #endregion
 
-using NSerializer.UATs.Contexts;
-using NUnit.Framework;
-
-
-namespace NSerializer.SandPit.Examples.Migration
+namespace NSerializer.Migration.Tests
 {
-    [TestFixture]
-    public class FieldMigration : SerializeContext
+    public class V010203Migrator : IMigrationRulesBuilder
     {
-        // Name changes
-        // New fields (services)
-        // Deleted fields
+        public void Build(IMigrationRules rules)
+        {
+        }
     }
 }

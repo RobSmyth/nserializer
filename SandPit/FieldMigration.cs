@@ -1,4 +1,4 @@
-#region Copyright
+﻿#region Copyright
 
 // The contents of this file are subject to the Mozilla Public License
 //  Version 1.1 (the "License"); you may not use this file except in compliance
@@ -18,21 +18,17 @@
 
 #endregion
 
-using NSerializer.Migration;
-using NSerializer.SandPit.Examples.Migration.SampleTypes;
+using NSerializer.UATs.Contexts;
+using NUnit.Framework;
 
 
-namespace NSerializer.SandPit.Examples.Migration
+namespace NSerializer.Migration.Tests
 {
-    public class V010200Migrator : IMigrationRulesBuilder
+    [TestFixture]
+    public class FieldMigration : SerializeContext
     {
-        public void Build(IMigrationRules rules)
-        {
-            rules.ForType<TypeA>()
-                .MatchesTypeName("MyOldNamespace.MyOldTypeA")
-                .Field("noLongerLovedField").Ignore()
-                .Field("oldFieldName").RenamedTo("newFieldName")
-                .Field("newFieldName").SetTo(42);
-        }
+        // Name changes
+        // New fields (services)
+        // Deleted fields
     }
 }

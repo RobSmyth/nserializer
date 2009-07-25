@@ -7,8 +7,8 @@
     <ProjectGuid>{A0D016CE-3D1F-49CA-84A5-F2BBB2F0AA4C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NSerializer.SandPit</RootNamespace>
-    <AssemblyName>NSerializer.SandPit</AssemblyName>
+    <RootNamespace>NSerializer.Migration.Tests</RootNamespace>
+    <AssemblyName>Tests.NSerializer.Migration</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -52,15 +52,15 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Examples\Migration\DeletedField\ClassA.cs" />
-    <Compile Include="Examples\Migration\FieldMigration.cs" />
-    <Compile Include="Examples\Migration\TypeMigrationTest.cs" />
-    <Compile Include="Examples\Migration\MockingTestFixture.cs" />
+    <Compile Include="FieldMigration.cs" />
+    <Compile Include="TypeMigrationTest.cs" />
+    <Compile Include="MockingTestFixture.cs" />
     <Compile Include="Examples\Migration\SampleTypes\TypeA.cs" />
     <Compile Include="Examples\Migration\SampleTypes\TypeB.cs" />
-    <Compile Include="Examples\Migration\V010200Migrator.cs" />
-    <Compile Include="Examples\Migration\V010202Migrator.cs" />
-    <Compile Include="Examples\Migration\V010203Migrator.cs" />
-    <Compile Include="Examples\Migration\MigrationBuilder.cs" />
+    <Compile Include="V010200Migrator.cs" />
+    <Compile Include="V010202Migrator.cs" />
+    <Compile Include="V010203Migrator.cs" />
+    <Compile Include="MigrationBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NXmlSerializer\NSerializer.csproj">

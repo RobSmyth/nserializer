@@ -18,15 +18,25 @@
 
 #endregion
 
-using NSerializer.Migration;
+using System;
+using NSerializer.SandPit.Examples.Migration.SampleTypes;
 
 
-namespace NSerializer.SandPit.Examples.Migration
+namespace NSerializer.Migration.Tests
 {
-    public class V010203Migrator : IMigrationRulesBuilder
+    public class MigrationBuilder : IMigrationRulesBuilder
     {
         public void Build(IMigrationRules rules)
         {
+            rules.ForType<TypeA>().UseAlias("XYZServiceType");
+            rules.ForType<TypeB>().UseAlias("ABCServiceType");
+
+            rules
+                .From(new Version(1, 2, 6)).MigrateUsing(new V010203Migrator())
+                .From(new Version(1, 2, 5)).MigrateUsing(new V010202Migrator())
+                .From(new Version(1, 2, 4)).NotSupported()
+                .From(new Version(1, 2, 0)).MigrateUsing(new V010200Migrator())
+                .AllPriorVersions().NotSupported();
         }
     }
 }

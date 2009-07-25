@@ -18,26 +18,20 @@
 
 #endregion
 
-using System;
-using NSerializer.Migration;
 using NSerializer.SandPit.Examples.Migration.SampleTypes;
 
 
-namespace NSerializer.SandPit.Examples.Migration
+namespace NSerializer.Migration.Tests
 {
-    public class MigrationBuilder : IMigrationRulesBuilder
+    public class V010200Migrator : IMigrationRulesBuilder
     {
         public void Build(IMigrationRules rules)
         {
-            rules.ForType<TypeA>().UseAlias("XYZServiceType");
-            rules.ForType<TypeB>().UseAlias("ABCServiceType");
-
-            rules
-                .From(new Version(1, 2, 6)).MigrateUsing(new V010203Migrator())
-                .From(new Version(1, 2, 5)).MigrateUsing(new V010202Migrator())
-                .From(new Version(1, 2, 4)).NotSupported()
-                .From(new Version(1, 2, 0)).MigrateUsing(new V010200Migrator())
-                .AllPriorVersions().NotSupported();
+            rules.ForType<TypeA>()
+                .MatchesTypeName("MyOldNamespace.MyOldTypeA")
+                .Field("noLongerLovedField").Ignore()
+                .Field("oldFieldName").RenamedTo("newFieldName")
+                .Field("newFieldName").SetTo(42);
         }
     }
 }

@@ -18,10 +18,7 @@
 
 #endregion
 
-using NSerializer.Migration;
-
-
-namespace NSerializer.SandPit.Examples.Migration
+namespace NSerializer.Migration.Tests
 {
     public class V010202Migrator : IMigrationRulesBuilder
     {

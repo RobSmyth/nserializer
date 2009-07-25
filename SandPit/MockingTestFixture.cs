@@ -22,7 +22,7 @@ using NMock2;
 using NUnit.Framework;
 
 
-namespace NSerializer.SandPit.Examples.Migration
+namespace NSerializer.Migration.Tests
 {
     public abstract class MockingTestFixture
     {
