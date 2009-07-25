@@ -153,8 +153,10 @@ namespace NSerializer.UATs
                                        H = -7,
                                        I = 23,
                                        J = 42,
-                                       ArrayOfDoubles = new double[] {1.3d, 7.1d},
-                                       ArrayOfSingles = new Single[] { -3f, 0f, 11.3f },
+                                       ArrayOfDoubles = new[] {1.3d, 7.1d},
+                                       ArrayOfSingles = new[] {-3f, 0f, 11.3f},
+                                       K = TimeSpan.FromMilliseconds(123),
+                                       L = new DateTime(2010, 11, 30)
                                    };
             var xmlText = SerializeAsXml(sourceObject);
             Assert.Less(xmlText.Length, 2500, xmlText);
@@ -179,6 +181,11 @@ namespace NSerializer.UATs
             Assert.AreEqual(-3f, testedClass.ArrayOfSingles[0]);
             Assert.AreEqual(0f, testedClass.ArrayOfSingles[1]);
             Assert.AreEqual(11.3f, testedClass.ArrayOfSingles[2]);
+
+            Assert.AreEqual(123d, testedClass.K.TotalMilliseconds);
+
+            Assert.AreEqual(2010, testedClass.L.Year);
+            Assert.AreEqual(30, testedClass.L.Day);
         }
 
 #pragma warning disable UnusedMemberInPrivateClass
@@ -278,90 +285,40 @@ namespace NSerializer.UATs
 
         private class ClassI
         {
-            private bool a = false;
-            private int b = 0;
-            private double c = 0.0;
-            private Single d = 0;
-            private float e = 0.0F;
-            private char f = 'a';
-            private Int32 g = 0;
-            private Int64 h = 0;
-            private UInt32 i = 0;
-            private UInt64 j = 0;
-            private double[] arrayOfDoubles = new double[0];
-            private Single[] arrayOfSingles = new Single[0];
-
-            public bool A
+            public ClassI()
             {
-                get { return a; }
-                set { a = value; }
+                ArrayOfSingles = new Single[0];
+                ArrayOfDoubles = new double[0];
+                F = 'a';
             }
 
-            public int B
-            {
-                get { return b; }
-                set { b = value; }
-            }
+            public bool A { get; set; }
 
-            public double C
-            {
-                get { return c; }
-                set { c = value; }
-            }
+            public int B { get; set; }
 
-            public Single D
-            {
-                get { return d; }
-                set { d = value; }
-            }
+            public double C { get; set; }
 
-            public float E
-            {
-                get { return e; }
-                set { e = value; }
-            }
+            public Single D { get; set; }
 
-            public char F
-            {
-                get { return f; }
-                set { f = value; }
-            }
+            public float E { get; set; }
 
-            public int G
-            {
-                get { return g; }
-                set { g = value; }
-            }
+            public char F { get; set; }
 
-            public long H
-            {
-                get { return h; }
-                set { h = value; }
-            }
+            public int G { get; set; }
 
-            public uint I
-            {
-                get { return i; }
-                set { i = value; }
-            }
+            public long H { get; set; }
 
-            public ulong J
-            {
-                get { return j; }
-                set { j = value; }
-            }
+            public uint I { get; set; }
 
-            public double[] ArrayOfDoubles
-            {
-                get { return arrayOfDoubles; }
-                set { arrayOfDoubles = value; }
-            }
+            public ulong J { get; set; }
 
-            public float[] ArrayOfSingles
-            {
-                get { return arrayOfSingles; }
-                set { arrayOfSingles = value; }
-            }
+            public double[] ArrayOfDoubles { get; set; }
+
+            public float[] ArrayOfSingles { get; set; }
+
+            public TimeSpan K { get; set; }
+
+            public DateTime L { get; set; }
         }
 
 #pragma warning restore 168
