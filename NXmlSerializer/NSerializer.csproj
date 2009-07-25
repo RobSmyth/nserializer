@@ -57,7 +57,7 @@
     <Compile Include="XML\Readers\PayloadReader.cs" />
     <Compile Include="XML\Readers\INXmlElementReader.cs" />
     <Compile Include="XML\Readers\MetaDataReader.cs" />
-    <Compile Include="MigrationDefinitionFactory.cs" />
+    <Compile Include="Migration\MigrationDefinitionFactory.cs" />
     <Compile Include="Migration\Fields\FieldMigrator.cs" />
     <Compile Include="Migration\Fields\IFieldAction.cs" />
     <Compile Include="Migration\Fields\IgnoreFieldAction.cs" />
@@ -95,8 +95,7 @@
     <Compile Include="Migration\Types\TypeDefinition.cs" />
     <Compile Include="Migration\Types\TypeMigrationRules.cs" />
     <Compile Include="Migration\NullFieldDefinition.cs" />
-    <Compile Include="NullMigrationDefinition.cs" />
-    <Compile Include="NullTypeDefinition.cs" />
+    <Compile Include="Migration\NullMigrationDefinition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Framework\IApplicationObjectsRepository.cs" />
     <Compile Include="Framework\IDocumentObjectsRepository.cs" />

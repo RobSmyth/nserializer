@@ -19,6 +19,7 @@
 #endregion
 
 using System;
+using NSerializer.Framework.Types;
 
 
 namespace NSerializer.Types

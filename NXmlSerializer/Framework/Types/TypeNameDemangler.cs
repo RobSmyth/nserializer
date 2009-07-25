@@ -20,9 +20,10 @@
 
 using System;
 using System.Text.RegularExpressions;
+using NSerializer.Types;
 
 
-namespace NSerializer.Types
+namespace NSerializer.Framework.Types
 {
     public class TypeNameDemangler
     {

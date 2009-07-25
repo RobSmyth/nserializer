@@ -19,6 +19,7 @@
 #endregion
 
 using NMock2;
+using NSerializer.Framework.Types;
 using NSerializer.Types;
 using NUnit.Framework;
 

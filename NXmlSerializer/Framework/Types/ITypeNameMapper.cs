@@ -21,7 +21,7 @@
 using System;
 
 
-namespace NSerializer.Types
+namespace NSerializer.Framework.Types
 {
     public interface ITypeNameMapper
     {
