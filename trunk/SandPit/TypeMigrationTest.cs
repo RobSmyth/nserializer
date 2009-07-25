@@ -18,12 +18,11 @@
 
 #endregion
 
-using NSerializer.Migration;
 using NSerializer.UATs.Contexts;
 using NUnit.Framework;
 
 
-namespace NSerializer.SandPit.Examples.Migration
+namespace NSerializer.Migration.Tests
 {
     [TestFixture]
     public class TypeMigrationTest : SerializeContext
