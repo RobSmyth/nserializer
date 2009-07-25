@@ -24,6 +24,7 @@ using NDependencyInjection;
 using NDependencyInjection.Exceptions;
 using NDependencyInjection.interfaces;
 using NSerializer.Framework;
+using NSerializer.UATs.Contexts;
 using NUnit.Framework;
 
 

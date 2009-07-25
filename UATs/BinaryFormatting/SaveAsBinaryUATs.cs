@@ -20,6 +20,7 @@
 
 using System;
 using System.Diagnostics;
+using NSerializer.UATs.Contexts;
 using NSerializer.XML.Document;
 using NSerializer.XML.Document.Writers;
 using NUnit.Framework;
