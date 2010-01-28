@@ -49,7 +49,7 @@ namespace NSerializer.XML.Readers
             Payload payload;
 
             inputStream.Seek(0, SeekOrigin.Begin);
-            if (inputStream.Seek("<c type=\"_0\""))
+            if (inputStream.Seek("<c type=\"!0\""))
             {
                 using (var nodeReader = new XmlElementReaderFactory(inputStream).Create())
                 {

@@ -143,8 +143,8 @@ namespace NSerializer.UATs
         {
             var sourceObject = new ClassI
                                    {
-                                       A = true,
-                                       B = 7,
+                                       BoolField = true,
+                                       IntField = 7,
                                        C = 123.456D,
                                        D = 13,
                                        E = 79.346F,
@@ -157,14 +157,15 @@ namespace NSerializer.UATs
                                        ArrayOfSingles = new[] {-3f, 0f, 11.3f},
                                        K = TimeSpan.FromMilliseconds(123),
                                        L = new DateTime(2010, 11, 30),
-                                       M = new List<ClassJ>() { new ClassJ { MyField = 7 }, new ClassJ { MyField = 11 } }
+                                       M = new List<ClassJ>() { new ClassJ { MyField = 7 }, new ClassJ { MyField = 11 } },
+                                       N = new[] {new ClassK<int>()}
                                    };
             var xmlText = SerializeAsXml(sourceObject);
-            Assert.Less(xmlText.Length, 3500, xmlText);
+            Assert.Less(xmlText.Length, 4000, xmlText);
 
             var testedClass = ReadXmlText<ClassI>(xmlText);
-            Assert.AreEqual(true, testedClass.A);
-            Assert.AreEqual(7, testedClass.B);
+            Assert.AreEqual(true, testedClass.BoolField);
+            Assert.AreEqual(7, testedClass.IntField);
             Assert.AreEqual(123.456D, testedClass.C);
             Assert.AreEqual(13, testedClass.D);
             Assert.AreEqual(79.346F, testedClass.E);
@@ -296,9 +297,9 @@ namespace NSerializer.UATs
                 F = 'a';
             }
 
-            public bool A { get; set; }
+            public bool BoolField { get; set; }
 
-            public int B { get; set; }
+            public int IntField { get; set; }
 
             public double C { get; set; }
 
@@ -325,12 +326,20 @@ namespace NSerializer.UATs
             public DateTime L { get; set; }
 
             public List<ClassJ> M { get; set;}
+
+            public ClassK<int>[] N { get; set; }
         }
 
-        public class ClassJ
+        private class ClassJ
         {
             public int MyField { get; set; }
         }
+
+        public class ClassK<T>
+        {
+            public T MyField { get; set; }
+        }
+
 
 #pragma warning restore 168
 #pragma warning restore UnusedMemberInPrivateClass

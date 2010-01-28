@@ -18,6 +18,8 @@
 
 #endregion
 
+// Project site: http://code.google.com/p/nserializer/
+
 using System;
 using System.IO;
 using NSerializer.Framework;
@@ -51,6 +53,7 @@ namespace NSerializer
 
         /// <summary>
         /// Write object/value to XML to string writer.
+        /// Project site: http://code.google.com/p/nserializer/
         /// </summary>
         /// <param name="value">
         /// Object instance to write.

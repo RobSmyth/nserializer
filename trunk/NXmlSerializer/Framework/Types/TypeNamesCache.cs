@@ -18,7 +18,10 @@
 
 #endregion
 
+// Project site: http://code.google.com/p/nserializer/
+
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 
@@ -26,12 +29,14 @@ namespace NSerializer.Framework.Types
 {
     public class TypeNamesCache : ITypeNamesCache
     {
-        private readonly Dictionary<Type, int> cache = new Dictionary<Type, int>();
+        private readonly SortedList<Type, int> cache;
+        private readonly List<Type> typesCache = new List<Type>();
         private readonly ITypeNameMapper typeNamesMapper;
 
         public TypeNamesCache(ITypeNameMapper typeNamesMapper)
         {
             this.typeNamesMapper = typeNamesMapper;
+            cache = new SortedList<Type, int>(new TypeComparer());
         }
 
         public MetaDataTypeName[] Names
@@ -39,29 +44,41 @@ namespace NSerializer.Framework.Types
             get
             {
                 var names = new List<MetaDataTypeName>();
-                foreach (var pair in cache)
+
+                for (var index = 0; index < typesCache.Count; index++)
                 {
-                    string typeName;
-
-                    if (typeNamesMapper.CanHandle(pair.Key))
-                    {
-                        typeName = typeNamesMapper.GetTypeName(pair.Key);
-                    }
-                    else
-                    {
-                        // >>> map embedded types (array and generics) here <<<
-                        typeName = new TypeNameDemangler(pair.Key).ToString();
-                    }
-
-                    names.Add(new MetaDataTypeName(names.Count, typeName));
+                    names.Add(new MetaDataTypeName(index, GetNormalisedName(typesCache[index])));
                 }
+
                 return names.ToArray();
             }
         }
 
+        private string GetNormalisedName(Type type)
+        {
+            string typeName;
+            if (typeNamesMapper.CanHandle(type))
+            {
+                typeName = typeNamesMapper.GetTypeName(type);
+            }
+            else
+            {
+                // >>> map embedded types (array and generics) here <<<
+
+                if(type.IsArray)
+                {
+                    typeName = string.Format("{0}[]", GetTypeName(type.GetElementType()));
+                }
+                else
+                {
+                    typeName = new TypeNameDemangler(type).ToString();
+                }
+            }
+            return typeName;
+        }
+
         public string GetTypeName(Type type)
         {
-            //Console.WriteLine("GetTypeName {0}", type.FullName);//>>>
             int id;
             if (cache.ContainsKey(type))
             {
@@ -70,10 +87,19 @@ namespace NSerializer.Framework.Types
             else
             {
                 id = cache.Count;
-                cache.Add(type, id);
+                cache.Add(type, typesCache.Count);
+                typesCache.Add(type);
             }
 
-            return string.Format("_{0}", id);
+            return string.Format("!{0}", id);
+        }
+    }
+
+    public class TypeComparer : IComparer<Type>
+    {
+        public int Compare(Type x, Type y)
+        {
+            return x.FullName.CompareTo(y.FullName);
         }
     }
 }
