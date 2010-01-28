@@ -18,6 +18,8 @@
 
 #endregion
 
+// Project site: http://code.google.com/p/nserializer/
+
 using System;
 using System.IO;
 using System.Text;
@@ -63,8 +65,8 @@ namespace NSerializer.Tests.XML.Readers
 
             Stub.On(typeFinder).Method("Get").With(typeof (Payload).FullName).Will(Return.Value(typeof (Payload)));
             Stub.On(typeFinder).Method("Get").With("System.String[]").Will(Return.Value(typeof (String[])));
-            Stub.On(typeFinder).Method("Get").With("_0").Will(Return.Value(typeof (Payload)));
-            Stub.On(typeFinder).Method("Get").With("_1").Will(Return.Value(typeof (A)));
+            Stub.On(typeFinder).Method("Get").With("!0").Will(Return.Value(typeof (Payload)));
+            Stub.On(typeFinder).Method("Get").With("!1").Will(Return.Value(typeof (A)));
 
             var payload = reader.Read(new XmlStreamReader(stream));
 

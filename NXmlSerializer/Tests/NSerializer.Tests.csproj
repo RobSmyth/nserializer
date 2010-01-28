@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Framework\Types\ReaderNameMappingTypeFinderTests.cs" />
     <Compile Include="MockingTestFixture.cs" />
     <Compile Include="NullInstanceRepositoryTests.cs" />
     <Compile Include="NXmlTestFixtureBase.cs" />

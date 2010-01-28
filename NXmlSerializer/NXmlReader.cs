@@ -18,6 +18,8 @@
 
 #endregion
 
+// Project site: http://code.google.com/p/nserializer/
+
 using System;
 using System.IO;
 using System.Reflection;
@@ -40,6 +42,7 @@ namespace NSerializer
 
         /// <summary>
         /// XML text reader constructor.
+        /// Project site: http://code.google.com/p/nserializer/
         /// </summary>
         /// <param name="typeSeedAssembly">
         /// Seed assembly used for type discovery. 
@@ -54,6 +57,7 @@ namespace NSerializer
 
         /// <summary>
         /// XML text reader constructor.
+        /// Project site: http://code.google.com/p/nserializer/
         /// </summary>
         /// <param name="typeSeedAssembly">
         /// Seed assembly used for type discovery. 
@@ -75,6 +79,7 @@ namespace NSerializer
 
         /// <summary>
         /// XML text reader constructor.
+        /// Project site: http://code.google.com/p/nserializer/
         /// </summary>
         /// <param name="typeSeedAssembly">
         /// Seed assembly used for type discovery. 
@@ -102,6 +107,7 @@ namespace NSerializer
 
         /// <summary>
         /// Read XML text written using NSerializer.
+        /// Project site: http://code.google.com/p/nserializer/
         /// </summary>
         public T Read<T>(Stream inputStream)
         {

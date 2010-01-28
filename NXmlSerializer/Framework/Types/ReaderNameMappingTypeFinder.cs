@@ -18,8 +18,11 @@
 
 #endregion
 
+// Project site: http://code.google.com/p/nserializer/
+
 using System;
 using NSerializer.Types;
+using System.Text.RegularExpressions;
 
 
 namespace NSerializer.Framework.Types
@@ -37,12 +40,21 @@ namespace NSerializer.Framework.Types
 
         public Type Get(string typeName)
         {
-            if (typeName[0] == '_')
+            while (typeName[0] == '!')
             {
-                var typeIndex = int.Parse(typeName.Trim('_'));
-                typeName = names[typeIndex];
+                var regex = new Regex(@"^!(?<id>\d+)(?<remainder>.*)$", RegexOptions.IgnorePatternWhitespace);
+                var matches = regex.Matches(typeName);
+                var id = matches[0].Groups["id"].Value;
+                var remainder = matches[0].Groups["remainder"].Value;
+                var typeIndex = int.Parse(id);
+                typeName = names[typeIndex] + remainder;
             }
 
+            var isArray = typeName.EndsWith("[]");
+            if (isArray)
+            {
+                return typeFinder.Get(typeName.Substring(0, typeName.Length - "[]".Length)).MakeArrayType();
+            }
             return typeFinder.Get(typeName);
         }
     }
