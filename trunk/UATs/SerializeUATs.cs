@@ -190,7 +190,10 @@ namespace NSerializer.UATs
             Assert.AreEqual(30, testedClass.L.Day);
 
             Assert.AreEqual(2, testedClass.M.Count);
+            Assert.AreEqual(7, testedClass.M[0].MyField);
             Assert.AreEqual(11, testedClass.M[1].MyField);
+
+            Assert.AreEqual(1, testedClass.N.Length);
         }
 
 #pragma warning disable UnusedMemberInPrivateClass
