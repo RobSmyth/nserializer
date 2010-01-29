@@ -1,3 +1,4 @@
 * Documentation
   * [QuickStart Quick Start]
+  * [SupportedDataTypes Supported Data Types]
   * [Migration]
