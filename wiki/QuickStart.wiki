@@ -129,8 +129,8 @@ Serialization had been optimised, to reduce the size of XML, for the types liste
     * System.Char
     * System.Version
     * System.Collections.Generic.List<>
-    * System.ComponentModel.BindingList<>
-    * System.Collections.ArrayList
+    * [System.ComponentModel.BindingList<>]
+    * [System.Collections.ArrayList]
     * double[]
 
 
