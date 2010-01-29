@@ -1,3 +1,4 @@
+#sidebar SideBarTableOfContets
 =Quick Start=
 
 <wiki:toc max_depth="2" />
