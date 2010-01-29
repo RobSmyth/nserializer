@@ -3,8 +3,8 @@
 Supports:
 
     * Intefaces
-    * TimeSpan
-    * DateTime
+    * !TimeSpan
+    * !DateTime
     * Guid
     * Enums
     * Arrays (single dimension)
