@@ -106,9 +106,9 @@ Types known to be supported:
     * Generic class types
     * Structure types
     * Primitive data types
-    * [TimeSpan]
-    * [DateTime]
-    * [ArrayList]
+    * !TimeSpan
+    * !DateTime
+    * !ArrayList
     * List<>
     * Dictionary<>
     * Guid
@@ -129,8 +129,8 @@ Serialization had been optimised, to reduce the size of XML, for the types liste
     * System.Char
     * System.Version
     * System.Collections.Generic.List<>
-    * [System.ComponentModel.BindingList<>]
-    * [System.Collections.ArrayList]
+    * System.!ComponentModel.!BindingList<>
+    * System.Collections.!ArrayList
     * double[]
 
 
@@ -146,7 +146,7 @@ See Repository Integration for more information.
 
 ==Building The Code==
 
-The Visual Studio project uses the MSBuild Community Tasks 'AssemblyInfo' and 'SvnVersion' targets to generate the AssemblyInfo.cs file to synchronise the build number to the subversion revision. Download it here.
+The Visual Studio project uses the MSBuild Community Tasks '!AssemblyInfo' and '!SvnVersion' targets to generate the !AssemblyInfo.cs file to synchronise the build number to the subversion revision. Download it here.
 
 You will also want NUnit to run the tests.
 
