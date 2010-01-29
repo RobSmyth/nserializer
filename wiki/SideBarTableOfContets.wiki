@@ -1,2 +1,2 @@
 * Documentation
-  * Quick Start
+  * [Quick Start|QuickStart]
