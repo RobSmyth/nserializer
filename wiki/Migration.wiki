@@ -1,3 +1,4 @@
+#sidebar SideBarTableOfContets
 With each new product version the format of the saved XML file may change. This can be due to changed namespaces or class names. Data migration is to allow an application to read a prior version's file and convert it to the current application objects. This is a work in progress, not all migration scenarios are supported.
 
 =Supported Migration=
