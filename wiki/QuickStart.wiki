@@ -1,7 +1,7 @@
 #sidebar SideBarTableOfContets
-=Quick Start=
-
 <wiki:toc max_depth="2" />
+
+=Quick Start=
 
 ==Serialize==
 
