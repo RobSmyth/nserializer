@@ -1,2 +1,3 @@
 * Documentation
   * [QuickStart Quick Start]
+  * [Migration]
