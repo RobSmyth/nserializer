@@ -1,5 +1,7 @@
 =Quick Start=
 
+<wiki:toc max_depth="2" />
+
 ==Serialize==
 
 {{{
@@ -104,9 +106,9 @@ Types known to be supported:
     * Generic class types
     * Structure types
     * Primitive data types
-    * TimeSpan
-    * DateTime
-    * ArrayList
+    * [TimeSpan]
+    * [DateTime]
+    * [ArrayList]
     * List<>
     * Dictionary<>
     * Guid
