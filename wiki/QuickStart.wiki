@@ -1,6 +1,7 @@
 Quick Start
 Serialize
 
+{{{
 INXmlDocument xmlDocument = new NXmlDocument();
 NXmlWriter xmlWriter = new NXmlWriter(xmlDocument, null);
 xmlWriter.Write(value);
@@ -15,19 +16,23 @@ To serialize text to a file use the following code fragment.
 
 StreamWriter writer = new StreamWriter(fileName);
 writer.Write(xmlText);
+}}}
 
 Deserialize
 
+{{{
 private T ReadXmlText<T>(string xmlText)
 {
     StringReader stringReader = new StringReader(xmlText);
     NXmlReader reader = new NXmlReader(stringReader, typeSeedAssembly, null, null);
     return reader.Read<T>();
 }
+}}}
 
 Testing A Class Can Be Serialized
 The NUnit test fixture is an example of how to test if a class can be serialized using NXmlSerializer. Replace the 'MyClassUnderTest' with the class being tested. This test fixture assumes the class does not contain application or document scope objects.
 
+{{{
 [TestFixture]
 public class SampleTestFixture
 {
@@ -83,7 +88,7 @@ public class MyClassUnderTest
         get { return a; }
     }
 }
- 
+}}}
 
 
 Types Serialized
