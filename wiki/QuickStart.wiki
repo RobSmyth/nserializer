@@ -32,7 +32,7 @@ private T ReadXmlText<T>(string xmlText)
 }
 }}}
 
-==Testing A Class Can Be Serialized==
+==Testing Class Serializing==
 
 The NUnit test fixture is an example of how to test if a class can be serialized using NXmlSerializer. Replace the 'MyClassUnderTest' with the class being tested. This test fixture assumes the class does not contain application or document scope objects.
 
