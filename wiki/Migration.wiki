@@ -1,9 +1,10 @@
 #sidebar SideBarTableOfContets
+=Migration=
 Product feature changes and code refactoring often change the data saved. New data may be added, the data structure may change, or types may change name. NSerializer is being extended to provide data migration to allow a product to maintain compatibility with files saved by prior version of the product.
 
 Data migration is to allow an application to read a prior version's file and convert it to the current application objects. This is a work in progress, not all migration scenarios are supported.
 
-=Supported Migration=
+==Supported Migration==
 
 Currently NXmlSerializer supports migration with the following changes to application data types:
 
@@ -20,22 +21,22 @@ Hopefully in future release:
 
 Migration can be divided into either data movement (renaming, type splits/merging, deletion) or consolidation where data is processed to produce a new state. All of the above are the former.
 
-=Types of Migration=
+==Types of Migration==
 
-==Changed type and/or namespace names==
+===Changed type and/or namespace names===
 
 
-==New fields==
+===New fields===
 
 Currently supported.
 
 NSerializer deserializes types that have fields. The new fields with have null or default values.
 
-==Changed field names==
+===Changed field names===
 
 Supported.
 
-==Type refactored to multiple types==
+===Type refactored to multiple types===
 
 Not supported. Work in progress.
 
@@ -48,7 +49,7 @@ Issue to solve:
 
 Approach being considered: Use type aliasing to provide a class that implements the original class's fields. Provide proxies for the new types. Reference mapping.
 
-==Multiple types merged to another type==
+===Multiple types merged to another type===
 
 Not supported. Work in progress.
 
@@ -62,10 +63,10 @@ Issue to solve:
 
 Probably an infrequent scenario so this will be a lower priority feature.
 
-==Fields split/merged==
+===Fields split/merged===
 
 Now partially supported. Work in progress.
 
-=Links=
+==Links==
  * [http://en.wikipedia.org/wiki/Data_conversion Data conversion]
  * [http://en.wikipedia.org/wiki/Data_transformation Data transformation]
