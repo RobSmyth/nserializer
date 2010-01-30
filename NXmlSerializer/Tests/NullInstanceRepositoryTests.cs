@@ -36,13 +36,9 @@ namespace NSerializer.Tests
         }
 
         [Test]
-        [ExpectedException(typeof (UnableToReadXMLTextException),
-            ExpectedMessage =
-                "External instance repository required to read type 'NSerializer.Tests.NullInstanceRepositoryTests'."
-            )]
         public void GetInstance_ThrowsException()
         {
-            repository.Get(GetType());
+            Assert.Throws<UnableToReadXMLTextException>(() => repository.Get(GetType()),"External instance repository required to read type 'NSerializer.Tests.NullInstanceRepositoryTests'.");
         }
     }
 }

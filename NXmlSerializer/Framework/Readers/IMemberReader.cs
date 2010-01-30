@@ -21,6 +21,7 @@
 using System;
 using NSerializer.Framework.Document;
 using NSerializer.XML.Readers;
+using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer.Framework.Readers
@@ -28,6 +29,6 @@ namespace NSerializer.Framework.Readers
     public interface IMemberReader
     {
         bool CanRead(INXmlElementReader nodeReader);
-        IMemberValue Read(INXmlElementReader nodeReader, Type type);
+        IMemberValue Read(INXmlElementReader nodeReader, DestinationType type);
     }
 }

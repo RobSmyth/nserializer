@@ -42,7 +42,7 @@ namespace NSerializer.Migration.Types
         {
             if (!typeDefinition.HasFieldDefinition(fieldName))
             {
-                typeDefinition.CreateFieldDefinition(fieldName, typeDefinition.FindFieldDefinition(fieldName));
+                typeDefinition.CreateFieldDefinition(fieldName, null);
             }
             return new FieldRules(typeDefinition.FindFieldDefinition(fieldName), this);
         }

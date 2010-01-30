@@ -22,6 +22,7 @@ using System;
 using NSerializer.Exceptions;
 using NSerializer.Framework.Readers;
 using NSerializer.Types;
+using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer.XML.Readers.Values
@@ -55,13 +56,13 @@ namespace NSerializer.XML.Readers.Values
                     throw new NXmlReaderFormatException("Missing class members node.");
                 }
 
-                ReadFields(instance, membersNodeReader, type);
+                ReadFields(instance, membersNodeReader, new DestinationType(type));
             }
 
             return instance;
         }
 
-        private void ReadFields(object instance, INXmlElementReader membersNodeReader, Type type)
+        private void ReadFields(object instance, INXmlElementReader membersNodeReader, DestinationType type)
         {
             INXmlElementReader fieldReader;
             while ((fieldReader = membersNodeReader.GetNextChildNode("f")) != null)

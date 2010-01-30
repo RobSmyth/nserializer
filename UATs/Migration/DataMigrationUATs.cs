@@ -18,16 +18,17 @@
 
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using NSerializer.Exceptions;
 using NSerializer.Migration;
 using NSerializer.UATs.Contexts;
+using NSerializer.UATs.Migration.Migration;
 using NUnit.Framework;
-using TestNamespace;
 
 
-namespace NSerializer.UATs
+namespace NSerializer.UATs.Migration
 {
     [TestFixture]
     public class DataMigrationUATs : SerializeContext
@@ -56,7 +57,7 @@ namespace NSerializer.UATs
         {
             var xmlText = SerializeAsXml(new List<object> { new MyTypeC_V1(7) });
 
-            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
+            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder(new FileNameChangeMigrationBuilder()))[0];
             Assert.AreEqual(typeof(MyTypeC_V2), destination.GetType());
         }
 
@@ -80,15 +81,25 @@ namespace NSerializer.UATs
             public void Build(IMigrationRules rules)
             {
                 rules.ForType<MyTypeA_V2>()
-                    .MatchesTypeName("NSerializer.UATs.DataMigrationUATs+MyTypeA_V1");
+                    .MatchesTypeName("NSerializer.UATs.Migration.DataMigrationUATs+MyTypeA_V1");
 
                 rules.ForType<MyTypeB_V2>()
-                    .MatchesTypeName("NSerializer.UATs.DataMigrationUATs+MyTypeB_V1");
+                    .MatchesTypeName("NSerializer.UATs.Migration.DataMigrationUATs+MyTypeB_V1");
 
                 rules.ForType<MyTypeC_V2>()
-                    .MatchesTypeName("NSerializer.UATs.DataMigrationUATs+MyTypeC_V1");
+                    //.Field("valueA").RenamedTo("valueAV2")
+                    .MatchesTypeName("NSerializer.UATs.Migration.DataMigrationUATs+MyTypeC_V1");
 
                 childRulesBuilders.ToList().ForEach(builder => builder.Build(rules));
+            }
+        }
+
+        private class FileNameChangeMigrationBuilder : IMigrationRulesBuilder
+        {
+            public void Build(IMigrationRules rules)
+            {
+                rules.ForType<MyTypeC_V2>()
+                    .Field("valueA").RenamedTo("valueAV2");
             }
         }
 
@@ -116,14 +127,25 @@ namespace NSerializer.UATs
 
         private class MyTypeC_V2
         {
+            private readonly int valueAV2;
+
+            public MyTypeC_V2(int valueAv2)
+            {
+                valueAV2 = valueAv2;
+            }
+
+            public int ValueAv2
+            {
+                get { return valueAV2; }
+            }
         }
     }
-}
 
 
-namespace TestNamespace
-{
-    internal class MyTypeB_V2
+    namespace Migration
     {
+        internal class MyTypeB_V2
+        {
+        }
     }
 }

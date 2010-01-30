@@ -41,7 +41,7 @@ namespace NSerializer.XML.Readers.Members
             return nodeReader.Name == "f";
         }
 
-        public IMemberValue Read(INXmlElementReader nodeReader, Type type)
+        public IMemberValue Read(INXmlElementReader nodeReader, DestinationType type)
         {
             var fieldName = nodeReader.Attributes.Get("name");
 

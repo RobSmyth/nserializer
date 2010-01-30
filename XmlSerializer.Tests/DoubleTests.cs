@@ -107,19 +107,15 @@ namespace NSerializer.XmlSerializer.Tests
         }
 
         [Test]
-        [ExpectedException(typeof (OverflowException))]
         public void MaxValue_ThrowsException_WhenParsing()
         {
-            var readValue = double.Parse(double.MaxValue.ToString());
-            Assert.AreEqual(double.MaxValue, readValue);
+            Assert.Throws<OverflowException>(() => double.Parse(double.MaxValue.ToString()));
         }
 
         [Test]
-        [ExpectedException(typeof (OverflowException))]
         public void MinValue_ThrowsException_WhenParsing()
         {
-            var readValue = double.Parse(double.MinValue.ToString());
-            Assert.AreEqual(double.MinValue, readValue);
+            Assert.Throws<OverflowException>(() => double.Parse(double.MinValue.ToString()));
         }
 
         [Test]

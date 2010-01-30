@@ -43,14 +43,12 @@ namespace NSerializer.Tests.TypeFinders
         }
 
         [Test]
-        [ExpectedException(typeof (UnableToReadXMLTextException),
-            ExpectedMessage = "Unable to find type 'mynamespace.nonExistingType'.")]
         public void Get_ThrowsException_IfUnknownTypeName()
         {
             Expect.Once.On(typeFinderA).Method("Get").Will(Return.Value(null));
             Expect.Once.On(typeFinderB).Method("Get").Will(Return.Value(null));
 
-            Assert.IsNull(finder.Get("mynamespace.nonExistingType"));
+            Assert.Throws<UnableToReadXMLTextException>(() => finder.Get("mynamespace.nonExistingType"), "Unable to find type 'mynamespace.nonExistingType'.");
         }
 
         [Test]
