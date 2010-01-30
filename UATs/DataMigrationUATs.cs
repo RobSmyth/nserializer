@@ -19,9 +19,13 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
+using NSerializer.Migration;
 using NSerializer.Types;
 using NSerializer.UATs.Contexts;
 using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
+using TestNamespace;
 
 
 namespace NSerializer.UATs
@@ -30,101 +34,59 @@ namespace NSerializer.UATs
     public class DataMigrationUATs : SerializeContext
     {
         [Test]
-        [Ignore("Being replaced by new migration builder - to ensure this test is replaced")]
-        public void NewFieldsAdded()
+        public void TypeNameChange()
         {
-            var v1a = new Version1_ClassA(7, 11);
+            var source = new MyTypeA_V1();
+            var xmlText = SerializeAsXml(new List<object> {source});
 
-            var xmlText = SerializeAsXml(v1a);
-
-            var v2a = ReadXmlText<Version2_ClassA>(xmlText, null, null);
-
-            Assert.AreEqual(7, v2a.Field1);
-            Assert.AreEqual(11, v2a.Field2);
-            Assert.AreEqual(0, v2a.Field3);
-        }
-    }
-
-    internal class Version1_ClassA
-    {
-        private int field1;
-        private int field2;
-
-        public Version1_ClassA(int field1, int field2)
-        {
-            this.field1 = field1;
-            this.field2 = field2;
-        }
-    }
-
-    internal class Version1_ClassB
-    {
-    }
-
-    internal class Version2_ClassA
-    {
-        private readonly int field1;
-        private readonly int field2;
-        private readonly int field3;
-
-        public Version2_ClassA(int field1, int field2, int field3)
-        {
-            this.field1 = field1;
-            this.field3 = field3;
-            this.field2 = field2;
+            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
+            Assert.AreEqual(typeof(MyTypeA_V2), destination.GetType());
         }
 
-        public int Field3
+        [Test]
+        public void TypeNamespaceChange()
         {
-            get { return field3; }
+            var source = new MyTypeB_V1();
+            var xmlText = SerializeAsXml(new List<object> { source });
+
+            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
+            Assert.AreEqual(typeof(MyTypeB_V2), destination.GetType());
         }
 
-        public int Field2
+        private class MigrationRulesBuilder : IMigrationRulesBuilder
         {
-            get { return field2; }
+            public void Build(IMigrationRules rules)
+            {
+                rules.ForType<MyTypeA_V2>()
+                    .MatchesTypeName("NSerializer.UATs.DataMigrationUATs+MyTypeA_V1");
+
+                rules.ForType<MyTypeB_V2>()
+                    .MatchesTypeName("NSerializer.UATs.DataMigrationUATs+MyTypeB_V1");
+            }
         }
 
-        public int Field1
-        {
-            get { return field1; }
-        }
-    }
+        #region TestTypes
 
-    internal class Version2_ClassC
-    {
-    }
-
-    public class V1CA_To_V2CA_ReaderMappingTypeFinder : IReaderMappingTypeFinder
-    {
-        public bool CanHandle(string name)
+        private class MyTypeA_V1
         {
-            return name == "NSerializer.UATs.Version1_ClassA";
         }
 
-        public Type Get(string name)
+        private class MyTypeB_V1
         {
-            return typeof (Version2_ClassA);
         }
+
+        private class MyTypeA_V2
+        {
+        }
+
+        #endregion //TestTypes
     }
 }
 
 
-namespace MyNamespace
+namespace TestNamespace
 {
-    public class MyClass
+    internal class MyTypeB_V2
     {
-    }
-
-    public class SampleReaderMappingTypeFinder : IReaderMappingTypeFinder
-    {
-        public bool CanHandle(string name)
-        {
-            return name == "MyNewNamespace.MyClass";
-        }
-
-        public Type Get(string name)
-        {
-            return typeof (MyClass);
-        }
     }
 }
