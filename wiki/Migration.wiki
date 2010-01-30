@@ -1,5 +1,7 @@
 #sidebar SideBarTableOfContets
-With each new product version the format of the saved XML file may change. This can be due to changed namespaces or class names. Data migration is to allow an application to read a prior version's file and convert it to the current application objects. This is a work in progress, not all migration scenarios are supported.
+Product feature changes and code refactoring often change the data saved. New data may be added, the data structure may change, or types may change name. NSerializer is being extended to provide data migration to allow a product to maintain compatibility with files saved by prior version of the product.
+
+Data migration is to allow an application to read a prior version's file and convert it to the current application objects. This is a work in progress, not all migration scenarios are supported.
 
 =Supported Migration=
 
@@ -22,26 +24,6 @@ Migration can be divided into either data movement (renaming, type splits/mergin
 
 ==Changed type and/or namespace names==
 
-Currently supported.
-
-Best practice is to pass a type name mapper object, implementing the interface IWriterTypeNameMapper, to the writer to use nicknames for type serialization. If this is done changes to namespace or type names are done automatically as only the nickname is used in the XML file.
-
-However if the prior version did not use a type name mapper for the changed namespace or type a mapping type finder can be passed to the reader to pass current application types when the old type name is found. The code below shows a sample mapping type finder that will return the current type MyOldNamespaceName.MyOldClassName when the old name MyOldNamespaceName.MyOldClassName is found in the file.
-
-{{{
-public class SampleReaderMappingTypeFinder : IReaderMappingTypeFinder
-{
-    public bool CanHandle(string name)
-    {
-        return name == "MyOldNamespaceName.MyOldClassName"; // old name
-    }
- 
-    public Type Get(string name)
-    {
-        return typeof(MyNamespace.MyClass);
-    }
-}
-}}}
 
 ==New fields==
 
@@ -51,9 +33,7 @@ NXmlSerializer deserializes types that have fields. The new fields with have nul
 
 ==Changed field names==
 
-Not supported. Work in progress.
-
-Approach being considered: Use type aliasing to provide an inhereted class that implements the field with the original name. This would require an initialise method. NSerializer may support this more directly by recongnizing an interface to invoke the initialize method after deserializing.
+Supported.
 
 ==Type refactored to multiple types==
 
