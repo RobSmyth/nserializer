@@ -1,5 +1,6 @@
 #labels Migration
 #sidebar SideBarTableOfContets
+<wiki:toc max_depth="3" />
 =Migration=
 Product feature changes and code refactoring often change the data saved. New data may be added, the data structure may change, or types may change name. NSerializer is being extended to provide data migration to allow a product to maintain compatibility with files saved by prior version of the product.
 
@@ -22,7 +23,7 @@ Hopefully in future release:
 
 Migration can be divided into either data movement (renaming, type splits/merging, deletion) or consolidation where data is processed to produce a new state. All of the above are the former.
 
-==Types of Migration==
+==Type migration==
 
 ===Changed type and/or namespace names===
 
@@ -60,6 +61,8 @@ Migration rules:
 rules.ForType<NewFoo>()
   .MatchesTypeName("NSerializer.Example.Bar");
 }}}
+
+==Fields migration==
 
 ===New fields===
 
@@ -121,6 +124,6 @@ rules.ForType<Foo>()
   .Field("myField").RenamedTo("myRenamedField");
 }}}
 
-==Links==
+=Links=
  * [http://en.wikipedia.org/wiki/Data_conversion Data conversion]
  * [http://en.wikipedia.org/wiki/Data_transformation Data transformation]
