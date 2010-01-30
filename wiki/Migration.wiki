@@ -47,7 +47,7 @@ rules.ForType<RenamedFoo>()
 
 ===Changed name and/or namespace===
 
-Simple refactoring or type name changes should not break compatibility.
+Simple refactoring or type name changes should not break compatibility so consider using an alias first. But if an alias was not used it is necessary to link the type to the old type name. 
 
 ====Example====
 
