@@ -92,9 +92,9 @@ class Foo
 
 Supported.
 
-Prior (saved) version code:
-
 ====Example====
+
+Prior (saved) version code:
 
 {{{
 class Foo
