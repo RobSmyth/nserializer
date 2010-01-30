@@ -28,9 +28,29 @@ Migration can be divided into either data movement (renaming, type splits/mergin
 
 ===New fields===
 
-Currently supported.
+Currently supported. No configuration required. New fields with have null or default values.
 
-NSerializer deserializes types that have fields. The new fields with have null or default values.
+Version 1.0 code:
+
+{{{
+class Foo
+{
+  private int myField;
+    :
+}
+}}}
+
+Version 1.1. code:
+
+{{{
+class Foo
+{
+  private int myField;
+  private int myNewField;
+    :
+}
+}}}
+
 
 ===Changed field names===
 
