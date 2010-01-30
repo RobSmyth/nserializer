@@ -14,6 +14,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,18 +42,25 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\NDependencyInjection.dll</HintPath>
     </Reference>
+    <Reference Include="NMock2, Version=1.0.2313.18049, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\NMock2.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.4.0.2, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationObjectRepositoryUATs.cs" />
     <Compile Include="BinaryFormatting\SaveAsBinaryUATs.cs" />
-    <Compile Include="DataMigrationUATs.cs" />
+    <Compile Include="Migration\DataMigrationUATs.cs" />
     <Compile Include="DependencyInjectTests.cs" />
     <Compile Include="SampleTestFixture.cs" />
     <Compile Include="Contexts\SerializeContext.cs" />
@@ -71,9 +79,6 @@
       <Project>{DC35C153-623F-403B-93AD-F39ED62201BD}</Project>
       <Name>TestAssembly1</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Migration\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
