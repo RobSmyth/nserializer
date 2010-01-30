@@ -29,7 +29,7 @@ Migration can be divided into either data movement (renaming, type splits/mergin
 
 Currently supported.
 
-NXmlSerializer deserializes types that have fields. The new fields with have null or default values.
+NSerializer deserializes types that have fields. The new fields with have null or default values.
 
 ==Changed field names==
 
