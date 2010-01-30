@@ -18,13 +18,10 @@
 
 #endregion
 
-using System;
 using System.Collections.Generic;
 using NSerializer.Migration;
-using NSerializer.Types;
 using NSerializer.UATs.Contexts;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using TestNamespace;
 
 
@@ -40,17 +37,17 @@ namespace NSerializer.UATs
             var xmlText = SerializeAsXml(new List<object> {source});
 
             var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
-            Assert.AreEqual(typeof(MyTypeA_V2), destination.GetType());
+            Assert.AreEqual(typeof (MyTypeA_V2), destination.GetType());
         }
 
         [Test]
         public void TypeNamespaceChange()
         {
             var source = new MyTypeB_V1();
-            var xmlText = SerializeAsXml(new List<object> { source });
+            var xmlText = SerializeAsXml(new List<object> {source});
 
             var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
-            Assert.AreEqual(typeof(MyTypeB_V2), destination.GetType());
+            Assert.AreEqual(typeof (MyTypeB_V2), destination.GetType());
         }
 
         private class MigrationRulesBuilder : IMigrationRulesBuilder
@@ -65,8 +62,6 @@ namespace NSerializer.UATs
             }
         }
 
-        #region TestTypes
-
         private class MyTypeA_V1
         {
         }
@@ -78,8 +73,6 @@ namespace NSerializer.UATs
         private class MyTypeA_V2
         {
         }
-
-        #endregion //TestTypes
     }
 }
 
