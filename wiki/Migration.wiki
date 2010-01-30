@@ -25,7 +25,7 @@ Migration can be divided into either data movement (renaming, type splits/mergin
 
 ==Type migration==
 
-===Changed type and/or namespace names===
+===Changed name and/or namespace===
 
 Simple refactoring or type name changes should not break compatibility.
 
