@@ -25,6 +25,26 @@ Migration can be divided into either data movement (renaming, type splits/mergin
 
 ==Type migration==
 
+===Aliases===
+
+Assigning an alias to a type means that a type's name and/or namespace can be changed without breaking file compatibility. This is because the serializer only serialized the alias and not the type's name.
+
+Example:
+
+{{{
+rules.ForType<Foo>()
+  .UseAlias("FooAlias");
+}}}
+
+If Foo is renamed then refactoring will rename the type in the rule. It is best to make the alias name different from the original type name so that refactoring tools, like Resharper, will not change the alias.
+
+So after refactoring the rule will be:
+
+{{{
+rules.ForType<RenamedFoo>()
+  .UseAlias("FooAlias");
+}}}
+
 ===Changed name and/or namespace===
 
 Simple refactoring or type name changes should not break compatibility.
