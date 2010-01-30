@@ -45,7 +45,7 @@ rules.ForType<RenamedFoo>()
   .UseAlias("FooAlias");
 }}}
 
-===Changed name and/or namespace===
+===Name and/or namespace changed===
 
 Simple refactoring or type name changes should not break compatibility so consider using an alias first. But if an alias was not used it is necessary to link the type to the old type name. 
 
@@ -111,7 +111,7 @@ class Foo
 }
 }}}
 
-===Changed field names===
+===Name changed===
 
 Supported.
 
