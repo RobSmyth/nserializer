@@ -121,19 +121,6 @@ rules.ForType<Foo>()
   .Field("myField").RenamedTo("myRenamedField");
 }}}
 
-===Type refactored to multiple types===
-
-Not supported. Work in progress.
-
-Issue to solve:
-
-    * Resolve references to the correct type(s).
-    * Redirect field values to new types.
-    * Execute logic to initialise new types.
-
-
-Approach being considered: Use type aliasing to provide a class that implements the original class's fields. Provide proxies for the new types. Reference mapping.
-
 ==Links==
  * [http://en.wikipedia.org/wiki/Data_conversion Data conversion]
  * [http://en.wikipedia.org/wiki/Data_transformation Data transformation]
