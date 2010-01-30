@@ -19,6 +19,8 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Linq;
+using NSerializer.Exceptions;
 using NSerializer.Migration;
 using NSerializer.UATs.Contexts;
 using NUnit.Framework;
@@ -33,8 +35,7 @@ namespace NSerializer.UATs
         [Test]
         public void TypeNameChange()
         {
-            var source = new MyTypeA_V1();
-            var xmlText = SerializeAsXml(new List<object> {source});
+            var xmlText = SerializeAsXml(new List<object> {new MyTypeA_V1()});
 
             var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
             Assert.AreEqual(typeof (MyTypeA_V2), destination.GetType());
@@ -43,15 +44,39 @@ namespace NSerializer.UATs
         [Test]
         public void TypeNamespaceChange()
         {
-            var source = new MyTypeB_V1();
-            var xmlText = SerializeAsXml(new List<object> {source});
+            var xmlText = SerializeAsXml(new List<object> {new MyTypeB_V1()});
 
             var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
-            Assert.AreEqual(typeof (MyTypeB_V2), destination.GetType());
+            Assert.AreEqual(typeof(MyTypeB_V2), destination.GetType());
+        }
+
+        [Test]
+        [Ignore("wip")]
+        public void FieldNameChange()
+        {
+            var xmlText = SerializeAsXml(new List<object> { new MyTypeC_V1(7) });
+
+            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
+            Assert.AreEqual(typeof(MyTypeC_V2), destination.GetType());
+        }
+
+        [Test]
+        public void FieldNameChange_Failure()
+        {
+            var xmlText = SerializeAsXml(new List<object> { new MyTypeC_V1(7) });
+
+            Assert.Throws<NSerializerException>(() => ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder()));
         }
 
         private class MigrationRulesBuilder : IMigrationRulesBuilder
         {
+            private readonly IMigrationRulesBuilder[] childRulesBuilders;
+
+            public MigrationRulesBuilder(params IMigrationRulesBuilder[] childRulesBuilders)
+            {
+                this.childRulesBuilders = childRulesBuilders;
+            }
+
             public void Build(IMigrationRules rules)
             {
                 rules.ForType<MyTypeA_V2>()
@@ -59,6 +84,11 @@ namespace NSerializer.UATs
 
                 rules.ForType<MyTypeB_V2>()
                     .MatchesTypeName("NSerializer.UATs.DataMigrationUATs+MyTypeB_V1");
+
+                rules.ForType<MyTypeC_V2>()
+                    .MatchesTypeName("NSerializer.UATs.DataMigrationUATs+MyTypeC_V1");
+
+                childRulesBuilders.ToList().ForEach(builder => builder.Build(rules));
             }
         }
 
@@ -71,6 +101,20 @@ namespace NSerializer.UATs
         }
 
         private class MyTypeA_V2
+        {
+        }
+
+        private class MyTypeC_V1
+        {
+            private readonly int valueA;
+
+            public MyTypeC_V1(int valueA)
+            {
+                this.valueA = valueA;
+            }
+        }
+
+        private class MyTypeC_V2
         {
         }
     }
