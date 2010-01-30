@@ -37,7 +37,6 @@ namespace NSerializer.UATs
         }
 
         [Test]
-        [ExpectedException(typeof (UnableToReadXMLTextException))]
         public void ThrowsExceptionIfReadingEmptyXmlString()
         {
             var xmlText = string.Empty;
@@ -45,23 +44,21 @@ namespace NSerializer.UATs
 
             var reader = new NXmlReader(typeSeedAssembly);
 
-            reader.Read<object>(GetStream(xmlText));
+            Assert.Throws<UnableToReadXMLTextException>(() => reader.Read<object>(GetStream(xmlText)));
         }
 
         [Test]
-        [ExpectedException(typeof (UnableToReadXMLTextException))]
         public void ThrowsExceptionIfReadingNullStream()
         {
             var reader = new NXmlReader(typeSeedAssembly);
 
-            reader.Read<object>(null);
+            Assert.Throws<UnableToReadXMLTextException>(() => reader.Read<object>(null));
         }
 
         [Test]
-        [ExpectedException(typeof (UnableToReadXMLTextException))]
         public void ThrowsExceptionOnInvalidXmlStringFormat()
         {
-            ReadXmlText<object>("invalid xml content");
+            Assert.Throws<UnableToReadXMLTextException>(() => ReadXmlText<object>("invalid xml content"));
         }
     }
 }

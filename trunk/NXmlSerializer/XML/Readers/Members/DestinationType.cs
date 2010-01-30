@@ -19,15 +19,33 @@
 #endregion
 
 using System;
-using NSerializer.XML.Readers;
-using NSerializer.XML.Readers.Members;
+using System.Reflection;
 
 
-namespace NSerializer.Framework.Readers
+namespace NSerializer.XML.Readers.Members
 {
-    public interface IBaseTypeMembersReader
+    public class DestinationType
     {
-        bool CanRead(INXmlElementReader nodeReader);
-        void ReadMembers(object instance, INXmlElementReader nodeReader, DestinationType type);
+        private readonly Type type;
+
+        public DestinationType(Type type)
+        {
+            this.type = type;
+        }
+
+        public DestinationType BaseType
+        {
+            get { return new DestinationType(type.BaseType); }
+        }
+
+        public string FullName
+        {
+            get { return type.FullName; }
+        }
+
+        public FieldInfo GetField(string fieldName, BindingFlags bindingFlags)
+        {
+            return type.GetField(fieldName, bindingFlags);
+        }
     }
 }

@@ -50,11 +50,9 @@ namespace NSerializer.UATs
         }
 
         [Test]
-        [ExpectedException(typeof (UnableToReadXMLTextException),
-            ExpectedMessage = "Unable to find type 'NSerializer.UATs.BasicUsage'.")]
         public void Get_ThrowsException_IfTypeNotFound()
         {
-            Assert.IsNull(typeFinder.Get("NSerializer.UATs.BasicUsage"));
+            Assert.Throws<UnableToReadXMLTextException>(() => typeFinder.Get("NSerializer.UATs.BasicUsage"), "Unable to find type 'NSerializer.UATs.BasicUsage'.");
         }
 
         [Test]
