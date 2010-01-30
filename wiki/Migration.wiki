@@ -30,7 +30,9 @@ Migration can be divided into either data movement (renaming, type splits/mergin
 
 Currently supported. No configuration required. New fields with have null or default values.
 
-Version 1.0 code:
+====Example====
+
+Prior (saved) version code:
 
 {{{
 class Foo
@@ -40,7 +42,7 @@ class Foo
 }
 }}}
 
-Version 1.1. code:
+Current version code:
 
 {{{
 class Foo
@@ -55,6 +57,36 @@ class Foo
 ===Changed field names===
 
 Supported.
+
+Prior (saved) version code:
+
+====Example====
+
+{{{
+class Foo
+{
+  private int myField;
+    :
+}
+}}}
+
+Current version code:
+
+{{{
+class Foo
+{
+  private int myRenamedField;
+    :
+}
+}}}
+
+Migration rules:
+
+{{{
+rules.ForType<Foo>()
+  .Field("myField").RenamedTo("myRenamedField");
+}}}
+
 
 ===Type refactored to multiple types===
 
