@@ -11,7 +11,7 @@ Data migration is to allow an application to read a prior version's file and con
 Currently NSerializer supports migration with the following changes to application data types:
 
     * Namespace
-    * Type name / type replacement
+    * Type name / type substitution
     * New fields
     * Field name
     * Deleted fields
