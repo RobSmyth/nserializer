@@ -49,7 +49,7 @@ namespace NSerializer.XML.Readers.Members
             return canRead;
         }
 
-        public IMemberValue Read(INXmlElementReader nodeReader, ITargetType type)
+        public IMemberValue Read(INXmlElementReader nodeReader, IDataType type)
         {
             var memberValues = new List<IMemberValue>();
             foreach (var typeMemberReader in memberReaders)

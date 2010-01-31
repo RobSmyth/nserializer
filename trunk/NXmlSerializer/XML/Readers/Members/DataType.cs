@@ -25,20 +25,20 @@ using NSerializer.Framework.Types;
 
 namespace NSerializer.XML.Readers.Members
 {
-    public class DestinationType : ITargetType
+    public class DataType : IDataType
     {
         private readonly Type type;
         private readonly ITypeFinder typeFinder;
 
-        public DestinationType(Type type, ITypeFinder typeFinder)
+        public DataType(Type type, ITypeFinder typeFinder)
         {
             this.type = type;
             this.typeFinder = typeFinder;
         }
 
-        public DestinationType BaseType
+        public DataType BaseType
         {
-            get { return new DestinationType(type.BaseType, typeFinder); }
+            get { return new DataType(type.BaseType, typeFinder); }
         }
 
         public string FullName
@@ -61,18 +61,56 @@ namespace NSerializer.XML.Readers.Members
             return type;
         }
 
-        public DestinationType GetElementType()
+        public DataType GetElementType()
         {
-            return new DestinationType(type.GetElementType(), typeFinder);
+            return new DataType(type.GetElementType(), typeFinder);
         }
 
-        public ITargetType MakeArrayType()
+        public IDataType MakeArrayType()
         {
-            return new DestinationType(type.MakeArrayType(), typeFinder);
+            return new DataType(type.MakeArrayType(), typeFinder);
+        }
+
+        public static implicit operator Type(DataType rhs)
+        {
+            return rhs.type;
+        }
+
+        public static bool operator ==(Type lhs, DataType rhs)
+        {
+            return lhs == rhs.type;
+        }
+
+        public static bool operator !=(Type lhs, DataType rhs)
+        {
+            return !(lhs == rhs);
+        }
+
+        public bool Equals(DataType other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Equals(other.type, type) && Equals(other.typeFinder, typeFinder);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof (DataType)) return false;
+            return Equals((DataType) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((type != null ? type.GetHashCode() : 0)*397) ^ (typeFinder != null ? typeFinder.GetHashCode() : 0);
+            }
         }
     }
 
-    public class DestinationType<T> : DestinationType
+    public class DestinationType<T> : DataType
     {
         public DestinationType(ITypeFinder typeFinder)
             : base(typeof(T), typeFinder)

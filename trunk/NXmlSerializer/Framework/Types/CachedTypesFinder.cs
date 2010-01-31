@@ -36,14 +36,14 @@ namespace NSerializer.Framework.Types
             this.typeFinder = typeFinder;
         }
 
-        public ITargetType Get(string typeName)
+        public IDataType Get(string typeName)
         {
             Type foundType;
             if (!cachedTypes.TryGetValue(typeName, out foundType))
             {
                 return null;
             }
-            return new DestinationType(foundType, typeFinder);
+            return new DataType(foundType, typeFinder);
         }
 
         public void Add(string typeName, Type type)

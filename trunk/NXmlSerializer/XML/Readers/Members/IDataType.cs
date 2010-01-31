@@ -24,14 +24,14 @@ using System.Reflection;
 
 namespace NSerializer.XML.Readers.Members
 {
-    public interface ITargetType
+    public interface IDataType
     {
-        DestinationType BaseType { get; }
+        DataType BaseType { get; }
         string FullName { get; }
         bool IsArray { get; }
         FieldInfo GetField(string fieldName, BindingFlags bindingFlags);
         Type GetTargetType();
-        DestinationType GetElementType();
-        ITargetType MakeArrayType();
+        DataType GetElementType();
+        IDataType MakeArrayType();
     }
 }

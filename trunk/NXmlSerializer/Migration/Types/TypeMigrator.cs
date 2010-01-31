@@ -37,7 +37,7 @@ namespace NSerializer.Migration.Types
             this.migrationDefinition = migrationDefinition;
         }
 
-        public ITargetType Get(string typeName)
+        public IDataType Get(string typeName)
         {
             var typeDefinition = migrationDefinition.GetTypeDefinition(typeName);
             if (typeDefinition != null)
