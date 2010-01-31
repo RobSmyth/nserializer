@@ -45,9 +45,8 @@ namespace NSerializer.XML.Readers.Members
         {
             var fieldName = nodeReader.Attributes.Get("name");
 
-            var fieldInfo = type.GetField(fieldName,
-                                          BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-            if (fieldInfo == null)
+            var field = type.GetField(fieldName);
+            if (field == null)
             {
                 throw new UnableToReadXMLTextException(
                     string.Format("Unable to find field '{0}'.", fieldName));
@@ -56,7 +55,7 @@ namespace NSerializer.XML.Readers.Members
             IMemberValue value;
             using (var valueNode = nodeReader.GetNextChildNode())
             {
-                value = new FieldValue(fieldInfo, objectReader.Get(valueNode));
+                value = new FieldValue(field, objectReader.Get(valueNode));
             }
 
             return value;
