@@ -137,6 +137,38 @@ rules.ForType<Foo>()
   .Field("myField").RenamedTo("myRenamedField");
 }}}
 
+===Deleted or ignored===
+
+Supported.
+
+====Example====
+
+Prior (saved) version code:
+
+{{{
+class Foo
+{
+  private int myField;
+    :
+}
+}}}
+
+Current version code:
+
+{{{
+class Foo
+{
+}
+}}}
+
+Migration rules:
+
+{{{
+rules.ForType<Foo>()
+  .Field("myField").Ignore();
+}}}
+
+
 =Links=
  * [http://en.wikipedia.org/wiki/Data_conversion Data conversion]
  * [http://en.wikipedia.org/wiki/Data_transformation Data transformation]
