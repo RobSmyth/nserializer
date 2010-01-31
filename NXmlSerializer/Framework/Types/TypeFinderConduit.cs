@@ -28,9 +28,9 @@ namespace NSerializer.Framework.Types
     {
         private ITypeFinder typeFinder;
 
-        public IDataType Get(string typeName)
+        public IDataType GetType(string typeName)
         {
-            return typeFinder.Get(typeName);
+            return typeFinder.GetType(typeName);
         }
 
         public void SetTarget(ITypeFinder target)

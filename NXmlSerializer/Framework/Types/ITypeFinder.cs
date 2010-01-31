@@ -26,6 +26,6 @@ namespace NSerializer.Framework.Types
 {
     public interface ITypeFinder
     {
-        IDataType Get(string typeName);
+        IDataType GetType(string typeName);
     }
 }

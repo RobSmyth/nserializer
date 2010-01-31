@@ -58,7 +58,7 @@ namespace NSerializer.XML.Readers.Values
                 }
 
                 var typeName = nodeReader.Attributes.Get("type");
-                var objectType = typeFinder.Get(typeName);
+                var objectType = typeFinder.GetType(typeName);
 
                 objectInstance = valuesList.ToArray(objectType.GetElementType().GetTargetType());
 

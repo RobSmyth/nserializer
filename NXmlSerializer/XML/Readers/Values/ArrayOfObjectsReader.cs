@@ -62,7 +62,7 @@ namespace NSerializer.XML.Readers.Values
                 }
             }
 
-            var elementType = typeFinder.Get(nodeReader.Attributes.Get("type")).GetElementType();
+            var elementType = typeFinder.GetType(nodeReader.Attributes.Get("type")).GetElementType();
             var objectInstance = valuesList.ToArray(elementType.GetTargetType());
 
             readObjects.Add(nodeReader.Attributes.GetInteger("ID"), objectInstance);

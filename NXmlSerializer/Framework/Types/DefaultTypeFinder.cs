@@ -44,9 +44,9 @@ namespace NSerializer.Framework.Types
             typeFinderConduit.SetTarget(typeFinder);
         }
 
-        public IDataType Get(string typeName)
+        public IDataType GetType(string typeName)
         {
-            return typeFinder.Get(typeName);
+            return typeFinder.GetType(typeName);
         }
     }
 }

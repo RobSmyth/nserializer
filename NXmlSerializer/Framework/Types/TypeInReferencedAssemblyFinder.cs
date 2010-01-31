@@ -40,7 +40,7 @@ namespace NSerializer.Framework.Types
             this.typeFinder = typeFinder;
         }
 
-        public IDataType Get(string typeName)
+        public IDataType GetType(string typeName)
         {
             var assemblyNameFilter = new PassOnceNameFilter();
 

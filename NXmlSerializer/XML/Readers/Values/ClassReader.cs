@@ -18,6 +18,8 @@
 
 #endregion
 
+// Project site: http://code.google.com/p/nserializer/
+
 using System;
 using NSerializer.Exceptions;
 using NSerializer.Framework;
@@ -58,7 +60,7 @@ namespace NSerializer.XML.Readers.Values
         public object Get(INXmlElementReader nodeReader)
         {
             var typeName = nodeReader.Attributes.Get("type");
-            var type = typeFinder.Get(typeName);
+            var type = typeFinder.GetType(typeName);
 
             var typeAccessor = new TypeAccessor(type.GetTargetType(), docObjectRepository);
             var instance = typeAccessor.GetInstance();

@@ -31,7 +31,7 @@ namespace NSerializer.Tests.Framework.Types
     [TestFixture]
     public class ReaderNameMappingTypeFinderTests : MockingTestFixture
     {
-        private ReaderNameMappingTypeFinder finder;
+        private ReaderNameAliasingTypeFinder finder;
         private string[] names;
         private ITypeFinder typeFinder;
 
@@ -43,23 +43,23 @@ namespace NSerializer.Tests.Framework.Types
                             "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA", "!0[]",
                             "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeC"
                         };
-            finder = new ReaderNameMappingTypeFinder(typeFinder, names);
+            finder = new ReaderNameAliasingTypeFinder(typeFinder, names);
         }
 
         [Test]
         public void Get()
         {
-            Expect.Once.On(typeFinder).Method("Get").With(
+            Expect.Once.On(typeFinder).Method("GetType").With(
                 "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA").Will(Return.Value(new DestinationType<MyTypeA>(null)));
-            Assert.AreEqual(typeof (MyTypeA), finder.Get("!0").GetTargetType());
+            Assert.AreEqual(typeof (MyTypeA), finder.GetType("!0").GetTargetType());
 
-            Expect.Once.On(typeFinder).Method("Get").With(
+            Expect.Once.On(typeFinder).Method("GetType").With(
                 "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA").Will(Return.Value(new DestinationType<MyTypeA>(null)));
-            Assert.AreEqual(typeof (MyTypeA[]), finder.Get("!1").GetTargetType());
+            Assert.AreEqual(typeof (MyTypeA[]), finder.GetType("!1").GetTargetType());
 
-            Expect.Once.On(typeFinder).Method("Get").With(
+            Expect.Once.On(typeFinder).Method("GetType").With(
                 "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeC").Will(Return.Value(new DestinationType<MyTypeC>(null)));
-            Assert.AreEqual(typeof (MyTypeC), finder.Get("!2").GetTargetType());
+            Assert.AreEqual(typeof (MyTypeC), finder.GetType("!2").GetTargetType());
         }
 
         private class MyTypeA

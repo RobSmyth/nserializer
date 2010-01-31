@@ -43,7 +43,7 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void DoesNotFindTypeInReferencedAssembly()
         {
-            Assert.IsNull(finder.Get("System.Int32"));
+            Assert.IsNull(finder.GetType("System.Int32"));
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace NSerializer.Tests.TypeFinders
         {
             Expect.Once.On(typesCache).Method("Add").With("NSerializer.Tests.TypeFinders.TypeInAssemblyFinderTests",
                                                           GetType());
-            Assert.IsNotNull(finder.Get("NSerializer.Tests.TypeFinders.TypeInAssemblyFinderTests"));
+            Assert.IsNotNull(finder.GetType("NSerializer.Tests.TypeFinders.TypeInAssemblyFinderTests"));
         }
     }
 }

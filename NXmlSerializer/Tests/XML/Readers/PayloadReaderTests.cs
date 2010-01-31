@@ -64,10 +64,10 @@ namespace NSerializer.Tests.XML.Readers
 
             var stream = new MemoryStream(Encoding.ASCII.GetBytes(xml));
 
-            Stub.On(typeFinder).Method("Get").With(typeof (Payload).FullName).Will(Return.Value(new DestinationType<Payload>(null)));
-            Stub.On(typeFinder).Method("Get").With("System.String[]").Will(Return.Value(new DestinationType<String[]>(null)));
-            Stub.On(typeFinder).Method("Get").With("!0").Will(Return.Value(new DestinationType<Payload>(null)));
-            Stub.On(typeFinder).Method("Get").With("!1").Will(Return.Value(new DestinationType<A>(null)));
+            Stub.On(typeFinder).Method("GetType").With(typeof (Payload).FullName).Will(Return.Value(new DestinationType<Payload>(null)));
+            Stub.On(typeFinder).Method("GetType").With("System.String[]").Will(Return.Value(new DestinationType<String[]>(null)));
+            Stub.On(typeFinder).Method("GetType").With("!0").Will(Return.Value(new DestinationType<Payload>(null)));
+            Stub.On(typeFinder).Method("GetType").With("!1").Will(Return.Value(new DestinationType<A>(null)));
 
             var payload = reader.Read(new XmlStreamReader(stream));
 

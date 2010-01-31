@@ -34,13 +34,13 @@ namespace NSerializer.Framework.Types
             this.typeFinders = typeFinders;
         }
 
-        public IDataType Get(string typeName)
+        public IDataType GetType(string typeName)
         {
             IDataType foundType = null;
 
             foreach (var finder in typeFinders)
             {
-                foundType = finder.Get(typeName);
+                foundType = finder.GetType(typeName);
                 if (foundType != null && foundType.GetTargetType() != null)
                 {
                     break;

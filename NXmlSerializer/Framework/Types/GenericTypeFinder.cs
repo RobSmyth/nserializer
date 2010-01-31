@@ -37,7 +37,7 @@ namespace NSerializer.Framework.Types
             this.typeFinder = typeFinder;
         }
 
-        public IDataType Get(string typeName)
+        public IDataType GetType(string typeName)
         {
             Type foundType = null;
 
@@ -51,7 +51,7 @@ namespace NSerializer.Framework.Types
                     var parameters = matches[0].Groups["paramterTypes"].Value;
                     var valueTypeName = matches[0].Groups["collectionType"].Value;
 
-                    var valueType = typeFinder.Get(valueTypeName);
+                    var valueType = typeFinder.GetType(valueTypeName);
 
                     if (valueType != null)
                     {
@@ -76,7 +76,7 @@ namespace NSerializer.Framework.Types
             for (var index = 0; index < paramterTypes.Length; index++)
             {
                 var parameterTypeName = parameterTypeNames[index].Trim(new[] {' ', '[', ']'});
-                paramterTypes[index] = typeFinder.Get(parameterTypeName).GetTargetType();
+                paramterTypes[index] = typeFinder.GetType(parameterTypeName).GetTargetType();
             }
             return paramterTypes;
         }

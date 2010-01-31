@@ -177,7 +177,7 @@
     <Compile Include="XML\Readers\Members\MemberReader.cs" />
     <Compile Include="XML\Readers\Values\ArrayOfObjectsReader.cs" />
     <Compile Include="XML\Readers\Values\DefaultValueReader.cs" />
-    <Compile Include="Framework\Types\ReaderNameMappingTypeFinder.cs" />
+    <Compile Include="Framework\Types\ReaderNameAliasingTypeFinder.cs" />
     <Compile Include="Framework\Types\TypeNamesCache.cs" />
     <Compile Include="XML\Readers\XmlElementReaderFactory.cs" />
     <Compile Include="XML\Writers\Members\FieldWriter.cs" />
