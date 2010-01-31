@@ -28,6 +28,7 @@ using NSerializer.Framework;
 using NSerializer.Framework.Types;
 using NSerializer.Migration;
 using NSerializer.XML.Readers;
+using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer
@@ -124,9 +125,9 @@ namespace NSerializer
 
                 var migrationDefinition =
                     new MigrationDefinitionFactory(metaData.PayloadVersion, migrationRulesBuilder).Create();
-                var typeMigrator = migrationDefinition.GetTypeMigrator(typeFinder);
+                typeFinder = migrationDefinition.GetTypeMigrator(typeFinder);
 
-                var payloadReader = new PayloadReader(new ReaderNameAliasingTypeFinder(typeMigrator,
+                var payloadReader = new PayloadReader(new ReaderNameAliasingTypeFinder(typeFinder,
                                                                                       metaData.TypeNames),
                                                       appObjectRepository, docObjectRepository);
                 var payLoad = payloadReader.Read(new XmlStreamReader(inputStream));

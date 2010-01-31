@@ -45,7 +45,7 @@ namespace NSerializer.Framework.Types
             if (foundType != null)
             {
                 typesCache.Add(typeName, foundType);
-                return new DataType(foundType, typeFinder);
+                return new DataType(foundType);
             }
             return null;
         }

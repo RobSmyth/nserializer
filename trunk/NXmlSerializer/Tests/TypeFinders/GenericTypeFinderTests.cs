@@ -18,6 +18,8 @@
 
 #endregion
 
+// Project site: http://code.google.com/p/nserializer/
+
 using System.Collections.Generic;
 using NMock2;
 using NSerializer.Framework.Types;
@@ -56,10 +58,10 @@ namespace NSerializer.Tests.TypeFinders
                 typeof (List<SerializableClassWithProperties>);
 
             Expect.Once.On(typeFinder).Method("GetType").With("System.Collections.Generic.List`1").Will(
-                Return.Value(new DataType(typeof(List<>), null)));
+                Return.Value(new DataType(typeof(List<>))));
             Expect.Once.On(typeFinder).Method("GetType").With(
                 "NSerializer.Tests.XML.Targets.SerializableClassWithProperties").Will(
-                Return.Value(new DestinationType<SerializableClassWithProperties>(null)));
+                Return.Value(new DestinationType<SerializableClassWithProperties>()));
             ;
             Expect.Once.On(typesCache).Method("Add").With(
                 "System.Collections.Generic.List`1[[NSerializer.Tests.XML.Targets.SerializableClassWithProperties]]",

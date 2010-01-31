@@ -43,7 +43,7 @@ namespace NSerializer.Framework.Types
             {
                 return null;
             }
-            return new DataType(foundType, typeFinder);
+            return new DataType(foundType);
         }
 
         public void Add(string typeName, Type type)

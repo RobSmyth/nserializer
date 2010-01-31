@@ -66,7 +66,7 @@ namespace NSerializer.Framework.Types
                 }
             }
 
-            return foundType == null ? null : new DataType(foundType, typeFinder);
+            return foundType == null ? null : new DataType(foundType);
         }
 
         private Type[] GetParamterTypes(string parameters)

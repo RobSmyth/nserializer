@@ -18,6 +18,8 @@
 
 #endregion
 
+// Project site: http://code.google.com/p/nserializer/
+
 using NMock2;
 using NSerializer.Exceptions;
 using NSerializer.Framework.Types;
@@ -45,8 +47,8 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void Get_ThrowsException_IfUnknownTypeName()
         {
-            Expect.Once.On(typeFinderA).Method("GetType").Will(Return.Value(new DataType(null, null)));
-            Expect.Once.On(typeFinderB).Method("GetType").Will(Return.Value(new DataType(null, null)));
+            Expect.Once.On(typeFinderA).Method("GetType").Will(Return.Value(new DataType(null)));
+            Expect.Once.On(typeFinderB).Method("GetType").Will(Return.Value(new DataType(null)));
 
             Assert.Throws<UnableToReadXMLTextException>(() => finder.GetType("mynamespace.nonExistingType"), "Unable to find type 'mynamespace.nonExistingType'.");
         }
@@ -54,7 +56,7 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void Get_ReturnsFoundType_IfFirstFinderFindsType()
         {
-            Expect.Once.On(typeFinderA).Method("GetType").Will(Return.Value(new DataType(GetType(), null)));
+            Expect.Once.On(typeFinderA).Method("GetType").Will(Return.Value(new DataType(GetType())));
 
             Assert.AreEqual(GetType(), finder.GetType("mynamespace.nonExistingType").GetTargetType());
         }
@@ -62,8 +64,8 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void Get_ReturnsFoundType_IfFirstFinderDoesNotFindTypeButSecondFinderDoes()
         {
-            Expect.Once.On(typeFinderA).Method("GetType").Will(Return.Value(new DataType(null,null)));
-            Expect.Once.On(typeFinderB).Method("GetType").Will(Return.Value(new DataType(GetType(),null)));
+            Expect.Once.On(typeFinderA).Method("GetType").Will(Return.Value(new DataType(null)));
+            Expect.Once.On(typeFinderB).Method("GetType").Will(Return.Value(new DataType(GetType())));
 
             Assert.AreEqual(GetType(), finder.GetType("mynamespace.nonExistingType").GetTargetType());
         }
