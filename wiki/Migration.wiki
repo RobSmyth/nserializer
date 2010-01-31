@@ -15,6 +15,7 @@ Currently NSerializer supports migration with the following changes to applicati
     * New fields
     * Field name
     * Deleted fields
+    * Field type changes (conversion)
 
 ==Type migration==
 
