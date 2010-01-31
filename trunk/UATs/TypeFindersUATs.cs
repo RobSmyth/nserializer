@@ -51,13 +51,13 @@ namespace NSerializer.UATs
         [Test]
         public void Get_ThrowsException_IfTypeNotFound()
         {
-            Assert.Throws<UnableToReadXMLTextException>(() => typeFinder.Get("NSerializer.UATs.BasicUsage"), "Unable to find type 'NSerializer.UATs.BasicUsage'.");
+            Assert.Throws<UnableToReadXMLTextException>(() => typeFinder.GetType("NSerializer.UATs.BasicUsage"), "Unable to find type 'NSerializer.UATs.BasicUsage'.");
         }
 
         [Test]
         public void BasicUsage()
         {
-            Assert.IsNotNull(typeFinder.Get("NSerializer.UATs.TypeFindersUATs"));
+            Assert.IsNotNull(typeFinder.GetType("NSerializer.UATs.TypeFindersUATs"));
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace NSerializer.UATs
 
             for (var count = 0; count < 100000; count++)
             {
-                Assert.IsNotNull(typeFinder.Get("System.Int32"));
+                Assert.IsNotNull(typeFinder.GetType("System.Int32"));
             }
 
             var elapsedTime = DateTime.Now - startTime;

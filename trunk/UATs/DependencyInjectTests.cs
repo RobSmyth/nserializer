@@ -65,7 +65,7 @@ namespace NSerializer.UATs
             public NDependencyInjectAdapter(ISystemDefinition system)
             {
                 this.system = system;
-                getMethodInfo = system.GetType().GetMethod("Get");
+                getMethodInfo = system.GetType().GetMethod("GetType");
             }
 
             public object Get(Type type)

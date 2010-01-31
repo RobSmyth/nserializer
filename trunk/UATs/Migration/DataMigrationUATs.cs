@@ -87,7 +87,6 @@ namespace NSerializer.UATs.Migration
                     .MatchesTypeName("NSerializer.UATs.Migration.DataMigrationUATs+MyTypeB_V1");
 
                 rules.ForType<MyTypeC_V2>()
-                    //.Field("valueA").RenamedTo("valueAV2")
                     .MatchesTypeName("NSerializer.UATs.Migration.DataMigrationUATs+MyTypeC_V1");
 
                 childRulesBuilders.ToList().ForEach(builder => builder.Build(rules));

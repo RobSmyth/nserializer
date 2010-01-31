@@ -126,7 +126,7 @@ namespace NSerializer
                     new MigrationDefinitionFactory(metaData.PayloadVersion, migrationRulesBuilder).Create();
                 var typeMigrator = migrationDefinition.GetTypeMigrator(typeFinder);
 
-                var payloadReader = new PayloadReader(new ReaderNameMappingTypeFinder(typeMigrator,
+                var payloadReader = new PayloadReader(new ReaderNameAliasingTypeFinder(typeMigrator,
                                                                                       metaData.TypeNames),
                                                       appObjectRepository, docObjectRepository);
                 var payLoad = payloadReader.Read(new XmlStreamReader(inputStream));

@@ -46,7 +46,7 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void ReturnsNullForNonGenericType()
         {
-            Assert.IsNull(finder.Get("NSerializer.Tests.TypeHandling.GenericTypeFinderTests"));
+            Assert.IsNull(finder.GetType("NSerializer.Tests.TypeHandling.GenericTypeFinderTests"));
         }
 
         [Test]
@@ -55,9 +55,9 @@ namespace NSerializer.Tests.TypeFinders
             var expectedType =
                 typeof (List<SerializableClassWithProperties>);
 
-            Expect.Once.On(typeFinder).Method("Get").With("System.Collections.Generic.List`1").Will(
+            Expect.Once.On(typeFinder).Method("GetType").With("System.Collections.Generic.List`1").Will(
                 Return.Value(new DataType(typeof(List<>), null)));
-            Expect.Once.On(typeFinder).Method("Get").With(
+            Expect.Once.On(typeFinder).Method("GetType").With(
                 "NSerializer.Tests.XML.Targets.SerializableClassWithProperties").Will(
                 Return.Value(new DestinationType<SerializableClassWithProperties>(null)));
             ;
@@ -66,7 +66,7 @@ namespace NSerializer.Tests.TypeFinders
                 expectedType);
 
             Assert.AreEqual(expectedType,
-                            finder.Get(
+                            finder.GetType(
                                 "System.Collections.Generic.List`1[[NSerializer.Tests.XML.Targets.SerializableClassWithProperties]]").GetTargetType());
         }
     }

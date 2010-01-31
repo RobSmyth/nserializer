@@ -37,14 +37,14 @@ namespace NSerializer.Migration.Types
             this.migrationDefinition = migrationDefinition;
         }
 
-        public IDataType Get(string typeName)
+        public IDataType GetType(string typeName)
         {
             var typeDefinition = migrationDefinition.GetTypeDefinition(typeName);
             if (typeDefinition != null)
             {
                 typeName = typeDefinition.GetTypeName();
             }
-            return typeFinder.Get(typeName);
+            return typeFinder.GetType(typeName);
         }
 
         public IFieldMigrator GetFieldMigrator()

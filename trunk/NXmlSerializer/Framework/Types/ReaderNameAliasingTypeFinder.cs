@@ -27,18 +27,18 @@ using NSerializer.XML.Readers.Members;
 
 namespace NSerializer.Framework.Types
 {
-    public class ReaderNameMappingTypeFinder : ITypeFinder
+    public class ReaderNameAliasingTypeFinder : ITypeFinder
     {
         private readonly string[] names;
         private readonly ITypeFinder typeFinder;
 
-        public ReaderNameMappingTypeFinder(ITypeFinder typeFinder, string[] names)
+        public ReaderNameAliasingTypeFinder(ITypeFinder typeFinder, string[] names)
         {
             this.typeFinder = typeFinder;
             this.names = names;
         }
 
-        public IDataType Get(string typeName)
+        public IDataType GetType(string typeName)
         {
             while (typeName[0] == '!')
             {
@@ -53,9 +53,9 @@ namespace NSerializer.Framework.Types
             var isArray = typeName.EndsWith("[]");
             if (isArray)
             {
-                return typeFinder.Get(typeName.Substring(0, typeName.Length - "[]".Length)).MakeArrayType();
+                return typeFinder.GetType(typeName.Substring(0, typeName.Length - "[]".Length)).MakeArrayType();
             }
-            return typeFinder.Get(typeName);
+            return typeFinder.GetType(typeName);
         }
     }
 }

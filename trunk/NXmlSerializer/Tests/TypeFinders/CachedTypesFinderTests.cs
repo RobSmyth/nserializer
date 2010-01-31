@@ -41,14 +41,14 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void Get_ReturnsNull_Initially()
         {
-            Assert.IsNull(finder.Get("mynampesace.myType"));
+            Assert.IsNull(finder.GetType("mynampesace.myType"));
         }
 
         [Test]
         public void Get_ReturnsType_AfterTypeAdded()
         {
             finder.Add("mynampesace.myType", GetType());
-            Assert.AreEqual(GetType(), finder.Get("mynampesace.myType").GetTargetType());
+            Assert.AreEqual(GetType(), finder.GetType("mynampesace.myType").GetTargetType());
         }
     }
 }

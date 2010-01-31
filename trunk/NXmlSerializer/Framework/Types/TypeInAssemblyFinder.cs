@@ -39,7 +39,7 @@ namespace NSerializer.Framework.Types
             this.typeFinder = typeFinder;
         }
 
-        public IDataType Get(string typeName)
+        public IDataType GetType(string typeName)
         {
             var foundType = seedAssembly.GetType(typeName);
             if (foundType != null)
