@@ -28,27 +28,27 @@ namespace NSerializer.Framework.Types
 {
     internal class CachedTypesFinder : ITypesCache, ITypeFinder
     {
-        private readonly ITypeFinder typeFinder;
-        private readonly Dictionary<string, Type> cachedTypes = new Dictionary<string, Type>();
+        private readonly IDataTypeFactory dataTypeFactory;
+        private readonly Dictionary<string, IDataType> cachedTypes = new Dictionary<string, IDataType>();
 
-        public CachedTypesFinder(ITypeFinder typeFinder)
+        public CachedTypesFinder(IDataTypeFactory dataTypeFactory)
         {
-            this.typeFinder = typeFinder;
+            this.dataTypeFactory = dataTypeFactory;
         }
 
         public IDataType GetType(string typeName)
         {
-            Type foundType;
+            IDataType foundType;
             if (!cachedTypes.TryGetValue(typeName, out foundType))
             {
                 return null;
             }
-            return new DataType(foundType);
+            return foundType;
         }
 
         public void Add(string typeName, Type type)
         {
-            cachedTypes.Add(typeName, type);
+            cachedTypes.Add(typeName, dataTypeFactory.Create(type));
         }
     }
 }

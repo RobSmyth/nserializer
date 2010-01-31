@@ -24,7 +24,9 @@ using NMock2;
 using NSerializer.Framework.Types;
 using NSerializer.TestAssembly1;
 using NSerializer.Types;
+using NSerializer.XML.Readers.Members;
 using NUnit.Framework;
+using Is=NMock2.Is;
 
 
 namespace NSerializer.Tests.TypeFinders
@@ -35,66 +37,61 @@ namespace NSerializer.Tests.TypeFinders
         private Assembly seedAssembly;
         private ITypesCache typesCache;
         private ITypeFinder typeFinder;
+        private IDataTypeFactory dataTypeFactory;
+        private IDataType dataType;
 
         protected override void SetUp()
         {
             seedAssembly = GetType().Assembly;
             typeFinder = NewMock<ITypeFinder>();
             typesCache = NewMock<ITypesCache>();
+            dataTypeFactory = NewMock<IDataTypeFactory>();
+            dataType = NewMock<IDataType>();
         }
 
         [Test]
         public void CanFindSystemTypeAndCachesTypeFound()
         {
-            ITypeFinder finder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder);
+            Stub.On(dataTypeFactory).Method("Create").With(typeof(Int32)).Will(Return.Value(dataType));
+            ITypeFinder finder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder, dataTypeFactory);
             Expect.Once.On(typesCache).Method("Add").With("System.Int32", typeof (Int32));
-            Assert.AreEqual(typeof (Int32), finder.GetType("System.Int32").GetTargetType());
+            Assert.AreSame(dataType, finder.GetType("System.Int32"));
         }
 
         [Test]
         public void DoesNotFindTypeInSeedAssembly()
         {
-            ITypeFinder finder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder);
-            Assert.IsNull(finder.GetType(GetType().FullName).GetTargetType());
+            Stub.On(dataTypeFactory).Method("Create").With(Is.Null).Will(Return.Value(dataType));
+            ITypeFinder finder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder, dataTypeFactory);
+            finder.GetType(GetType().FullName);
         }
 
         [Test]
         public void CanFindTypeInDirectlyReferencedAssembly()
         {
+            Stub.On(dataTypeFactory).Method("Create").With(typeof(TestTypeA1)).Will(Return.Value(dataType));
             Stub.On(typesCache).Method("Add").WithAnyArguments();
-            ITypeFinder finder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder);
-            Assert.IsNotNull(finder.GetType("NSerializer.TestAssembly1.TestTypeA1").GetTargetType());
+            ITypeFinder finder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder, dataTypeFactory);
+            Assert.AreSame(dataType, finder.GetType("NSerializer.TestAssembly1.TestTypeA1"));
         }
 
         [Test]
         public void CanFindTypeInSecondReferencedAssembly()
         {
+            Stub.On(dataTypeFactory).Method("Create").WithAnyArguments().Will(Return.Value(dataType));
             Stub.On(typesCache).Method("Add").WithAnyArguments();
-            ITypeFinder finder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder);
-            Assert.IsNotNull(finder.GetType("NSerializer.TestAssembly2.TestTypeA2").GetTargetType());
-        }
-
-        [Test]
-        public void CanFindTypeInThirdReferencedAssemblyQuickly()
-        {
-            Stub.On(typesCache).Method("Add").WithAnyArguments();
-
-            var startTime = DateTime.Now;
-
-            ITypeFinder finder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder);
-            Assert.IsNotNull(finder.GetType("NSerializer.TestAssembly3.TestTypeA3").GetTargetType());
-
-            var expiredTime = DateTime.Now - startTime;
-            Assert.IsTrue(expiredTime < TimeSpan.FromSeconds(2));
-            // generous time allowance for test reliability, really a sanity check
+            ITypeFinder finder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder, dataTypeFactory);
+            Assert.AreSame(dataType, finder.GetType("NSerializer.TestAssembly2.TestTypeA2"));
         }
 
         [Test]
         public void CanFindArrayType()
         {
+            Stub.On(dataTypeFactory).Method("Create").With(typeof(TestTypeA1[])).Will(Return.Value(dataType));
+            Stub.On(dataType).GetProperty("IsArray").Will(Return.Value(true));
             Stub.On(typesCache).Method("Add").WithAnyArguments();
 
-            ITypeFinder finder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder);
+            ITypeFinder finder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder, dataTypeFactory);
 
             var type = finder.GetType("NSerializer.TestAssembly1.TestTypeA1[]");
             Assert.IsNotNull(type);
@@ -104,7 +101,7 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void CanFindStringType()
         {
-            var soughtType = typeof (string);
+            var soughtType = typeof(string);
             CanFindType(soughtType);
         }
 
@@ -117,11 +114,12 @@ namespace NSerializer.Tests.TypeFinders
 
         private void CanFindType(Type soughtType)
         {
+            Stub.On(dataTypeFactory).Method("Create").With(soughtType).Will(Return.Value(dataType));
             Stub.On(typesCache).Method("Add").WithAnyArguments();
 
-            ITypeFinder finder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder);
+            ITypeFinder finder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder, dataTypeFactory);
 
-            Assert.AreEqual(soughtType, finder.GetType(soughtType.FullName).GetTargetType());
+            Assert.AreSame(dataType, finder.GetType(soughtType.FullName));
         }
     }
 }

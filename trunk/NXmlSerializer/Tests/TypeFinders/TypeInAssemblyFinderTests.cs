@@ -22,6 +22,7 @@ using NMock2;
 using NSerializer.Framework.Types;
 using NSerializer.Types;
 using NUnit.Framework;
+using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer.Tests.TypeFinders
@@ -32,12 +33,14 @@ namespace NSerializer.Tests.TypeFinders
         private TypeInAssemblyFinder finder;
         private ITypesCache typesCache;
         private ITypeFinder typeFinder;
+        private IDataTypeFactory dataTypeFactory;
 
         protected override void SetUp()
         {
             typesCache = NewMock<ITypesCache>();
             typeFinder = NewMock<ITypeFinder>();
-            finder = new TypeInAssemblyFinder(GetType().Assembly, typesCache, typeFinder);
+            dataTypeFactory = NewMock<IDataTypeFactory>();
+            finder = new TypeInAssemblyFinder(GetType().Assembly, typesCache, dataTypeFactory);
         }
 
         [Test]
@@ -49,6 +52,8 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void FindsTypeInSeedAssemblyAndAddsToCache()
         {
+            var dataType = NewMock<IDataType>();
+            Stub.On(dataTypeFactory).Method("Create").With(GetType()).Will(Return.Value(dataType));
             Expect.Once.On(typesCache).Method("Add").With("NSerializer.Tests.TypeFinders.TypeInAssemblyFinderTests",
                                                           GetType());
             Assert.IsNotNull(finder.GetType("NSerializer.Tests.TypeFinders.TypeInAssemblyFinderTests"));

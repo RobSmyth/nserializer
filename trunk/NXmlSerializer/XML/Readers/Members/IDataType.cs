@@ -26,12 +26,12 @@ namespace NSerializer.XML.Readers.Members
 {
     public interface IDataType
     {
-        DataType BaseType { get; }
+        IDataType BaseType { get; }
         string FullName { get; }
         bool IsArray { get; }
         FieldInfo GetField(string fieldName, BindingFlags bindingFlags);
         Type GetTargetType();
-        DataType GetElementType();
+        IDataType GetElementType();
         IDataType MakeArrayType();
     }
 }

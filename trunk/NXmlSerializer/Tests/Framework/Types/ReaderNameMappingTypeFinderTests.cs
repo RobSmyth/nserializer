@@ -49,17 +49,22 @@ namespace NSerializer.Tests.Framework.Types
         [Test]
         public void Get()
         {
+            var typeA1 = NewMock<IDataType>();
             Expect.Once.On(typeFinder).Method("GetType").With(
-                "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA").Will(Return.Value(new DestinationType<MyTypeA>()));
-            Assert.AreEqual(typeof (MyTypeA), finder.GetType("!0").GetTargetType());
+                "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA").Will(Return.Value(typeA1));
+            Assert.AreSame(typeA1, finder.GetType("!0"));
 
+            var typeA2 = NewMock<IDataType>();
+            var typeA2_Array = NewMock<IDataType>();
+            Stub.On(typeA2).Method("MakeArrayType").WithNoArguments().Will(Return.Value(typeA2_Array));
             Expect.Once.On(typeFinder).Method("GetType").With(
-                "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA").Will(Return.Value(new DestinationType<MyTypeA>()));
-            Assert.AreEqual(typeof (MyTypeA[]), finder.GetType("!1").GetTargetType());
+                "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA").Will(Return.Value(typeA2));
+            Assert.AreSame(typeA2_Array, finder.GetType("!1"));
 
+            var typeC = NewMock<IDataType>();
             Expect.Once.On(typeFinder).Method("GetType").With(
-                "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeC").Will(Return.Value(new DestinationType<MyTypeC>()));
-            Assert.AreEqual(typeof (MyTypeC), finder.GetType("!2").GetTargetType());
+                "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeC").Will(Return.Value(typeC));
+            Assert.AreSame(typeC, finder.GetType("!2"));
         }
 
         private class MyTypeA

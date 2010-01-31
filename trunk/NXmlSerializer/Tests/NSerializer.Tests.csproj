@@ -57,13 +57,11 @@
     <Compile Include="NXmlWriterTests.cs" />
     <Compile Include="XML\Readers\NodeAttributesReaderTests.cs" />
     <Compile Include="XML\Readers\NXmlStreamReaderTests.cs" />
-    <Compile Include="XML\Readers\PayloadReaderTests.cs" />
     <Compile Include="XML\Readers\Values\ListReaderTests.cs" />
     <Compile Include="XML\Readers\Values\ValueTypeReaderTests.cs" />
     <Compile Include="TypeFinders\CachedTypesFinderTests.cs" />
     <Compile Include="TypeFinders\GenericTypeFinderTests.cs" />
     <Compile Include="TypeFinders\PassOnceNameFilterTests.cs" />
-    <Compile Include="TypeFinders\TypeFindersTests.cs" />
     <Compile Include="TypeFinders\TypeInAssemblyFinderTests.cs" />
     <Compile Include="TypeFinders\TypeInReferencedAssemblyFinderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
