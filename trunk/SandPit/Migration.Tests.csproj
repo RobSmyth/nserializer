@@ -56,7 +56,6 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Examples\Migration\DeletedField\ClassA.cs" />
-    <Compile Include="FieldMigration.cs" />
     <Compile Include="TypeMigrationTest.cs" />
     <Compile Include="MockingTestFixture.cs" />
     <Compile Include="Examples\Migration\SampleTypes\TypeA.cs" />
