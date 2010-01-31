@@ -24,6 +24,7 @@ using NSerializer.Framework;
 using NSerializer.Framework.Document;
 using NSerializer.Framework.Readers;
 using NSerializer.Framework.Types;
+using NSerializer.XML.Readers.Members;
 using NSerializer.XML.Readers.Values;
 
 
@@ -33,15 +34,16 @@ namespace NSerializer.XML.Readers
     {
         private readonly IApplicationObjectsRepository appObjectRepository;
         private readonly IDocumentObjectsRepository docObjectRepository;
+        private readonly IDataTypeFactory dataTypeFactory;
         private readonly ITypeFinder typeFinder;
 
-        public PayloadReader(ITypeFinder typeFinder,
-                             IApplicationObjectsRepository appObjectRepository,
-                             IDocumentObjectsRepository docObjectRepository)
+        public PayloadReader(ITypeFinder typeFinder, IApplicationObjectsRepository appObjectRepository,
+                             IDocumentObjectsRepository docObjectRepository, IDataTypeFactory dataTypeFactory)
         {
             this.typeFinder = typeFinder;
             this.appObjectRepository = appObjectRepository;
             this.docObjectRepository = docObjectRepository;
+            this.dataTypeFactory = dataTypeFactory;
         }
 
         public Payload Read(XmlStreamReader inputStream)
@@ -56,7 +58,7 @@ namespace NSerializer.XML.Readers
                     IObjectReader objectReader =
                         new DefaultValueReader(typeFinder,
                                                appObjectRepository,
-                                               docObjectRepository);
+                                               docObjectRepository, dataTypeFactory);
 
                     payload = (Payload) objectReader.Get(nodeReader);
                 }

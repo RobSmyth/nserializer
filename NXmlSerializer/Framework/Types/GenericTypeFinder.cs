@@ -29,12 +29,14 @@ namespace NSerializer.Framework.Types
     internal class GenericTypeFinder : ITypeFinder
     {
         private readonly ITypeFinder typeFinder;
+        private readonly IDataTypeFactory dataTypeFactory;
         private readonly ITypesCache typesCache;
 
-        public GenericTypeFinder(ITypesCache typesCache, ITypeFinder typeFinder)
+        public GenericTypeFinder(ITypesCache typesCache, ITypeFinder typeFinder, IDataTypeFactory dataTypeFactory)
         {
             this.typesCache = typesCache;
             this.typeFinder = typeFinder;
+            this.dataTypeFactory = dataTypeFactory;
         }
 
         public IDataType GetType(string typeName)
@@ -66,7 +68,7 @@ namespace NSerializer.Framework.Types
                 }
             }
 
-            return foundType == null ? null : new DataType(foundType);
+            return foundType == null ? null : dataTypeFactory.Create(foundType);
         }
 
         private Type[] GetParamterTypes(string parameters)

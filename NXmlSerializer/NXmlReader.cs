@@ -118,9 +118,11 @@ namespace NSerializer
 
             try
             {
-                ITypeFinder typeFinder = new DefaultTypeFinder(typeSeedAssembly);
+                var dataTypeFactory = new DataTypeFactory();
 
-                var metaDataReader = new MetaDataReader(typeFinder);
+                ITypeFinder typeFinder = new DefaultTypeFinder(typeSeedAssembly, dataTypeFactory);
+
+                var metaDataReader = new MetaDataReader(typeFinder, dataTypeFactory);
                 var metaData = metaDataReader.Read(new XmlStreamReader(inputStream));
 
                 var migrationDefinition =
@@ -128,8 +130,8 @@ namespace NSerializer
                 typeFinder = migrationDefinition.GetTypeMigrator(typeFinder);
 
                 var payloadReader = new PayloadReader(new ReaderNameAliasingTypeFinder(typeFinder,
-                                                                                      metaData.TypeNames),
-                                                      appObjectRepository, docObjectRepository);
+                                                                                       metaData.TypeNames),
+                                                      appObjectRepository, docObjectRepository, dataTypeFactory);
                 var payLoad = payloadReader.Read(new XmlStreamReader(inputStream));
 
                 valueRead = (T) payLoad.Target;

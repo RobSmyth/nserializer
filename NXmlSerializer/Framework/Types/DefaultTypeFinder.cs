@@ -31,14 +31,14 @@ namespace NSerializer.Framework.Types
     {
         private readonly ITypeFinder typeFinder;
 
-        public DefaultTypeFinder(Assembly seedAssembly)
+        public DefaultTypeFinder(Assembly seedAssembly, IDataTypeFactory dataTypeFactory)
         {
             var typeFinderConduit = new TypeFinderConduit();
 
-            var typesCache = new CachedTypesFinder(typeFinderConduit);
-            ITypeFinder genericTypeFinder = new GenericTypeFinder(typesCache, typeFinderConduit);
-            ITypeFinder typeInAssemblyFinder = new TypeInAssemblyFinder(seedAssembly, typesCache, typeFinderConduit);
-            ITypeFinder typeInReferencedAssemblyFinder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder);
+            var typesCache = new CachedTypesFinder(dataTypeFactory);
+            ITypeFinder genericTypeFinder = new GenericTypeFinder(typesCache, typeFinderConduit, dataTypeFactory);
+            ITypeFinder typeInAssemblyFinder = new TypeInAssemblyFinder(seedAssembly, typesCache, dataTypeFactory);
+            ITypeFinder typeInReferencedAssemblyFinder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder, dataTypeFactory);
 
             typeFinder =
                 new TypeFinder(typesCache, genericTypeFinder, typeInAssemblyFinder, typeInReferencedAssemblyFinder);

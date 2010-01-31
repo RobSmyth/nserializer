@@ -21,6 +21,7 @@
 using System;
 using NSerializer.Exceptions;
 using NSerializer.Framework.Types;
+using NSerializer.XML.Readers.Members;
 using NUnit.Framework;
 
 
@@ -34,14 +35,15 @@ namespace NSerializer.UATs
         [SetUp]
         public void SetUp()
         {
+            var dataTypeFactory = new DataTypeFactory();
             var seedAssembly = GetType().Assembly;
 
             var typeFinderConduit = new TypeFinderConduit();
 
-            var typesCache = new CachedTypesFinder(typeFinderConduit);
-            ITypeFinder genericTypeFindeer = new GenericTypeFinder(typesCache, typeFinderConduit);
-            ITypeFinder typeInAssemblyFinder = new TypeInAssemblyFinder(seedAssembly, typesCache, typeFinder);
-            ITypeFinder typeInReferencedAssembliesFinder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder);
+            var typesCache = new CachedTypesFinder(dataTypeFactory);
+            ITypeFinder genericTypeFindeer = new GenericTypeFinder(typesCache, typeFinderConduit, dataTypeFactory);
+            ITypeFinder typeInAssemblyFinder = new TypeInAssemblyFinder(seedAssembly, typesCache, dataTypeFactory);
+            ITypeFinder typeInReferencedAssembliesFinder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder, dataTypeFactory);
 
             typeFinder = new TypeFinder(typesCache, genericTypeFindeer, typeInAssemblyFinder,
                                         typeInReferencedAssembliesFinder);

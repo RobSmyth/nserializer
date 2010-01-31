@@ -20,7 +20,9 @@
 
 // Project site: http://code.google.com/p/nserializer/
 
+using NMock2;
 using NSerializer.Framework.Types;
+using NSerializer.XML.Readers.Members;
 using NUnit.Framework;
 
 
@@ -30,12 +32,12 @@ namespace NSerializer.Tests.TypeFinders
     public class CachedTypesFinderTests : MockingTestFixture
     {
         private CachedTypesFinder finder;
-        private ITypeFinder typeFinder;
+        private IDataTypeFactory dataTypeFactory;
 
         protected override void SetUp()
         {
-            typeFinder = NewMock<ITypeFinder>();
-            finder = new CachedTypesFinder(typeFinder);
+            dataTypeFactory = NewMock<IDataTypeFactory>();
+            finder = new CachedTypesFinder(dataTypeFactory);
         }
 
         [Test]
@@ -47,8 +49,10 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void Get_ReturnsType_AfterTypeAdded()
         {
+            var dataType = NewMock<IDataType>();
+            Stub.On(dataTypeFactory).Method("Create").With(GetType()).Will(Return.Value(dataType));
             finder.Add("mynampesace.myType", GetType());
-            Assert.AreEqual(GetType(), finder.GetType("mynampesace.myType").GetTargetType());
+            Assert.AreSame(dataType, finder.GetType("mynampesace.myType"));
         }
     }
 }

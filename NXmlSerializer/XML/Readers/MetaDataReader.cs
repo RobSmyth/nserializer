@@ -24,6 +24,7 @@ using NSerializer.Framework.Document;
 using NSerializer.Framework.Readers;
 using NSerializer.Framework.Types;
 using NSerializer.XML.Readers.Values;
+using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer.XML.Readers
@@ -31,10 +32,12 @@ namespace NSerializer.XML.Readers
     public class MetaDataReader
     {
         private readonly ITypeFinder typeFinder;
+        private readonly IDataTypeFactory dataTypeFactory;
 
-        public MetaDataReader(ITypeFinder typeFinder)
+        public MetaDataReader(ITypeFinder typeFinder, IDataTypeFactory dataTypeFactory)
         {
             this.typeFinder = typeFinder;
+            this.dataTypeFactory = dataTypeFactory;
         }
 
         public MetaData Read(XmlStreamReader inputStream)
@@ -48,7 +51,7 @@ namespace NSerializer.XML.Readers
                     IObjectReader objectReader =
                         new DefaultValueReader(typeFinder,
                                                new NullApplicationObjectRepository(),
-                                               new NullDocumentObjectRepository());
+                                               new NullDocumentObjectRepository(), dataTypeFactory);
 
                     metaData = (MetaData) objectReader.Get(nodeReader);
                 }

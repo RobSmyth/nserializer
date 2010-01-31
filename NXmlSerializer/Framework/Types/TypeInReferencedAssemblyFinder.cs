@@ -32,12 +32,14 @@ namespace NSerializer.Framework.Types
         private readonly Assembly seedAssembly;
         private readonly ITypesCache typesCache;
         private readonly ITypeFinder typeFinder;
+        private readonly IDataTypeFactory dataTypeFactory;
 
-        public TypeInReferencedAssemblyFinder(Assembly seedAssembly, ITypesCache typesCache, ITypeFinder typeFinder)
+        public TypeInReferencedAssemblyFinder(Assembly seedAssembly, ITypesCache typesCache, ITypeFinder typeFinder, IDataTypeFactory dataTypeFactory)
         {
             this.seedAssembly = seedAssembly;
             this.typesCache = typesCache;
             this.typeFinder = typeFinder;
+            this.dataTypeFactory = dataTypeFactory;
         }
 
         public IDataType GetType(string typeName)
@@ -51,7 +53,7 @@ namespace NSerializer.Framework.Types
                 typesCache.Add(typeName, foundType);
             }
 
-            return new DataType(foundType);
+            return dataTypeFactory.Create(foundType);
         }
 
         private static Type SearchReferencedAssemblies(string typeName, Assembly assembly,
