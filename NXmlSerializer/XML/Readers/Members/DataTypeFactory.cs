@@ -27,7 +27,7 @@ namespace NSerializer.XML.Readers.Members
 {
     public class DataTypeFactory : IDataTypeFactory
     {
-        private IMigrationDefinition migrationDefiniton = new NullMigrationDefinition();
+        private IMigrationDefinition migrationDefiniton;
 
         public IDataType Create(Type type)
         {
@@ -62,6 +62,16 @@ namespace NSerializer.XML.Readers.Members
 
             public FieldInfo GetField(string fieldName, BindingFlags bindingFlags)
             {
+                if (migrationDefiniton != null)
+                {
+                    var typeDefinition = migrationDefiniton.GetTypeDefinition(type);
+                    if (typeDefinition != null)
+                    {
+                        var fieldDefinition = typeDefinition.GetFieldDefinition(fieldName);
+                        fieldName = fieldDefinition.Name;
+                    }
+                }
+
                 return type.GetField(fieldName, bindingFlags);
             }
 

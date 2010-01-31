@@ -26,12 +26,34 @@ namespace NSerializer.Migration
 {
     internal class NullFieldDefinition : IFieldDefinition
     {
+        private readonly string fieldName;
+
+        public NullFieldDefinition(string fieldName)
+        {
+            this.fieldName = fieldName;
+        }
+
         public void AddAction(IFieldAction action)
         {
             throw new InvalidOperationException();
         }
 
         public void SetField(object instance, object value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Name
+        {
+            get { return fieldName; }
+        }
+
+        public bool Matches(string name)
+        {
+            return false;
+        }
+
+        public void Rename(string newName)
         {
             throw new NotImplementedException();
         }

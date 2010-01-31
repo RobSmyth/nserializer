@@ -44,7 +44,7 @@ namespace NSerializer.Migration.Fields
 
         public ITypeMigrationRules RenamedTo(string newFieldName)
         {
-            fieldDefinition.AddAction(new RenameFieldAction(newFieldName));
+            fieldDefinition.Rename(newFieldName);
             return typeMigrationRules;
         }
 

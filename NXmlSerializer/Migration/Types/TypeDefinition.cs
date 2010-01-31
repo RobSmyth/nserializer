@@ -21,6 +21,7 @@
 // Project site: http://code.google.com/p/nserializer/
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using NSerializer.Migration.Fields;
 
@@ -29,9 +30,7 @@ namespace NSerializer.Migration.Types
 {
     internal class TypeDefinition<T> : ITypeDefinition
     {
-        private readonly Dictionary<string, IFieldDefinition> fieldDefinitions =
-            new Dictionary<string, IFieldDefinition>();
-
+        private readonly List<IFieldDefinition> fieldDefinitions = new List<IFieldDefinition>();
         private readonly Dictionary<string, int> matchingNames = new Dictionary<string, int>();
         private readonly ITypeDefinition parentTypeDefinition;
         private string alias = string.Empty;
@@ -57,22 +56,22 @@ namespace NSerializer.Migration.Types
 
         public bool HasFieldDefinition(string fieldName)
         {
-            return fieldDefinitions.ContainsKey(fieldName);
+            return fieldDefinitions.Any(definition => definition.Matches(fieldName));
         }
 
         public void CreateFieldDefinition(string fieldName, IFieldDefinition parentFieldDefinition)
         {
-            fieldDefinitions.Add(fieldName, new FieldDefinition(parentFieldDefinition));
+            fieldDefinitions.Add(new FieldDefinition(parentFieldDefinition, fieldName));
         }
 
         public IFieldDefinition FindFieldDefinition(string fieldName)
         {
-            IFieldDefinition fieldDefinition;
+            IFieldDefinition fieldDefinition = null;
             if (HasFieldDefinition(fieldName))
             {
-                fieldDefinition = fieldDefinitions[fieldName];
+                fieldDefinition = fieldDefinitions.First(definition => definition.Matches(fieldName));
             }
-            else
+            else if(parentTypeDefinition != null)
             {
                 fieldDefinition = parentTypeDefinition.FindFieldDefinition(fieldName);
             }
@@ -101,7 +100,8 @@ namespace NSerializer.Migration.Types
 
         public IFieldDefinition GetFieldDefinition(string name)
         {
-            throw new NotImplementedException();
+            var fieldDefinition = FindFieldDefinition(name);
+            return fieldDefinition ?? new NullFieldDefinition(name);
         }
     }
 }

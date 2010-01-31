@@ -26,24 +26,44 @@ namespace NSerializer.Migration.Fields
 {
     internal class FieldDefinition : IFieldDefinition
     {
-        private readonly List<IFieldAction> migrationActions = new List<IFieldAction>();
+        private string fieldName;
+        private readonly List<string> aliases = new List<string>();
+        private bool renamed;
 
-        public FieldDefinition(IFieldDefinition parentDefinition)
+        public FieldDefinition(IFieldDefinition parentDefinition, string fieldName)
         {
+            this.fieldName = fieldName;
+        }
+
+        public void Rename(string newName)
+        {
+            if (renamed)
+            {
+                throw new InvalidOperationException("Attempt to rename field twice in same scope");
+            }
+            renamed = true;
+            aliases.Add(fieldName);
+            fieldName = newName;
         }
 
         public void AddAction(IFieldAction action)
         {
-            if (migrationActions.Contains(action))
-            {
-                throw new MigrationConfigurationException("Cannot add action twice to smae field definition.");
-            }
-            migrationActions.Add(action);
+            // obsolete
         }
 
         public void SetField(object instance, object value)
         {
             throw new NotImplementedException();
+        }
+
+        public string Name
+        {
+            get { return fieldName; }
+        }
+
+        public bool Matches(string name)
+        {
+            return name == fieldName || aliases.Contains(name);
         }
     }
 }

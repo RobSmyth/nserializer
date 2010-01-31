@@ -24,5 +24,8 @@ namespace NSerializer.Migration.Fields
     {
         void AddAction(IFieldAction action);
         void SetField(object instance, object value);
+        string Name { get; }
+        bool Matches(string fieldName);
+        void Rename(string newName);
     }
 }
