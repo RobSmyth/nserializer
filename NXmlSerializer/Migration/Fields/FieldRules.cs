@@ -20,6 +20,7 @@
 
 // Project site: http://code.google.com/p/nserializer/
 
+using System;
 using NSerializer.Migration.Types;
 
 
@@ -29,6 +30,7 @@ namespace NSerializer.Migration.Fields
     {
         private readonly IFieldDefinition fieldDefinition;
         private readonly ITypeMigrationRules typeMigrationRules;
+        private IMigrationConverter valueConverter = new NullValueConverter();
 
         public FieldRules(IFieldDefinition fieldDefinition, ITypeMigrationRules typeMigrationRules)
         {
@@ -51,6 +53,12 @@ namespace NSerializer.Migration.Fields
         public ITypeMigrationRules SetTo(object value)
         {
             fieldDefinition.AddAction(new SetFieldAction(value));
+            return typeMigrationRules;
+        }
+
+        public ITypeMigrationRules ConvertUsing(IMigrationConverter converter)
+        {
+            valueConverter = converter;
             return typeMigrationRules;
         }
     }

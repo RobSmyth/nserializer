@@ -59,5 +59,10 @@ namespace NSerializer.Migration
         {
             throw new NotImplementedException();
         }
+
+        public object Convert(object value)
+        {
+            return value;
+        }
     }
 }

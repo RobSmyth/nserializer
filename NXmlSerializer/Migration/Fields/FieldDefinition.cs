@@ -48,6 +48,11 @@ namespace NSerializer.Migration.Fields
             fieldName = newName;
         }
 
+        public object Convert(object value)
+        {
+            return value;
+        }
+
         public void AddAction(IFieldAction action)
         {
             // obsolete
