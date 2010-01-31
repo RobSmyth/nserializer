@@ -30,7 +30,6 @@ namespace NSerializer.Migration.Fields
     {
         private readonly IFieldDefinition fieldDefinition;
         private readonly ITypeMigrationRules typeMigrationRules;
-        private IMigrationConverter valueConverter = new NullValueConverter();
 
         public FieldRules(IFieldDefinition fieldDefinition, ITypeMigrationRules typeMigrationRules)
         {
@@ -58,7 +57,7 @@ namespace NSerializer.Migration.Fields
 
         public ITypeMigrationRules ConvertUsing(IMigrationConverter converter)
         {
-            valueConverter = converter;
+            fieldDefinition.ConvertUsing(converter);
             return typeMigrationRules;
         }
     }

@@ -29,5 +29,6 @@ namespace NSerializer.Migration.Fields
         bool Matches(string fieldName);
         void Rename(string newName);
         object Convert(object value);
+        void ConvertUsing(IMigrationConverter converter);
     }
 }

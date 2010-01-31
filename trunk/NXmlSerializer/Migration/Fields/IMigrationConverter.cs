@@ -24,5 +24,6 @@ namespace NSerializer.Migration.Fields
 {
     public interface IMigrationConverter
     {
+        object Convert(object value);
     }
 }

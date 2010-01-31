@@ -31,6 +31,7 @@ namespace NSerializer.Migration.Fields
         private string fieldName;
         private readonly List<string> aliases = new List<string>();
         private bool renamed;
+        private IMigrationConverter valueConverter = new NullValueConverter();
 
         public FieldDefinition(IFieldDefinition parentDefinition, string fieldName)
         {
@@ -50,7 +51,12 @@ namespace NSerializer.Migration.Fields
 
         public object Convert(object value)
         {
-            return value;
+            return valueConverter.Convert(value);
+        }
+
+        public void ConvertUsing(IMigrationConverter converter)
+        {
+            valueConverter = converter;
         }
 
         public void AddAction(IFieldAction action)
