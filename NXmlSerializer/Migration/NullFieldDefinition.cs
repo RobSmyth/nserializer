@@ -64,5 +64,10 @@ namespace NSerializer.Migration
         {
             return value;
         }
+
+        public void ConvertUsing(IMigrationConverter converter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

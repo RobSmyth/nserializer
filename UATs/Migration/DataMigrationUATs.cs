@@ -87,7 +87,6 @@ namespace NSerializer.UATs.Migration
         }
 
         [Test]
-        [Ignore("wip")]
         public void FieldTypeChange_Coercion()
         {
             var xmlText = SerializeAsXml(new List<object> { new MyTypeE_V1(17) });
@@ -150,7 +149,7 @@ namespace NSerializer.UATs.Migration
             public void Build(IMigrationRules rules)
             {
                 rules.ForType<MyTypeE_V2>()
-                    .Field("valueA").ConvertUsing(new IntToByteConverter());
+                    .Field("valueA").ConvertUsing(new ToByteConverter());
             }
         }
 
@@ -225,8 +224,12 @@ namespace NSerializer.UATs.Migration
             }
         }
 
-        internal class IntToByteConverter : IMigrationConverter
+        private class ToByteConverter : IMigrationConverter
         {
+            public object Convert(object value)
+            {
+                return System.Convert.ToByte(value);
+            }
         }
     }
 
