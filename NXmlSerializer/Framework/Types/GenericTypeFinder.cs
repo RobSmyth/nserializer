@@ -37,7 +37,7 @@ namespace NSerializer.Framework.Types
             this.typeFinder = typeFinder;
         }
 
-        public ITargetType Get(string typeName)
+        public IDataType Get(string typeName)
         {
             Type foundType = null;
 
@@ -66,7 +66,7 @@ namespace NSerializer.Framework.Types
                 }
             }
 
-            return foundType == null ? null : new DestinationType(foundType, typeFinder);
+            return foundType == null ? null : new DataType(foundType, typeFinder);
         }
 
         private Type[] GetParamterTypes(string parameters)

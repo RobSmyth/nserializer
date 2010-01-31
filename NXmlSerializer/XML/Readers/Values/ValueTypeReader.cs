@@ -62,7 +62,7 @@ namespace NSerializer.XML.Readers.Values
             return instance;
         }
 
-        private void ReadFields(object instance, INXmlElementReader membersNodeReader, ITargetType type)
+        private void ReadFields(object instance, INXmlElementReader membersNodeReader, IDataType type)
         {
             INXmlElementReader fieldReader;
             while ((fieldReader = membersNodeReader.GetNextChildNode("f")) != null)

@@ -45,8 +45,8 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void Get_ThrowsException_IfUnknownTypeName()
         {
-            Expect.Once.On(typeFinderA).Method("Get").Will(Return.Value(new DestinationType(null, null)));
-            Expect.Once.On(typeFinderB).Method("Get").Will(Return.Value(new DestinationType(null, null)));
+            Expect.Once.On(typeFinderA).Method("Get").Will(Return.Value(new DataType(null, null)));
+            Expect.Once.On(typeFinderB).Method("Get").Will(Return.Value(new DataType(null, null)));
 
             Assert.Throws<UnableToReadXMLTextException>(() => finder.Get("mynamespace.nonExistingType"), "Unable to find type 'mynamespace.nonExistingType'.");
         }
@@ -54,7 +54,7 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void Get_ReturnsFoundType_IfFirstFinderFindsType()
         {
-            Expect.Once.On(typeFinderA).Method("Get").Will(Return.Value(new DestinationType(GetType(), null)));
+            Expect.Once.On(typeFinderA).Method("Get").Will(Return.Value(new DataType(GetType(), null)));
 
             Assert.AreEqual(GetType(), finder.Get("mynamespace.nonExistingType").GetTargetType());
         }
@@ -62,8 +62,8 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void Get_ReturnsFoundType_IfFirstFinderDoesNotFindTypeButSecondFinderDoes()
         {
-            Expect.Once.On(typeFinderA).Method("Get").Will(Return.Value(new DestinationType(null,null)));
-            Expect.Once.On(typeFinderB).Method("Get").Will(Return.Value(new DestinationType(GetType(),null)));
+            Expect.Once.On(typeFinderA).Method("Get").Will(Return.Value(new DataType(null,null)));
+            Expect.Once.On(typeFinderB).Method("Get").Will(Return.Value(new DataType(GetType(),null)));
 
             Assert.AreEqual(GetType(), finder.Get("mynamespace.nonExistingType").GetTargetType());
         }

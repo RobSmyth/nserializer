@@ -56,7 +56,7 @@ namespace NSerializer.Tests.TypeFinders
                 typeof (List<SerializableClassWithProperties>);
 
             Expect.Once.On(typeFinder).Method("Get").With("System.Collections.Generic.List`1").Will(
-                Return.Value(new DestinationType(typeof(List<>), null)));
+                Return.Value(new DataType(typeof(List<>), null)));
             Expect.Once.On(typeFinder).Method("Get").With(
                 "NSerializer.Tests.XML.Targets.SerializableClassWithProperties").Will(
                 Return.Value(new DestinationType<SerializableClassWithProperties>(null)));

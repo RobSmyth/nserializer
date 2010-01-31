@@ -40,7 +40,7 @@ namespace NSerializer.Framework.Types
             this.typeFinder = typeFinder;
         }
 
-        public ITargetType Get(string typeName)
+        public IDataType Get(string typeName)
         {
             var assemblyNameFilter = new PassOnceNameFilter();
 
@@ -51,7 +51,7 @@ namespace NSerializer.Framework.Types
                 typesCache.Add(typeName, foundType);
             }
 
-            return new DestinationType(foundType, typeFinder);
+            return new DataType(foundType, typeFinder);
         }
 
         private static Type SearchReferencedAssemblies(string typeName, Assembly assembly,

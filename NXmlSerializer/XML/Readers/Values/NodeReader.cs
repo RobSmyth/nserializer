@@ -99,7 +99,7 @@ namespace NSerializer.XML.Readers.Values
             return readObject;
         }
 
-        void IBaseTypeMembersReader.ReadMembers(object instance, INXmlElementReader nodeReader, ITargetType type)
+        void IBaseTypeMembersReader.ReadMembers(object instance, INXmlElementReader nodeReader, IDataType type)
         {
             foreach (var reader in baseTypeReaders)
             {

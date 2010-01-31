@@ -70,7 +70,7 @@ namespace NSerializer.XML.Readers.Values
             return instance;
         }
 
-        public void ReadMembers(object instance, INXmlElementReader nodeReader, ITargetType type)
+        public void ReadMembers(object instance, INXmlElementReader nodeReader, IDataType type)
         {
             using (var membersNodeReader = nodeReader.GetNextChildNode("members"))
             {
@@ -100,7 +100,7 @@ namespace NSerializer.XML.Readers.Values
             }
         }
 
-        private void ReadFields(object instance, INXmlElementReader membersNodeReader, ITargetType type)
+        private void ReadFields(object instance, INXmlElementReader membersNodeReader, IDataType type)
         {
             INXmlElementReader fieldReader;
             while ((fieldReader = membersNodeReader.GetNextChildNode("f")) != null)

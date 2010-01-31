@@ -64,7 +64,7 @@ namespace NSerializer.XML.Readers.Values
             return instance;
         }
 
-        void IBaseTypeMembersReader.ReadMembers(object instance, INXmlElementReader nodeReader, ITargetType type)
+        void IBaseTypeMembersReader.ReadMembers(object instance, INXmlElementReader nodeReader, IDataType type)
         {
             var dictionary = (IDictionary) instance;
 

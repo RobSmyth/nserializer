@@ -38,7 +38,7 @@ namespace NSerializer.Framework.Types
             this.names = names;
         }
 
-        public ITargetType Get(string typeName)
+        public IDataType Get(string typeName)
         {
             while (typeName[0] == '!')
             {
