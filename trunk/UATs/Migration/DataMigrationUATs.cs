@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NSerializer.Exceptions;
 using NSerializer.Migration;
+using NSerializer.Migration.Fields;
 using NSerializer.UATs.Contexts;
 using NSerializer.UATs.Migration.Migration;
 using NUnit.Framework;
@@ -148,8 +149,8 @@ namespace NSerializer.UATs.Migration
         {
             public void Build(IMigrationRules rules)
             {
-                //rules.ForType<MyTypeE_V2>()
-                //    .Field("valueA").AllowTypeCoercion();
+                rules.ForType<MyTypeE_V2>()
+                    .Field("valueA").ConvertUsing(new IntToByteConverter());
             }
         }
 
@@ -223,7 +224,12 @@ namespace NSerializer.UATs.Migration
                 this.valueA = valueA;
             }
         }
+
+        internal class IntToByteConverter : IMigrationConverter
+        {
+        }
     }
+
 
     namespace Migration
     {

@@ -20,16 +20,9 @@
 
 // Project site: http://code.google.com/p/nserializer/
 
-using NSerializer.Migration.Types;
-
-
 namespace NSerializer.Migration.Fields
 {
-    public interface IFieldRules
+    public interface IMigrationConverter
     {
-        ITypeMigrationRules Ignore();
-        ITypeMigrationRules RenamedTo(string newFieldName);
-        ITypeMigrationRules SetTo(object value);
-        ITypeMigrationRules ConvertUsing(IMigrationConverter converter);
     }
 }

@@ -40,7 +40,7 @@ namespace NSerializer.XML.Readers.Members
 
         public void SetValue(object instance, object value)
         {
-            fieldInfo.SetValue(instance, value);
+            fieldInfo.SetValue(instance, fieldDefinition.Convert(value));
         }
     }
 }
