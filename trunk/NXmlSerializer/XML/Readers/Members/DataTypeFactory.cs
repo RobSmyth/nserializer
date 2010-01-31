@@ -20,29 +20,34 @@
 
 using System;
 using System.Reflection;
+using NSerializer.Migration;
 
 
 namespace NSerializer.XML.Readers.Members
 {
     public class DataTypeFactory : IDataTypeFactory
     {
+        private IMigrationDefinition migrationDefiniton = new NullMigrationDefinition();
+
         public IDataType Create(Type type)
         {
-            return new DataType(type);
+            return new DataType(type, migrationDefiniton);
         }
 
         private class DataType : IDataType
         {
             private readonly Type type;
+            private readonly IMigrationDefinition migrationDefiniton;
 
-            public DataType(Type type)
+            public DataType(Type type, IMigrationDefinition migrationDefiniton)
             {
                 this.type = type;
+                this.migrationDefiniton = migrationDefiniton;
             }
 
             public IDataType BaseType
             {
-                get { return new DataType(type.BaseType); }
+                get { return new DataType(type.BaseType, migrationDefiniton); }
             }
 
             public string FullName
@@ -67,12 +72,12 @@ namespace NSerializer.XML.Readers.Members
 
             public IDataType GetElementType()
             {
-                return new DataType(type.GetElementType());
+                return new DataType(type.GetElementType(), migrationDefiniton);
             }
 
             public IDataType MakeArrayType()
             {
-                return new DataType(type.MakeArrayType());
+                return new DataType(type.MakeArrayType(), migrationDefiniton);
             }
 
             public static implicit operator Type(DataType rhs)
@@ -114,11 +119,9 @@ namespace NSerializer.XML.Readers.Members
             }
         }
 
-        private class DestinationType<T> : DataType
+        internal void SetMigration(IMigrationDefinition definition)
         {
-            public DestinationType()
-                : base(typeof(T))
-            { }
+            migrationDefiniton = definition;
         }
     }
 }
