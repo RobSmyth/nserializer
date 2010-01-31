@@ -52,7 +52,6 @@ namespace NSerializer.UATs.Migration
         }
 
         [Test]
-        [Ignore("wip")]
         public void FieldNameChange()
         {
             var xmlText = SerializeAsXml(new List<object> { new MyTypeC_V1(7) });
