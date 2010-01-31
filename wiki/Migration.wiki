@@ -168,6 +168,47 @@ rules.ForType<Foo>()
   .Field("myField").Ignore();
 }}}
 
+===Type conversion===
+
+Sometimes a type may be changed to a more compact type (e.g. change from int to byte) to reduce file size. To support this and more complex conversions a custom type converter can be set for any field. A converter is a class that implements the IMigrationConverter interface.
+
+====Example====
+
+Prior (saved) version code:
+
+{{{
+class Foo
+{
+  private int myField;
+    :
+}
+}}}
+
+Current version code:
+
+{{{
+class Foo
+{
+  private byte myField;
+    :
+}
+}}}
+
+Migration rules:
+
+{{{
+rules.ForType<Foo>()
+  .Field("myField").ConvertUsing(new ToByteConverter());
+
+
+class ToByteConverter : IMigrationConverter
+{
+  public object Convert(object value)
+  {
+    return System.Convert.ToByte(value);
+  }
+}
+}}}
 
 =Links=
  * [http://en.wikipedia.org/wiki/Data_conversion Data conversion]
