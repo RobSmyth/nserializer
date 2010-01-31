@@ -62,8 +62,10 @@
     <Compile Include="Framework\Types\MetaDataTypeName.cs" />
     <Compile Include="Framework\Writers\Values\MetaDataTypeNameWriter.cs" />
     <Compile Include="XML\Readers\Members\DataTypeFactory.cs" />
+    <Compile Include="XML\Readers\Members\Field.cs" />
     <Compile Include="XML\Readers\Members\IDataType.cs" />
     <Compile Include="XML\Readers\Members\IDataTypeFactory.cs" />
+    <Compile Include="XML\Readers\Members\IField.cs" />
     <Compile Include="XML\Readers\PayloadReader.cs" />
     <Compile Include="XML\Readers\INXmlElementReader.cs" />
     <Compile Include="XML\Readers\MetaDataReader.cs" />

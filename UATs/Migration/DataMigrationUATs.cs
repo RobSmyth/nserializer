@@ -64,7 +64,23 @@ namespace NSerializer.UATs.Migration
         public void FieldNameChange_Failure()
         {
             var xmlText = SerializeAsXml(new List<object> { new MyTypeC_V1(7) });
+            Assert.Throws<NSerializerException>(() => ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder()));
+        }
 
+        [Test]
+        [Ignore("wip")]
+        public void DeletedField()
+        {
+            var xmlText = SerializeAsXml(new List<object> { new MyTypeD_V1(17) });
+
+            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder(new FileNameChangeMigrationBuilder()))[0];
+            Assert.AreEqual(typeof(MyTypeD_V2), destination.GetType());
+        }
+
+        [Test]
+        public void DeletedField_Failure()
+        {
+            var xmlText = SerializeAsXml(new List<object> { new MyTypeD_V1(3) });
             Assert.Throws<NSerializerException>(() => ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder()));
         }
 
@@ -88,6 +104,9 @@ namespace NSerializer.UATs.Migration
                 rules.ForType<MyTypeC_V2>()
                     .MatchesTypeName("NSerializer.UATs.Migration.DataMigrationUATs+MyTypeC_V1");
 
+                rules.ForType<MyTypeD_V2>()
+                    .MatchesTypeName("NSerializer.UATs.Migration.DataMigrationUATs+MyTypeD_V1");
+
                 childRulesBuilders.ToList().ForEach(builder => builder.Build(rules));
             }
         }
@@ -98,6 +117,9 @@ namespace NSerializer.UATs.Migration
             {
                 rules.ForType<MyTypeC_V2>()
                     .Field("valueA").RenamedTo("valueAV2");
+
+                rules.ForType<MyTypeD_V2>()
+                    .Field("valueA").Ignore();
             }
         }
 
@@ -136,6 +158,20 @@ namespace NSerializer.UATs.Migration
             {
                 get { return valueAV2; }
             }
+        }
+
+        private class MyTypeD_V1
+        {
+            private readonly int valueA;
+
+            public MyTypeD_V1(int valueA)
+            {
+                this.valueA = valueA;
+            }
+        }
+
+        private class MyTypeD_V2
+        {
         }
     }
 

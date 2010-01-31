@@ -26,10 +26,10 @@ namespace NSerializer.XML.Readers.Members
 {
     public class FieldValue : IMemberValue
     {
-        private readonly FieldInfo fieldInfo;
+        private readonly IField fieldInfo;
         private readonly object value;
 
-        public FieldValue(FieldInfo fieldInfo, object value)
+        public FieldValue(IField fieldInfo, object value)
         {
             this.fieldInfo = fieldInfo;
             this.value = value;

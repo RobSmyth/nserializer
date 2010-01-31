@@ -18,6 +18,8 @@
 
 #endregion
 
+// Project site: http://code.google.com/p/nserializer/
+
 using System;
 using System.Reflection;
 
@@ -29,7 +31,7 @@ namespace NSerializer.XML.Readers.Members
         IDataType BaseType { get; }
         string FullName { get; }
         bool IsArray { get; }
-        FieldInfo GetField(string fieldName, BindingFlags bindingFlags);
+        IField GetField(string fieldName);
         Type GetTargetType();
         IDataType GetElementType();
         IDataType MakeArrayType();

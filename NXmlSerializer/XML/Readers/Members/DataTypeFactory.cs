@@ -60,7 +60,7 @@ namespace NSerializer.XML.Readers.Members
                 get { return type.IsArray; }
             }
 
-            public FieldInfo GetField(string fieldName, BindingFlags bindingFlags)
+            public IField GetField(string fieldName)
             {
                 if (migrationDefiniton != null)
                 {
@@ -72,7 +72,7 @@ namespace NSerializer.XML.Readers.Members
                     }
                 }
 
-                return type.GetField(fieldName, bindingFlags);
+                return new Field(type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance));
             }
 
             public Type GetTargetType()
