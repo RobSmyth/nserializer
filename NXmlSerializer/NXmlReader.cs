@@ -127,6 +127,7 @@ namespace NSerializer
 
                 var migrationDefinition =
                     new MigrationDefinitionFactory(metaData.PayloadVersion, migrationRulesBuilder).Create();
+                dataTypeFactory.SetMigration(migrationDefinition);
                 typeFinder = migrationDefinition.GetTypeMigrator(typeFinder);
 
                 var payloadReader = new PayloadReader(new ReaderNameAliasingTypeFinder(typeFinder,
