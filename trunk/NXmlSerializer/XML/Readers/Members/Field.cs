@@ -22,17 +22,20 @@
 
 using System;
 using System.Reflection;
+using NSerializer.Migration.Fields;
 
 
 namespace NSerializer.XML.Readers.Members
 {
-    public class Field : IField
+    internal class Field : IField
     {
         private readonly FieldInfo fieldInfo;
+        private readonly IFieldDefinition fieldDefinition;
 
-        public Field(FieldInfo fieldInfo)
+        public Field(FieldInfo fieldInfo, IFieldDefinition fieldDefinition)
         {
             this.fieldInfo = fieldInfo;
+            this.fieldDefinition = fieldDefinition;
         }
 
         public void SetValue(object instance, object value)

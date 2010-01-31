@@ -58,7 +58,7 @@ namespace NSerializer.UATs.Migration
         {
             var xmlText = SerializeAsXml(new List<object> { new MyTypeC_V1(7) });
 
-            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder(new FileNameChangeMigrationBuilder()))[0];
+            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder(new FieldNameChangeMigrationBuilder()))[0];
             Assert.AreEqual(typeof(MyTypeC_V2), destination.GetType());
         }
 
@@ -74,7 +74,7 @@ namespace NSerializer.UATs.Migration
         {
             var xmlText = SerializeAsXml(new List<object> { new MyTypeD_V1(17) });
 
-            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder(new FileNameChangeMigrationBuilder()))[0];
+            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder(new FieldNameChangeMigrationBuilder()))[0];
             Assert.AreEqual(typeof(MyTypeD_V2), destination.GetType());
         }
 
@@ -82,6 +82,23 @@ namespace NSerializer.UATs.Migration
         public void DeletedField_Failure()
         {
             var xmlText = SerializeAsXml(new List<object> { new MyTypeD_V1(3) });
+            Assert.Throws<NSerializerException>(() => ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder()));
+        }
+
+        [Test]
+        [Ignore("wip")]
+        public void FieldTypeChange_Coercion()
+        {
+            var xmlText = SerializeAsXml(new List<object> { new MyTypeE_V1(17) });
+
+            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder(new FieldCoercionMigrationBuilder()))[0];
+            Assert.AreEqual(typeof(MyTypeE_V2), destination.GetType());
+        }
+
+        [Test]
+        public void FieldTypeChange_Coercion_Failure()
+        {
+            var xmlText = SerializeAsXml(new List<object> { new MyTypeE_V1(17) });
             Assert.Throws<NSerializerException>(() => ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder()));
         }
 
@@ -108,11 +125,14 @@ namespace NSerializer.UATs.Migration
                 rules.ForType<MyTypeD_V2>()
                     .MatchesTypeName("NSerializer.UATs.Migration.DataMigrationUATs+MyTypeD_V1");
 
+                rules.ForType<MyTypeE_V2>()
+                    .MatchesTypeName("NSerializer.UATs.Migration.DataMigrationUATs+MyTypeE_V1");
+
                 childRulesBuilders.ToList().ForEach(builder => builder.Build(rules));
             }
         }
 
-        private class FileNameChangeMigrationBuilder : IMigrationRulesBuilder
+        private class FieldNameChangeMigrationBuilder : IMigrationRulesBuilder
         {
             public void Build(IMigrationRules rules)
             {
@@ -121,6 +141,15 @@ namespace NSerializer.UATs.Migration
 
                 rules.ForType<MyTypeD_V2>()
                     .Field("valueA").Ignore();
+            }
+        }
+
+        private class FieldCoercionMigrationBuilder : IMigrationRulesBuilder
+        {
+            public void Build(IMigrationRules rules)
+            {
+                //rules.ForType<MyTypeE_V2>()
+                //    .Field("valueA").AllowTypeCoercion();
             }
         }
 
@@ -174,8 +203,27 @@ namespace NSerializer.UATs.Migration
         private class MyTypeD_V2
         {
         }
-    }
 
+        private class MyTypeE_V1
+        {
+            private readonly int valueA;
+
+            public MyTypeE_V1(int valueA)
+            {
+                this.valueA = valueA;
+            }
+        }
+
+        private class MyTypeE_V2
+        {
+            private readonly byte valueA;
+
+            public MyTypeE_V2(byte valueA)
+            {
+                this.valueA = valueA;
+            }
+        }
+    }
 
     namespace Migration
     {
