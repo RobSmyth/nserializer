@@ -20,10 +20,10 @@
 
 // Project site: http://code.google.com/p/nserializer/
 
-using NSerializer.Framework.Types;
-using NSerializer.Types;
-using NUnit.Framework;
 using NMock2;
+using NSerializer.Framework.Types;
+using NSerializer.XML.Readers.Members;
+using NUnit.Framework;
 
 
 namespace NSerializer.Tests.Framework.Types
@@ -32,27 +32,34 @@ namespace NSerializer.Tests.Framework.Types
     public class ReaderNameMappingTypeFinderTests : MockingTestFixture
     {
         private ReaderNameMappingTypeFinder finder;
-        private ITypeFinder typeFinder;
         private string[] names;
+        private ITypeFinder typeFinder;
 
         protected override void SetUp()
         {
             typeFinder = NewMock<ITypeFinder>();
-            names = new[] { "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA", "!0[]", "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeC" };
+            names = new[]
+                        {
+                            "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA", "!0[]",
+                            "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeC"
+                        };
             finder = new ReaderNameMappingTypeFinder(typeFinder, names);
         }
 
         [Test]
         public void Get()
         {
-            Expect.Once.On(typeFinder).Method("Get").With("NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA").Will(Return.Value(typeof(MyTypeA)));
-            Assert.AreEqual(typeof(MyTypeA), finder.Get("!0"));
+            Expect.Once.On(typeFinder).Method("Get").With(
+                "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA").Will(Return.Value(new DestinationType<MyTypeA>(null)));
+            Assert.AreEqual(typeof (MyTypeA), finder.Get("!0").GetTargetType());
 
-            Expect.Once.On(typeFinder).Method("Get").With("NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA").Will(Return.Value(typeof(MyTypeA)));
-            Assert.AreEqual(typeof(MyTypeA[]), finder.Get("!1"));
+            Expect.Once.On(typeFinder).Method("Get").With(
+                "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA").Will(Return.Value(new DestinationType<MyTypeA>(null)));
+            Assert.AreEqual(typeof (MyTypeA[]), finder.Get("!1").GetTargetType());
 
-            Expect.Once.On(typeFinder).Method("Get").With("NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeC").Will(Return.Value(typeof(MyTypeC)));
-            Assert.AreEqual(typeof(MyTypeC), finder.Get("!2"));
+            Expect.Once.On(typeFinder).Method("Get").With(
+                "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeC").Will(Return.Value(new DestinationType<MyTypeC>(null)));
+            Assert.AreEqual(typeof (MyTypeC), finder.Get("!2").GetTargetType());
         }
 
         private class MyTypeA

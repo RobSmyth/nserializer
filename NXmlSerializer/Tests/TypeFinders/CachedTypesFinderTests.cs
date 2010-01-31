@@ -30,10 +30,12 @@ namespace NSerializer.Tests.TypeFinders
     public class CachedTypesFinderTests : MockingTestFixture
     {
         private CachedTypesFinder finder;
+        private ITypeFinder typeFinder;
 
         protected override void SetUp()
         {
-            finder = new CachedTypesFinder();
+            typeFinder = NewMock<ITypeFinder>();
+            finder = new CachedTypesFinder(typeFinder);
         }
 
         [Test]
@@ -46,7 +48,7 @@ namespace NSerializer.Tests.TypeFinders
         public void Get_ReturnsType_AfterTypeAdded()
         {
             finder.Add("mynampesace.myType", GetType());
-            Assert.AreEqual(GetType(), finder.Get("mynampesace.myType"));
+            Assert.AreEqual(GetType(), finder.Get("mynampesace.myType").GetTargetType());
         }
     }
 }

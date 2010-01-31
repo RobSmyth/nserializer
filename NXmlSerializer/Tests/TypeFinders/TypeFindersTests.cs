@@ -21,7 +21,7 @@
 using NMock2;
 using NSerializer.Exceptions;
 using NSerializer.Framework.Types;
-using NSerializer.Types;
+using NSerializer.XML.Readers.Members;
 using NUnit.Framework;
 
 
@@ -45,8 +45,8 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void Get_ThrowsException_IfUnknownTypeName()
         {
-            Expect.Once.On(typeFinderA).Method("Get").Will(Return.Value(null));
-            Expect.Once.On(typeFinderB).Method("Get").Will(Return.Value(null));
+            Expect.Once.On(typeFinderA).Method("Get").Will(Return.Value(new DestinationType(null, null)));
+            Expect.Once.On(typeFinderB).Method("Get").Will(Return.Value(new DestinationType(null, null)));
 
             Assert.Throws<UnableToReadXMLTextException>(() => finder.Get("mynamespace.nonExistingType"), "Unable to find type 'mynamespace.nonExistingType'.");
         }
@@ -54,18 +54,18 @@ namespace NSerializer.Tests.TypeFinders
         [Test]
         public void Get_ReturnsFoundType_IfFirstFinderFindsType()
         {
-            Expect.Once.On(typeFinderA).Method("Get").Will(Return.Value(GetType()));
+            Expect.Once.On(typeFinderA).Method("Get").Will(Return.Value(new DestinationType(GetType(), null)));
 
-            Assert.AreEqual(GetType(), finder.Get("mynamespace.nonExistingType"));
+            Assert.AreEqual(GetType(), finder.Get("mynamespace.nonExistingType").GetTargetType());
         }
 
         [Test]
         public void Get_ReturnsFoundType_IfFirstFinderDoesNotFindTypeButSecondFinderDoes()
         {
-            Expect.Once.On(typeFinderA).Method("Get").Will(Return.Value(null));
-            Expect.Once.On(typeFinderB).Method("Get").Will(Return.Value(GetType()));
+            Expect.Once.On(typeFinderA).Method("Get").Will(Return.Value(new DestinationType(null,null)));
+            Expect.Once.On(typeFinderB).Method("Get").Will(Return.Value(new DestinationType(GetType(),null)));
 
-            Assert.AreEqual(GetType(), finder.Get("mynamespace.nonExistingType"));
+            Assert.AreEqual(GetType(), finder.Get("mynamespace.nonExistingType").GetTargetType());
         }
     }
 }

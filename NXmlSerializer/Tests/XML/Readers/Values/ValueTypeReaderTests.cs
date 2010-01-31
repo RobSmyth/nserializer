@@ -19,7 +19,7 @@
 #endregion
 
 using NSerializer.Framework.Readers;
-using NSerializer.Types;
+using NSerializer.Framework.Types;
 using NSerializer.XML.Readers.Values;
 using NUnit.Framework;
 

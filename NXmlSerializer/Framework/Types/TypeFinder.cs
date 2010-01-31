@@ -20,7 +20,7 @@
 
 using System;
 using NSerializer.Exceptions;
-using NSerializer.Types;
+using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer.Framework.Types
@@ -34,20 +34,20 @@ namespace NSerializer.Framework.Types
             this.typeFinders = typeFinders;
         }
 
-        public Type Get(string typeName)
+        public ITargetType Get(string typeName)
         {
-            Type foundType = null;
+            ITargetType foundType = null;
 
             foreach (var finder in typeFinders)
             {
                 foundType = finder.Get(typeName);
-                if (foundType != null)
+                if (foundType != null && foundType.GetTargetType() != null)
                 {
                     break;
                 }
             }
 
-            if (foundType == null)
+            if (foundType == null || foundType.GetTargetType() == null)
             {
                 throw new UnableToReadXMLTextException(string.Format("Unable to find type '{0}'.", typeName));
             }

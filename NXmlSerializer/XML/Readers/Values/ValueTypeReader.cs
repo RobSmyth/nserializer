@@ -21,7 +21,7 @@
 using System;
 using NSerializer.Exceptions;
 using NSerializer.Framework.Readers;
-using NSerializer.Types;
+using NSerializer.Framework.Types;
 using NSerializer.XML.Readers.Members;
 
 
@@ -47,7 +47,7 @@ namespace NSerializer.XML.Readers.Values
         {
             var typeName = nodeReader.Attributes.Get("type");
             var type = typeFinder.Get(typeName);
-            var instance = Activator.CreateInstance(type);
+            var instance = Activator.CreateInstance(type.GetTargetType());
 
             using (var membersNodeReader = nodeReader.GetNextChildNode("members"))
             {
@@ -56,13 +56,13 @@ namespace NSerializer.XML.Readers.Values
                     throw new NXmlReaderFormatException("Missing class members node.");
                 }
 
-                ReadFields(instance, membersNodeReader, new DestinationType(type));
+                ReadFields(instance, membersNodeReader, type);
             }
 
             return instance;
         }
 
-        private void ReadFields(object instance, INXmlElementReader membersNodeReader, DestinationType type)
+        private void ReadFields(object instance, INXmlElementReader membersNodeReader, ITargetType type)
         {
             INXmlElementReader fieldReader;
             while ((fieldReader = membersNodeReader.GetNextChildNode("f")) != null)

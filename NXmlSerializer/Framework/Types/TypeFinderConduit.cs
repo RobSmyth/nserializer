@@ -19,7 +19,7 @@
 #endregion
 
 using System;
-using NSerializer.Types;
+using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer.Framework.Types
@@ -28,7 +28,7 @@ namespace NSerializer.Framework.Types
     {
         private ITypeFinder typeFinder;
 
-        public Type Get(string typeName)
+        public ITargetType Get(string typeName)
         {
             return typeFinder.Get(typeName);
         }

@@ -31,11 +31,13 @@ namespace NSerializer.Tests.TypeFinders
     {
         private TypeInAssemblyFinder finder;
         private ITypesCache typesCache;
+        private ITypeFinder typeFinder;
 
         protected override void SetUp()
         {
             typesCache = NewMock<ITypesCache>();
-            finder = new TypeInAssemblyFinder(GetType().Assembly, typesCache);
+            typeFinder = NewMock<ITypeFinder>();
+            finder = new TypeInAssemblyFinder(GetType().Assembly, typesCache, typeFinder);
         }
 
         [Test]

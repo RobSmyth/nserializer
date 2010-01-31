@@ -21,22 +21,26 @@
 using System;
 using System.Reflection;
 using NSerializer.Exceptions;
+using NSerializer.Types;
+using NSerializer.XML.Readers.Members;
 
 
-namespace NSerializer.Types
+namespace NSerializer.Framework.Types
 {
     public class TypeInReferencedAssemblyFinder : ITypeFinder
     {
         private readonly Assembly seedAssembly;
         private readonly ITypesCache typesCache;
+        private readonly ITypeFinder typeFinder;
 
-        public TypeInReferencedAssemblyFinder(Assembly seedAssembly, ITypesCache typesCache)
+        public TypeInReferencedAssemblyFinder(Assembly seedAssembly, ITypesCache typesCache, ITypeFinder typeFinder)
         {
             this.seedAssembly = seedAssembly;
             this.typesCache = typesCache;
+            this.typeFinder = typeFinder;
         }
 
-        public Type Get(string typeName)
+        public ITargetType Get(string typeName)
         {
             var assemblyNameFilter = new PassOnceNameFilter();
 
@@ -47,7 +51,7 @@ namespace NSerializer.Types
                 typesCache.Add(typeName, foundType);
             }
 
-            return foundType;
+            return new DestinationType(foundType, typeFinder);
         }
 
         private static Type SearchReferencedAssemblies(string typeName, Assembly assembly,

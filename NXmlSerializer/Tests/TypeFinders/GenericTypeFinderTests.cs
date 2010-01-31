@@ -23,6 +23,7 @@ using NMock2;
 using NSerializer.Framework.Types;
 using NSerializer.TestAssembly1;
 using NSerializer.Types;
+using NSerializer.XML.Readers.Members;
 using NUnit.Framework;
 
 
@@ -55,10 +56,10 @@ namespace NSerializer.Tests.TypeFinders
                 typeof (List<SerializableClassWithProperties>);
 
             Expect.Once.On(typeFinder).Method("Get").With("System.Collections.Generic.List`1").Will(
-                Return.Value(typeof (List<>)));
+                Return.Value(new DestinationType(typeof(List<>), null)));
             Expect.Once.On(typeFinder).Method("Get").With(
                 "NSerializer.Tests.XML.Targets.SerializableClassWithProperties").Will(
-                Return.Value(typeof (SerializableClassWithProperties)));
+                Return.Value(new DestinationType<SerializableClassWithProperties>(null)));
             ;
             Expect.Once.On(typesCache).Method("Add").With(
                 "System.Collections.Generic.List`1[[NSerializer.Tests.XML.Targets.SerializableClassWithProperties]]",
@@ -66,7 +67,7 @@ namespace NSerializer.Tests.TypeFinders
 
             Assert.AreEqual(expectedType,
                             finder.Get(
-                                "System.Collections.Generic.List`1[[NSerializer.Tests.XML.Targets.SerializableClassWithProperties]]"));
+                                "System.Collections.Generic.List`1[[NSerializer.Tests.XML.Targets.SerializableClassWithProperties]]").GetTargetType());
         }
     }
 }
