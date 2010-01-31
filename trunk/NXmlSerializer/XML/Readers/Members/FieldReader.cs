@@ -18,6 +18,8 @@
 
 #endregion
 
+// Project site: http://code.google.com/p/nserializer/
+
 using System;
 using System.Reflection;
 using NSerializer.Exceptions;
