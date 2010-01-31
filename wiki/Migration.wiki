@@ -13,15 +13,7 @@ Currently NXmlSerializer supports migration with the following changes to applic
     * Namespace
     * Type name
     * New fields
-
-Hopefully in future release:
-
-    * Deleted fields
     * Field name
-    * Split class
-    * Merged classes (consolidation?)
-
-Migration can be divided into either data movement (renaming, type splits/merging, deletion) or consolidation where data is processed to produce a new state. All of the above are the former.
 
 ==Type migration==
 
