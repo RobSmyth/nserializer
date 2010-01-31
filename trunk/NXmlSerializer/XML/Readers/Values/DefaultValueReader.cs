@@ -22,7 +22,6 @@ using System.Reflection;
 using NSerializer.Framework;
 using NSerializer.Framework.Readers;
 using NSerializer.Framework.Types;
-using NSerializer.Types;
 
 
 namespace NSerializer.XML.Readers.Values

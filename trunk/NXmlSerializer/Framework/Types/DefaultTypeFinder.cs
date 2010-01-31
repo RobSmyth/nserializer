@@ -20,7 +20,7 @@
 
 using System;
 using System.Reflection;
-using NSerializer.Types;
+using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer.Framework.Types
@@ -33,10 +33,10 @@ namespace NSerializer.Framework.Types
         {
             var typeFinderConduit = new TypeFinderConduit();
 
-            var typesCache = new CachedTypesFinder();
+            var typesCache = new CachedTypesFinder(typeFinderConduit);
             ITypeFinder genericTypeFinder = new GenericTypeFinder(typesCache, typeFinderConduit);
-            ITypeFinder typeInAssemblyFinder = new TypeInAssemblyFinder(seedAssembly, typesCache);
-            ITypeFinder typeInReferencedAssemblyFinder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache);
+            ITypeFinder typeInAssemblyFinder = new TypeInAssemblyFinder(seedAssembly, typesCache, typeFinderConduit);
+            ITypeFinder typeInReferencedAssemblyFinder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder);
 
             typeFinder =
                 new TypeFinder(typesCache, genericTypeFinder, typeInAssemblyFinder, typeInReferencedAssemblyFinder);
@@ -44,7 +44,7 @@ namespace NSerializer.Framework.Types
             typeFinderConduit.SetTarget(typeFinder);
         }
 
-        public Type Get(string typeName)
+        public ITargetType Get(string typeName)
         {
             return typeFinder.Get(typeName);
         }

@@ -21,7 +21,6 @@
 using System;
 using NSerializer.Exceptions;
 using NSerializer.Framework.Types;
-using NSerializer.Types;
 using NUnit.Framework;
 
 
@@ -39,10 +38,10 @@ namespace NSerializer.UATs
 
             var typeFinderConduit = new TypeFinderConduit();
 
-            var typesCache = new CachedTypesFinder();
+            var typesCache = new CachedTypesFinder(typeFinderConduit);
             ITypeFinder genericTypeFindeer = new GenericTypeFinder(typesCache, typeFinderConduit);
-            ITypeFinder typeInAssemblyFinder = new TypeInAssemblyFinder(seedAssembly, typesCache);
-            ITypeFinder typeInReferencedAssembliesFinder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache);
+            ITypeFinder typeInAssemblyFinder = new TypeInAssemblyFinder(seedAssembly, typesCache, typeFinder);
+            ITypeFinder typeInReferencedAssembliesFinder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder);
 
             typeFinder = new TypeFinder(typesCache, genericTypeFindeer, typeInAssemblyFinder,
                                         typeInReferencedAssembliesFinder);

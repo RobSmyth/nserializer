@@ -22,6 +22,7 @@ using System;
 using System.Collections;
 using NSerializer.Framework;
 using NSerializer.Framework.Readers;
+using NSerializer.Framework.Types;
 using NSerializer.Types;
 using NSerializer.XML.Readers.Members;
 
@@ -54,16 +55,16 @@ namespace NSerializer.XML.Readers.Values
             var typeName = nodeReader.Attributes.Get("type");
             var type = typeFinder.Get(typeName);
 
-            var typeAccessor = new TypeAccessor(type, docObjectRepository);
+            var typeAccessor = new TypeAccessor(type.GetTargetType(), docObjectRepository);
             var instance = typeAccessor.GetInstance();
             readObjects.Add(nodeReader.Attributes.GetInteger("ID"), instance);
 
-            ((IBaseTypeMembersReader) this).ReadMembers(instance, nodeReader, new DestinationType(type));
+            ((IBaseTypeMembersReader)this).ReadMembers(instance, nodeReader, type);
 
             return instance;
         }
 
-        void IBaseTypeMembersReader.ReadMembers(object instance, INXmlElementReader nodeReader, DestinationType type)
+        void IBaseTypeMembersReader.ReadMembers(object instance, INXmlElementReader nodeReader, ITargetType type)
         {
             var list = (IList) instance;
 

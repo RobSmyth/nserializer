@@ -22,7 +22,6 @@ using System;
 using System.Collections.Generic;
 using NSerializer.Framework.Types;
 using NSerializer.Migration.Types;
-using NSerializer.Types;
 
 
 namespace NSerializer.Migration

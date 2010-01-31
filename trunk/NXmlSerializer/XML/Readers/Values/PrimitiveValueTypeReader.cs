@@ -20,7 +20,7 @@
 
 using System;
 using NSerializer.Framework.Readers;
-using NSerializer.Types;
+using NSerializer.Framework.Types;
 
 
 namespace NSerializer.XML.Readers.Values

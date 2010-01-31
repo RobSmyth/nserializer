@@ -21,6 +21,7 @@
 using System;
 using System.Reflection;
 using NSerializer.Types;
+using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer.Framework.Types
@@ -29,21 +30,24 @@ namespace NSerializer.Framework.Types
     {
         private readonly Assembly seedAssembly;
         private readonly ITypesCache typesCache;
+        private readonly ITypeFinder typeFinder;
 
-        public TypeInAssemblyFinder(Assembly seedAssembly, ITypesCache typesCache)
+        public TypeInAssemblyFinder(Assembly seedAssembly, ITypesCache typesCache, ITypeFinder typeFinder)
         {
             this.seedAssembly = seedAssembly;
             this.typesCache = typesCache;
+            this.typeFinder = typeFinder;
         }
 
-        public Type Get(string typeName)
+        public ITargetType Get(string typeName)
         {
             var foundType = seedAssembly.GetType(typeName);
             if (foundType != null)
             {
                 typesCache.Add(typeName, foundType);
+                return new DestinationType(foundType, typeFinder);
             }
-            return foundType;
+            return null;
         }
     }
 }

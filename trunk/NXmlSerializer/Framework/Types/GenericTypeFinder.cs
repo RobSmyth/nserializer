@@ -21,6 +21,7 @@
 using System;
 using System.Text.RegularExpressions;
 using NSerializer.Types;
+using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer.Framework.Types
@@ -36,7 +37,7 @@ namespace NSerializer.Framework.Types
             this.typeFinder = typeFinder;
         }
 
-        public Type Get(string typeName)
+        public ITargetType Get(string typeName)
         {
             Type foundType = null;
 
@@ -55,7 +56,7 @@ namespace NSerializer.Framework.Types
                     if (valueType != null)
                     {
                         var paramterTypes = GetParamterTypes(parameters);
-                        foundType = valueType.MakeGenericType(paramterTypes);
+                        foundType = valueType.GetTargetType().MakeGenericType(paramterTypes);
                     }
 
                     if (foundType != null)
@@ -65,7 +66,7 @@ namespace NSerializer.Framework.Types
                 }
             }
 
-            return foundType;
+            return foundType == null ? null : new DestinationType(foundType, typeFinder);
         }
 
         private Type[] GetParamterTypes(string parameters)
@@ -75,7 +76,7 @@ namespace NSerializer.Framework.Types
             for (var index = 0; index < paramterTypes.Length; index++)
             {
                 var parameterTypeName = parameterTypeNames[index].Trim(new[] {' ', '[', ']'});
-                paramterTypes[index] = typeFinder.Get(parameterTypeName);
+                paramterTypes[index] = typeFinder.Get(parameterTypeName).GetTargetType();
             }
             return paramterTypes;
         }

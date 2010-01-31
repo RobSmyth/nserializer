@@ -18,14 +18,20 @@
 
 #endregion
 
-using NSerializer.Framework.Types;
-using NSerializer.Migration.Fields;
+using System;
+using System.Reflection;
 
 
-namespace NSerializer.Migration.Types
+namespace NSerializer.XML.Readers.Members
 {
-    internal interface ITypeMigrator : ITypeFinder
+    public interface ITargetType
     {
-        IFieldMigrator GetFieldMigrator();
+        DestinationType BaseType { get; }
+        string FullName { get; }
+        bool IsArray { get; }
+        FieldInfo GetField(string fieldName, BindingFlags bindingFlags);
+        Type GetTargetType();
+        DestinationType GetElementType();
+        ITargetType MakeArrayType();
     }
 }

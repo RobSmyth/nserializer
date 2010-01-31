@@ -29,6 +29,6 @@ namespace NSerializer.Framework.Readers
     public interface IMemberReader
     {
         bool CanRead(INXmlElementReader nodeReader);
-        IMemberValue Read(INXmlElementReader nodeReader, DestinationType type);
+        IMemberValue Read(INXmlElementReader nodeReader, ITargetType type);
     }
 }

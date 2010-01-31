@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using NSerializer.Framework;
 using NSerializer.Framework.Readers;
 using NSerializer.Framework.Readers.Values;
-using NSerializer.Types;
+using NSerializer.Framework.Types;
 using NSerializer.XML.Readers.Members;
 
 
@@ -99,7 +99,7 @@ namespace NSerializer.XML.Readers.Values
             return readObject;
         }
 
-        void IBaseTypeMembersReader.ReadMembers(object instance, INXmlElementReader nodeReader, DestinationType type)
+        void IBaseTypeMembersReader.ReadMembers(object instance, INXmlElementReader nodeReader, ITargetType type)
         {
             foreach (var reader in baseTypeReaders)
             {

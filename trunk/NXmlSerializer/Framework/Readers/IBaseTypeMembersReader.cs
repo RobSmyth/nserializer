@@ -28,6 +28,6 @@ namespace NSerializer.Framework.Readers
     public interface IBaseTypeMembersReader
     {
         bool CanRead(INXmlElementReader nodeReader);
-        void ReadMembers(object instance, INXmlElementReader nodeReader, DestinationType type);
+        void ReadMembers(object instance, INXmlElementReader nodeReader, ITargetType type);
     }
 }

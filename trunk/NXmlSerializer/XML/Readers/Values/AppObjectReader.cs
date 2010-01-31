@@ -20,7 +20,7 @@
 
 using NSerializer.Framework;
 using NSerializer.Framework.Readers;
-using NSerializer.Types;
+using NSerializer.Framework.Types;
 
 
 namespace NSerializer.XML.Readers.Values
@@ -49,7 +49,7 @@ namespace NSerializer.XML.Readers.Values
             var typeName = nodeReader.Attributes.Get("type");
             var type = typeFinder.Get(typeName);
 
-            var instance = appObjectRepository.Get(type);
+            var instance = appObjectRepository.Get(type.GetTargetType());
             readObjects.Add(nodeReader.Attributes.GetInteger("ID"), instance);
 
             return instance;

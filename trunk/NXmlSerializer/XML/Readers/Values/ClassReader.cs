@@ -22,6 +22,7 @@ using System;
 using NSerializer.Exceptions;
 using NSerializer.Framework;
 using NSerializer.Framework.Readers;
+using NSerializer.Framework.Types;
 using NSerializer.Types;
 using NSerializer.XML.Readers.Members;
 
@@ -59,17 +60,17 @@ namespace NSerializer.XML.Readers.Values
             var typeName = nodeReader.Attributes.Get("type");
             var type = typeFinder.Get(typeName);
 
-            var typeAccessor = new TypeAccessor(type, docObjectRepository);
+            var typeAccessor = new TypeAccessor(type.GetTargetType(), docObjectRepository);
             var instance = typeAccessor.GetInstance();
 
             readObjects.Add(nodeReader.Attributes.GetInteger("ID"), instance);
 
-            ReadMembers(instance, nodeReader, new DestinationType(type));
+            ReadMembers(instance, nodeReader, type);
 
             return instance;
         }
 
-        public void ReadMembers(object instance, INXmlElementReader nodeReader, DestinationType type)
+        public void ReadMembers(object instance, INXmlElementReader nodeReader, ITargetType type)
         {
             using (var membersNodeReader = nodeReader.GetNextChildNode("members"))
             {
@@ -99,7 +100,7 @@ namespace NSerializer.XML.Readers.Values
             }
         }
 
-        private void ReadFields(object instance, INXmlElementReader membersNodeReader, DestinationType type)
+        private void ReadFields(object instance, INXmlElementReader membersNodeReader, ITargetType type)
         {
             INXmlElementReader fieldReader;
             while ((fieldReader = membersNodeReader.GetNextChildNode("f")) != null)

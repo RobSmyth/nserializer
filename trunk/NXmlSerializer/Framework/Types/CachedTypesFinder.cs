@@ -21,22 +21,29 @@
 using System;
 using System.Collections.Generic;
 using NSerializer.Types;
+using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer.Framework.Types
 {
     internal class CachedTypesFinder : ITypesCache, ITypeFinder
     {
+        private readonly ITypeFinder typeFinder;
         private readonly Dictionary<string, Type> cachedTypes = new Dictionary<string, Type>();
 
-        public Type Get(string typeName)
+        public CachedTypesFinder(ITypeFinder typeFinder)
+        {
+            this.typeFinder = typeFinder;
+        }
+
+        public ITargetType Get(string typeName)
         {
             Type foundType;
             if (!cachedTypes.TryGetValue(typeName, out foundType))
             {
-                foundType = null;
+                return null;
             }
-            return foundType;
+            return new DestinationType(foundType, typeFinder);
         }
 
         public void Add(string typeName, Type type)

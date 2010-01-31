@@ -19,8 +19,9 @@
 #endregion
 
 using System;
+using NSerializer.Framework.Types;
 using NSerializer.Migration.Fields;
-using NSerializer.Types;
+using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer.Migration.Types
@@ -36,7 +37,7 @@ namespace NSerializer.Migration.Types
             this.migrationDefinition = migrationDefinition;
         }
 
-        public Type Get(string typeName)
+        public ITargetType Get(string typeName)
         {
             var typeDefinition = migrationDefinition.GetTypeDefinition(typeName);
             if (typeDefinition != null)

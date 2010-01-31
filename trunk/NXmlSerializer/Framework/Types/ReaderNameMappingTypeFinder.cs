@@ -21,8 +21,8 @@
 // Project site: http://code.google.com/p/nserializer/
 
 using System;
-using NSerializer.Types;
 using System.Text.RegularExpressions;
+using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer.Framework.Types
@@ -38,7 +38,7 @@ namespace NSerializer.Framework.Types
             this.names = names;
         }
 
-        public Type Get(string typeName)
+        public ITargetType Get(string typeName)
         {
             while (typeName[0] == '!')
             {

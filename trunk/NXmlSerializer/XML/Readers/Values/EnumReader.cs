@@ -20,7 +20,7 @@
 
 using System;
 using NSerializer.Framework.Readers;
-using NSerializer.Types;
+using NSerializer.Framework.Types;
 
 
 namespace NSerializer.XML.Readers.Values
@@ -43,7 +43,7 @@ namespace NSerializer.XML.Readers.Values
         {
             var typeName = nodeReader.Attributes.Get("type");
             var type = typeFinder.Get(typeName);
-            return Enum.Parse(type, nodeReader.GetPayload().Trim());
+            return Enum.Parse(type.GetTargetType(), nodeReader.GetPayload().Trim());
         }
     }
 }

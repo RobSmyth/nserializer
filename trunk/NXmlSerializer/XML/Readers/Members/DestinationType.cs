@@ -20,22 +20,25 @@
 
 using System;
 using System.Reflection;
+using NSerializer.Framework.Types;
 
 
 namespace NSerializer.XML.Readers.Members
 {
-    public class DestinationType
+    public class DestinationType : ITargetType
     {
         private readonly Type type;
+        private readonly ITypeFinder typeFinder;
 
-        public DestinationType(Type type)
+        public DestinationType(Type type, ITypeFinder typeFinder)
         {
             this.type = type;
+            this.typeFinder = typeFinder;
         }
 
         public DestinationType BaseType
         {
-            get { return new DestinationType(type.BaseType); }
+            get { return new DestinationType(type.BaseType, typeFinder); }
         }
 
         public string FullName
@@ -43,9 +46,36 @@ namespace NSerializer.XML.Readers.Members
             get { return type.FullName; }
         }
 
+        public bool IsArray
+        {
+            get { return type.IsArray; }
+        }
+
         public FieldInfo GetField(string fieldName, BindingFlags bindingFlags)
         {
             return type.GetField(fieldName, bindingFlags);
         }
+
+        public Type GetTargetType()
+        {
+            return type;
+        }
+
+        public DestinationType GetElementType()
+        {
+            return new DestinationType(type.GetElementType(), typeFinder);
+        }
+
+        public ITargetType MakeArrayType()
+        {
+            return new DestinationType(type.MakeArrayType(), typeFinder);
+        }
+    }
+
+    public class DestinationType<T> : DestinationType
+    {
+        public DestinationType(ITypeFinder typeFinder)
+            : base(typeof(T), typeFinder)
+        { }
     }
 }

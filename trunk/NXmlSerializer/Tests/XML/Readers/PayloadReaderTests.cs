@@ -26,10 +26,11 @@ using System.Text;
 using NMock2;
 using NSerializer.Framework;
 using NSerializer.Framework.Document;
-using NSerializer.Types;
+using NSerializer.Framework.Types;
 using NSerializer.XML.Document;
 using NSerializer.XML.Document.Writers;
 using NSerializer.XML.Readers;
+using NSerializer.XML.Readers.Members;
 using NUnit.Framework;
 
 
@@ -63,10 +64,10 @@ namespace NSerializer.Tests.XML.Readers
 
             var stream = new MemoryStream(Encoding.ASCII.GetBytes(xml));
 
-            Stub.On(typeFinder).Method("Get").With(typeof (Payload).FullName).Will(Return.Value(typeof (Payload)));
-            Stub.On(typeFinder).Method("Get").With("System.String[]").Will(Return.Value(typeof (String[])));
-            Stub.On(typeFinder).Method("Get").With("!0").Will(Return.Value(typeof (Payload)));
-            Stub.On(typeFinder).Method("Get").With("!1").Will(Return.Value(typeof (A)));
+            Stub.On(typeFinder).Method("Get").With(typeof (Payload).FullName).Will(Return.Value(new DestinationType<Payload>(null)));
+            Stub.On(typeFinder).Method("Get").With("System.String[]").Will(Return.Value(new DestinationType<String[]>(null)));
+            Stub.On(typeFinder).Method("Get").With("!0").Will(Return.Value(new DestinationType<Payload>(null)));
+            Stub.On(typeFinder).Method("Get").With("!1").Will(Return.Value(new DestinationType<A>(null)));
 
             var payload = reader.Read(new XmlStreamReader(stream));
 
