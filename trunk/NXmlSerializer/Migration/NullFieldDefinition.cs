@@ -48,6 +48,8 @@ namespace NSerializer.Migration
             get { return fieldName; }
         }
 
+        public bool Ignored { get; set;}
+
         public bool Matches(string name)
         {
             return false;

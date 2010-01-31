@@ -61,6 +61,8 @@ namespace NSerializer.Migration.Fields
             get { return fieldName; }
         }
 
+        public bool Ignored { get; set;}
+
         public bool Matches(string name)
         {
             return name == fieldName || aliases.Contains(name);

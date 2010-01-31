@@ -68,7 +68,6 @@ namespace NSerializer.UATs.Migration
         }
 
         [Test]
-        [Ignore("wip")]
         public void DeletedField()
         {
             var xmlText = SerializeAsXml(new List<object> { new MyTypeD_V1(17) });

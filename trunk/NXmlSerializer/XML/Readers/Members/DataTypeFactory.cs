@@ -68,6 +68,12 @@ namespace NSerializer.XML.Readers.Members
                     if (typeDefinition != null)
                     {
                         var fieldDefinition = typeDefinition.GetFieldDefinition(fieldName);
+
+                        if (fieldDefinition.Ignored)
+                        {
+                            return new IgnoredField();
+                        }
+
                         fieldName = fieldDefinition.Name;
                     }
                 }
