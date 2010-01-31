@@ -8,7 +8,7 @@ Data migration is to allow an application to read a prior version's file and con
 
 ==Supported Migration==
 
-Currently NXmlSerializer supports migration with the following changes to application data types:
+Currently NSerializer supports migration with the following changes to application data types:
 
     * Namespace
     * Type name
