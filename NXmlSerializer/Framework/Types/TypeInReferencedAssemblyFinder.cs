@@ -51,7 +51,7 @@ namespace NSerializer.Framework.Types
                 typesCache.Add(typeName, foundType);
             }
 
-            return new DataType(foundType, typeFinder);
+            return new DataType(foundType);
         }
 
         private static Type SearchReferencedAssemblies(string typeName, Assembly assembly,

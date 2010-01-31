@@ -50,15 +50,15 @@ namespace NSerializer.Tests.Framework.Types
         public void Get()
         {
             Expect.Once.On(typeFinder).Method("GetType").With(
-                "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA").Will(Return.Value(new DestinationType<MyTypeA>(null)));
+                "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA").Will(Return.Value(new DestinationType<MyTypeA>()));
             Assert.AreEqual(typeof (MyTypeA), finder.GetType("!0").GetTargetType());
 
             Expect.Once.On(typeFinder).Method("GetType").With(
-                "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA").Will(Return.Value(new DestinationType<MyTypeA>(null)));
+                "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA").Will(Return.Value(new DestinationType<MyTypeA>()));
             Assert.AreEqual(typeof (MyTypeA[]), finder.GetType("!1").GetTargetType());
 
             Expect.Once.On(typeFinder).Method("GetType").With(
-                "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeC").Will(Return.Value(new DestinationType<MyTypeC>(null)));
+                "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeC").Will(Return.Value(new DestinationType<MyTypeC>()));
             Assert.AreEqual(typeof (MyTypeC), finder.GetType("!2").GetTargetType());
         }
 

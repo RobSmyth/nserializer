@@ -30,17 +30,15 @@ namespace NSerializer.XML.Readers.Members
     public class DataType : IDataType
     {
         private readonly Type type;
-        private readonly ITypeFinder typeFinder;
 
-        public DataType(Type type, ITypeFinder typeFinder)
+        public DataType(Type type)
         {
             this.type = type;
-            this.typeFinder = typeFinder;
         }
 
         public DataType BaseType
         {
-            get { return new DataType(type.BaseType, typeFinder); }
+            get { return new DataType(type.BaseType); }
         }
 
         public string FullName
@@ -65,12 +63,12 @@ namespace NSerializer.XML.Readers.Members
 
         public DataType GetElementType()
         {
-            return new DataType(type.GetElementType(), typeFinder);
+            return new DataType(type.GetElementType());
         }
 
         public IDataType MakeArrayType()
         {
-            return new DataType(type.MakeArrayType(), typeFinder);
+            return new DataType(type.MakeArrayType());
         }
 
         public static implicit operator Type(DataType rhs)
@@ -92,7 +90,7 @@ namespace NSerializer.XML.Readers.Members
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(other.type, type) && Equals(other.typeFinder, typeFinder);
+            return Equals(other.type, type);
         }
 
         public override bool Equals(object obj)
@@ -107,15 +105,15 @@ namespace NSerializer.XML.Readers.Members
         {
             unchecked
             {
-                return ((type != null ? type.GetHashCode() : 0)*397) ^ (typeFinder != null ? typeFinder.GetHashCode() : 0);
+                return ((type != null ? type.GetHashCode() : 0)*397);
             }
         }
     }
 
     public class DestinationType<T> : DataType
     {
-        public DestinationType(ITypeFinder typeFinder)
-            : base(typeof(T), typeFinder)
+        public DestinationType()
+            : base(typeof(T))
         { }
     }
 }
