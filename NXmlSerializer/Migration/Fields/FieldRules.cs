@@ -38,7 +38,7 @@ namespace NSerializer.Migration.Fields
 
         public ITypeMigrationRules Ignore()
         {
-            fieldDefinition.AddAction(new IgnoreFieldAction());
+            fieldDefinition.Ignored = true;
             return typeMigrationRules;
         }
 

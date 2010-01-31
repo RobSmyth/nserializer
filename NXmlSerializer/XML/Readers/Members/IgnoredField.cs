@@ -18,15 +18,15 @@
 
 #endregion
 
-namespace NSerializer.Migration.Fields
+using System;
+
+
+namespace NSerializer.XML.Readers.Members
 {
-    internal interface IFieldDefinition
+    internal class IgnoredField : IField
     {
-        void AddAction(IFieldAction action);
-        void SetField(object instance, object value);
-        string Name { get; }
-        bool Ignored { get; set; }
-        bool Matches(string fieldName);
-        void Rename(string newName);
+        public void SetValue(object instance, object value)
+        {
+        }
     }
 }
