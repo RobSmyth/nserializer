@@ -82,8 +82,11 @@ namespace NSerializer.UATs.Migration
 
             public void Build(IMigrationRules rules)
             {
+                rules.From(new Version(1, 4))
+                    .NoMigrationRequired();
+
                 rules.From(new Version(1,5))
-                    .NoMigrationRequired()
+                    .MigrateUsing(new From1V5MigrationRulesBuilder())
                     .AllPriorVersions().NotSupported();
 
                 //rules.ForType<MyTypeA_V1>()
@@ -91,6 +94,13 @@ namespace NSerializer.UATs.Migration
 
                 childRulesBuilders.ToList().ForEach(builder => builder.Build(rules));
             }
+        }
+    }
+
+    internal class From1V5MigrationRulesBuilder : IMigrationRulesBuilder
+    {
+        public void Build(IMigrationRules rules)
+        {
         }
     }
 }
