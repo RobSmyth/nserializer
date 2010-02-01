@@ -45,10 +45,10 @@ namespace NSerializer.UATs.Migration
         [Ignore("work in progress")]
         public void MigratesPriorVersion()
         {
-            var xmlText = SerializeAsXml(new List<object> { new MyTypeA_V2() });
+            var xmlText = SerializeAsXml(new List<object> { new MyTypeA_V1() });
 
-            xmlText = xmlText.Replace("version value=\"2.0.0.0\"", "version value=\"1.5.0.0\"");
-            Assert.IsTrue(xmlText.Contains("version value=\"1.5.0.0\""));
+            xmlText = xmlText.Replace("version value=\"2.0.0.0\"", "version value=\"1.4.0.0\"");
+            Assert.IsTrue(xmlText.Contains("version value=\"1.4.0.0\""));
 
             var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
             Assert.AreEqual(typeof(MyTypeA_V2), destination.GetType());
@@ -69,7 +69,7 @@ namespace NSerializer.UATs.Migration
         {}
 
         private class MyTypeA_V2
-        { }
+        {}
 
         private class MigrationRulesBuilder : IMigrationRulesBuilder
         {
@@ -83,7 +83,7 @@ namespace NSerializer.UATs.Migration
             public void Build(IMigrationRules rules)
             {
                 rules.From(new Version(1,4))
-                    .MigrateUsing(new From1V5MigrationRulesBuilder())
+                    .MigrateUsing(new From1V4MigrationRulesBuilder())
                     .AllPriorVersions().NotSupported();
 
                 rules.From(new Version(1, 5))
@@ -93,7 +93,7 @@ namespace NSerializer.UATs.Migration
             }
         }
 
-        internal class From1V5MigrationRulesBuilder : IMigrationRulesBuilder
+        private class From1V4MigrationRulesBuilder : IMigrationRulesBuilder
         {
             public void Build(IMigrationRules rules)
             {
