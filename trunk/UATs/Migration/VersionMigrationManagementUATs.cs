@@ -43,7 +43,6 @@ namespace NSerializer.UATs.Migration
         }
 
         [Test]
-        [Ignore("work in progress")]
         public void ThrowsExceptionIfBeforeFirstSupportedVersion()
         {
             var xmlText = SerializeAsXml(new List<object> { new MyTypeA_V2() });
