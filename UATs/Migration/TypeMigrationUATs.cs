@@ -51,6 +51,16 @@ namespace NSerializer.UATs.Migration
             Assert.AreEqual(typeof (MyTypeB_V2), destination.GetType());
         }
 
+        [Test]
+        [Ignore("work in progress")]
+        public void TypeConverion()
+        {
+            var xmlText = SerializeAsXml(new List<object> { new MyTypeB_V1() });
+
+            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
+            Assert.AreEqual(typeof(MyTypeB_V3), destination.GetType());
+        }
+
         private class MigrationRulesBuilder : IMigrationRulesBuilder
         {
             private readonly IMigrationRulesBuilder[] childRulesBuilders;
@@ -81,6 +91,13 @@ namespace NSerializer.UATs.Migration
 
         private class MyTypeB_V1
         {
+        }
+
+        private class MyTypeB_V3 : MyTypeB_V1
+        {
+            private int myField = 0;
+
+            public int MyField { get { return myField; } set { myField = value; } }
         }
 
         private class MyTypeA_V2
