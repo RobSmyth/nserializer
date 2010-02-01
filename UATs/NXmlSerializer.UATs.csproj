@@ -60,7 +60,8 @@
   <ItemGroup>
     <Compile Include="ApplicationObjectRepositoryUATs.cs" />
     <Compile Include="BinaryFormatting\SaveAsBinaryUATs.cs" />
-    <Compile Include="Migration\DataMigrationUATs.cs" />
+    <Compile Include="Migration\FieldMigrationUATs.cs" />
+    <Compile Include="Migration\TypeMigrationUATs.cs" />
     <Compile Include="DependencyInjectTests.cs" />
     <Compile Include="SampleTestFixture.cs" />
     <Compile Include="Contexts\SerializeContext.cs" />
