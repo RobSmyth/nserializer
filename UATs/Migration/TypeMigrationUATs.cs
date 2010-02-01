@@ -20,12 +20,9 @@
 
 // Project site: http://code.google.com/p/nserializer/
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using NSerializer.Exceptions;
 using NSerializer.Migration;
-using NSerializer.Migration.Fields;
 using NSerializer.UATs.Contexts;
 using NSerializer.UATs.Migration.Migration;
 using NUnit.Framework;
@@ -51,7 +48,7 @@ namespace NSerializer.UATs.Migration
             var xmlText = SerializeAsXml(new List<object> {new MyTypeB_V1()});
 
             var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
-            Assert.AreEqual(typeof(MyTypeB_V2), destination.GetType());
+            Assert.AreEqual(typeof (MyTypeB_V2), destination.GetType());
         }
 
         private class MigrationRulesBuilder : IMigrationRulesBuilder
