@@ -66,10 +66,10 @@ namespace NSerializer.Migration
         {
             if (versionComparer.Compare(currentVersion, version) < 0)
             {
-                throw new MigrationConfigurationException(
+                throw new FileVersionNotSupportedException(
                     string.Format(
-                        "Cannot handle rules to migrate from version {0} as it is later than the current version {1}",
-                        version, currentVersion));
+                        "Cannot migrate from version {0} as versions prior {1} are not supported",
+                        currentVersion, version));
             }
         }
     }

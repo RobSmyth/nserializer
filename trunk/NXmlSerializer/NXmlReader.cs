@@ -141,6 +141,10 @@ namespace NSerializer
             {
                 throw;
             }
+            catch (FileVersionNotSupportedException)
+            {
+                throw;
+            }
             catch (Exception exception)
             {
                 throw new UnableToReadXMLTextException("Error while reading XML text.", exception);

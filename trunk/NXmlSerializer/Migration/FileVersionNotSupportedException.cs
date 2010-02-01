@@ -18,17 +18,16 @@
 
 #endregion
 
-using System.Reflection;
-using System.Runtime.InteropServices;
+using System;
 
-[assembly : AssemblyTitle("NXmlSerialize")]
-[assembly : AssemblyDescription("DotNet serializer")]
-[assembly : AssemblyConfiguration("")]
-[assembly : AssemblyCompany("Robert Smyth (NoeticTools) http://robsmyth.com")]
-[assembly : AssemblyProduct("NSerializer / NXmlSerializer http://code.google.com/p/nserializer/")]
-[assembly : AssemblyCopyright("Copyright ©  2009")]
-[assembly : AssemblyTrademark("NSerializer, NXmlSerializer, NoeticTools")]
-[assembly : AssemblyCulture("")]
-[assembly : ComVisible(false)]
-[assembly : Guid("e4f5acd7-c9d7-495e-b2b3-7fa39c4c1cd7")]
-[assembly : AssemblyVersion("1.0.1.92")]
+
+namespace NSerializer.Migration
+{
+    public class FileVersionNotSupportedException : Exception
+    {
+        public FileVersionNotSupportedException(string message)
+            : base(message)
+        {
+        }
+    }
+}
