@@ -82,25 +82,24 @@ namespace NSerializer.UATs.Migration
 
             public void Build(IMigrationRules rules)
             {
-                rules.From(new Version(1, 4))
-                    .NoMigrationRequired();
-
-                rules.From(new Version(1,5))
+                rules.From(new Version(1,4))
                     .MigrateUsing(new From1V5MigrationRulesBuilder())
                     .AllPriorVersions().NotSupported();
 
-                //rules.ForType<MyTypeA_V1>()
-                //    .MatchesTypeName("NSerializer.UATs.Migration.FieldMigrationUATs+MyTypeA_V1");
+                rules.From(new Version(1, 5))
+                    .NoMigrationRequired();
 
                 childRulesBuilders.ToList().ForEach(builder => builder.Build(rules));
             }
         }
-    }
 
-    internal class From1V5MigrationRulesBuilder : IMigrationRulesBuilder
-    {
-        public void Build(IMigrationRules rules)
+        internal class From1V5MigrationRulesBuilder : IMigrationRulesBuilder
         {
+            public void Build(IMigrationRules rules)
+            {
+                rules.ForType<MyTypeA_V1>()
+                    .MatchesTypeName("NSerializer.UATs.Migration.FieldMigrationUATs+MyTypeA_V1");
+            }
         }
     }
 }
