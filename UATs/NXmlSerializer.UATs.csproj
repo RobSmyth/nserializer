@@ -63,7 +63,7 @@
     <Compile Include="Migration\FieldMigrationUATs.cs" />
     <Compile Include="Migration\TypeMigrationUATs.cs" />
     <Compile Include="DependencyInjectTests.cs" />
-    <Compile Include="Migration\VersionMigrationUATs.cs" />
+    <Compile Include="Migration\VersionMigrationManagementUATs.cs" />
     <Compile Include="SampleTestFixture.cs" />
     <Compile Include="Contexts\SerializeContext.cs" />
     <Compile Include="TimeLimit.cs" />

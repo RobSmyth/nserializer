@@ -32,7 +32,7 @@ using System.Text.RegularExpressions;
 namespace NSerializer.UATs.Migration
 {
     [TestFixture]
-    public class VersionMigrationUATs : SerializeContext
+    public class VersionMigrationManagementUATs : SerializeContext
     {
         [Test]
         public void NoMigrationRequiredIfCurrentVersion()
@@ -44,18 +44,14 @@ namespace NSerializer.UATs.Migration
 
         [Test]
         [Ignore("work in progress")]
-        public void MigrationRequiredIfEarlierVersion()
+        public void ThrowsExceptionIfBeforeFirstSupportedVersion()
         {
             var xmlText = SerializeAsXml(new List<object> { new MyTypeA_V2() });
 
-            //Console.WriteLine(xmlText);//>>>
-            //var regex = new Regex("version value=\"2.0.0.0\"");
-            //xmlText = regex.Replace(xmlText, "version value=\"1.1.0.0\"");
-            //Console.WriteLine(xmlText);//>>>
+            xmlText = xmlText.Replace("version value=\"2.0.0.0\"", "version value=\"1.1.0.0\"");
+            Assert.IsTrue(xmlText.Contains("version value=\"1.1.0.0\""));
 
-            var destination =
-                ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
-            Assert.AreEqual(typeof(MyTypeA_V2), destination.GetType());
+            Assert.Throws <FileVersionNotSupportedException>(()=>ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder()));
         }
 
         private class MyTypeA_V1
@@ -75,7 +71,7 @@ namespace NSerializer.UATs.Migration
 
             public void Build(IMigrationRules rules)
             {
-                rules.From(new Version(1,9))
+                rules.From(new Version(1,5))
                     .NoMigrationRequired()
                     .AllPriorVersions().NotSupported();
 
