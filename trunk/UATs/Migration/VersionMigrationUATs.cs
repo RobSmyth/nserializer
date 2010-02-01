@@ -18,8 +18,15 @@
 
 #endregion
 
+// Project site: http://code.google.com/p/nserializer/
+
+using System;
+using System.Linq;
+using NSerializer.Migration;
 using NSerializer.UATs.Contexts;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 
 namespace NSerializer.UATs.Migration
@@ -28,10 +35,55 @@ namespace NSerializer.UATs.Migration
     public class VersionMigrationUATs : SerializeContext
     {
         [Test]
-        [Ignore("work in progress")]
-        public void IgnoresOlderVersionRulesIfCurrentVersion()
+        public void NoMigrationRequiredIfCurrentVersion()
         {
-            
+            var xmlText = SerializeAsXml(new List<object> { new MyTypeA_V2() });
+            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
+            Assert.AreEqual(typeof(MyTypeA_V2), destination.GetType());
+        }
+
+        [Test]
+        [Ignore("work in progress")]
+        public void MigrationRequiredIfEarlierVersion()
+        {
+            var xmlText = SerializeAsXml(new List<object> { new MyTypeA_V2() });
+
+            //Console.WriteLine(xmlText);//>>>
+            //var regex = new Regex("version value=\"2.0.0.0\"");
+            //xmlText = regex.Replace(xmlText, "version value=\"1.1.0.0\"");
+            //Console.WriteLine(xmlText);//>>>
+
+            var destination =
+                ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
+            Assert.AreEqual(typeof(MyTypeA_V2), destination.GetType());
+        }
+
+        private class MyTypeA_V1
+        {}
+
+        private class MyTypeA_V2
+        { }
+
+        private class MigrationRulesBuilder : IMigrationRulesBuilder
+        {
+            private readonly IMigrationRulesBuilder[] childRulesBuilders;
+
+            public MigrationRulesBuilder(params IMigrationRulesBuilder[] childRulesBuilders)
+            {
+                this.childRulesBuilders = childRulesBuilders;
+            }
+
+            public void Build(IMigrationRules rules)
+            {
+                rules.From(new Version(1,9))
+                    .NoMigrationRequired()
+                    .AllPriorVersions().NotSupported();
+
+                //rules.ForType<MyTypeA_V1>()
+                //    .MatchesTypeName("NSerializer.UATs.Migration.FieldMigrationUATs+MyTypeA_V1");
+
+                childRulesBuilders.ToList().ForEach(builder => builder.Build(rules));
+            }
         }
     }
 }
