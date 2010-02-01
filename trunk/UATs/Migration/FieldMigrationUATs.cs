@@ -1,3 +1,23 @@
+#region Copyright
+
+// The contents of this file are subject to the Mozilla Public License
+//  Version 1.1 (the "License"); you may not use this file except in compliance
+//  with the License. You may obtain a copy of the License at
+//  
+//  http://www.mozilla.org/MPL/
+//  
+//  Software distributed under the License is distributed on an "AS IS"
+//  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+//  License for the specific language governing rights and limitations under 
+//  the License.
+//  
+//  The Initial Developer of the Original Code is Robert Smyth.
+//  Portions created by Robert Smyth are Copyright (C) 2008.
+//  
+//  All Rights Reserved.
+
+#endregion
+
 using System.Collections.Generic;
 using System.Linq;
 using NSerializer.Exceptions;
@@ -16,49 +36,57 @@ namespace NSerializer.UATs.Migration
         [Test]
         public void FieldNameChange()
         {
-            var xmlText = SerializeAsXml(new List<object> { new MyTypeC_V1(7) });
-
-            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder(new FieldNameChangeMigrationBuilder()))[0];
-            Assert.AreEqual(typeof(MyTypeC_V2), destination.GetType());
+            var xmlText = SerializeAsXml(new List<object> {new MyTypeC_V1(7)});
+            var destination =
+                ReadXmlText<List<object>>(xmlText, null, null,
+                                          new MigrationRulesBuilder(new FieldNameChangeMigrationBuilder()))[0];
+            Assert.AreEqual(typeof (MyTypeC_V2), destination.GetType());
         }
 
         [Test]
         public void FieldNameChange_Failure()
         {
-            var xmlText = SerializeAsXml(new List<object> { new MyTypeC_V1(7) });
-            Assert.Throws<NSerializerException>(() => ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder()));
+            var xmlText = SerializeAsXml(new List<object> {new MyTypeC_V1(7)});
+            Assert.Throws<NSerializerException>(
+                () => ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder()));
         }
 
         [Test]
         public void DeletedField()
         {
-            var xmlText = SerializeAsXml(new List<object> { new MyTypeD_V1(17) });
+            var xmlText = SerializeAsXml(new List<object> {new MyTypeD_V1(17)});
 
-            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder(new FieldNameChangeMigrationBuilder()))[0];
-            Assert.AreEqual(typeof(MyTypeD_V2), destination.GetType());
+            var destination =
+                ReadXmlText<List<object>>(xmlText, null, null,
+                                          new MigrationRulesBuilder(new FieldNameChangeMigrationBuilder()))[0];
+            Assert.AreEqual(typeof (MyTypeD_V2), destination.GetType());
         }
 
         [Test]
         public void DeletedField_Failure()
         {
-            var xmlText = SerializeAsXml(new List<object> { new MyTypeD_V1(3) });
-            Assert.Throws<NSerializerException>(() => ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder()));
+            var xmlText = SerializeAsXml(new List<object> {new MyTypeD_V1(3)});
+            Assert.Throws<NSerializerException>(
+                () => ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder()));
         }
 
         [Test]
         public void FieldTypeChange_Coercion()
         {
-            var xmlText = SerializeAsXml(new List<object> { new MyTypeE_V1(17) });
+            var xmlText = SerializeAsXml(new List<object> {new MyTypeE_V1(17)});
 
-            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder(new FieldCoercionMigrationBuilder()))[0];
-            Assert.AreEqual(typeof(MyTypeE_V2), destination.GetType());
+            var destination =
+                ReadXmlText<List<object>>(xmlText, null, null,
+                                          new MigrationRulesBuilder(new FieldCoercionMigrationBuilder()))[0];
+            Assert.AreEqual(typeof (MyTypeE_V2), destination.GetType());
         }
 
         [Test]
         public void FieldTypeChange_Coercion_Failure()
         {
-            var xmlText = SerializeAsXml(new List<object> { new MyTypeE_V1(17) });
-            Assert.Throws<NSerializerException>(() => ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder()));
+            var xmlText = SerializeAsXml(new List<object> {new MyTypeE_V1(17)});
+            Assert.Throws<NSerializerException>(
+                () => ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder()));
         }
 
         private class MigrationRulesBuilder : IMigrationRulesBuilder
