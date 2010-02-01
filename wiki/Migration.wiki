@@ -17,6 +17,22 @@ Currently NSerializer supports migration with the following changes to applicati
     * Deleted fields
     * Field type changes (conversion)
 
+==File version management==
+
+===Not supported versions===
+
+Each file saved using NSerializer includes the application's version. At some point very old versions are not supported. The cut-off version, if any, is given in the rules. The serializer throw a FileVersionNotSupportedException exception if the file version is prior to this version.
+
+====Example====
+
+Migration rules:
+
+{{{
+rules.From(new Version(1,5))
+  .NoMigrationRequired()
+  .AllPriorVersions().NotSupported();
+}}}
+
 ==Type migration==
 
 ===Aliases===
