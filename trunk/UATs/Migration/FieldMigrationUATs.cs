@@ -1,26 +1,3 @@
-#region Copyright
-
-// The contents of this file are subject to the Mozilla Public License
-//  Version 1.1 (the "License"); you may not use this file except in compliance
-//  with the License. You may obtain a copy of the License at
-//  
-//  http://www.mozilla.org/MPL/
-//  
-//  Software distributed under the License is distributed on an "AS IS"
-//  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
-//  License for the specific language governing rights and limitations under 
-//  the License.
-//  
-//  The Initial Developer of the Original Code is Robert Smyth.
-//  Portions created by Robert Smyth are Copyright (C) 2008.
-//  
-//  All Rights Reserved.
-
-#endregion
-
-// Project site: http://code.google.com/p/nserializer/
-
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using NSerializer.Exceptions;
@@ -34,26 +11,8 @@ using NUnit.Framework;
 namespace NSerializer.UATs.Migration
 {
     [TestFixture]
-    public class DataMigrationUATs : SerializeContext
+    public class FieldMigrationUATs : SerializeContext
     {
-        [Test]
-        public void TypeNameChange()
-        {
-            var xmlText = SerializeAsXml(new List<object> {new MyTypeA_V1()});
-
-            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
-            Assert.AreEqual(typeof (MyTypeA_V2), destination.GetType());
-        }
-
-        [Test]
-        public void TypeNamespaceChange()
-        {
-            var xmlText = SerializeAsXml(new List<object> {new MyTypeB_V1()});
-
-            var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
-            Assert.AreEqual(typeof(MyTypeB_V2), destination.GetType());
-        }
-
         [Test]
         public void FieldNameChange()
         {
@@ -114,19 +73,19 @@ namespace NSerializer.UATs.Migration
             public void Build(IMigrationRules rules)
             {
                 rules.ForType<MyTypeA_V2>()
-                    .MatchesTypeName("NSerializer.UATs.Migration.DataMigrationUATs+MyTypeA_V1");
+                    .MatchesTypeName("NSerializer.UATs.Migration.FieldMigrationUATs+MyTypeA_V1");
 
                 rules.ForType<MyTypeB_V2>()
-                    .MatchesTypeName("NSerializer.UATs.Migration.DataMigrationUATs+MyTypeB_V1");
+                    .MatchesTypeName("NSerializer.UATs.Migration.FieldMigrationUATs+MyTypeB_V1");
 
                 rules.ForType<MyTypeC_V2>()
-                    .MatchesTypeName("NSerializer.UATs.Migration.DataMigrationUATs+MyTypeC_V1");
+                    .MatchesTypeName("NSerializer.UATs.Migration.FieldMigrationUATs+MyTypeC_V1");
 
                 rules.ForType<MyTypeD_V2>()
-                    .MatchesTypeName("NSerializer.UATs.Migration.DataMigrationUATs+MyTypeD_V1");
+                    .MatchesTypeName("NSerializer.UATs.Migration.FieldMigrationUATs+MyTypeD_V1");
 
                 rules.ForType<MyTypeE_V2>()
-                    .MatchesTypeName("NSerializer.UATs.Migration.DataMigrationUATs+MyTypeE_V1");
+                    .MatchesTypeName("NSerializer.UATs.Migration.FieldMigrationUATs+MyTypeE_V1");
 
                 childRulesBuilders.ToList().ForEach(builder => builder.Build(rules));
             }
@@ -151,14 +110,6 @@ namespace NSerializer.UATs.Migration
                 rules.ForType<MyTypeE_V2>()
                     .Field("valueA").ConvertUsing(new ToByteConverter());
             }
-        }
-
-        private class MyTypeA_V1
-        {
-        }
-
-        private class MyTypeB_V1
-        {
         }
 
         private class MyTypeA_V2
@@ -230,14 +181,6 @@ namespace NSerializer.UATs.Migration
             {
                 return System.Convert.ToByte(value);
             }
-        }
-    }
-
-
-    namespace Migration
-    {
-        internal class MyTypeB_V2
-        {
         }
     }
 }
