@@ -47,6 +47,7 @@ namespace NSerializer.UATs.Migration
         {
             var xmlText = SerializeAsXml(new List<object> { new MyTypeA_V1() });
 
+            //Console.WriteLine(xmlText);//>>>
             xmlText = xmlText.Replace("version value=\"2.0.0.0\"", "version value=\"1.4.0.0\"");
             Assert.IsTrue(xmlText.Contains("version value=\"1.4.0.0\""));
 
@@ -55,6 +56,7 @@ namespace NSerializer.UATs.Migration
         }
 
         [Test]
+        [Ignore("work in progress")]
         public void ThrowsExceptionIfBeforeFirstSupportedVersion()
         {
             var xmlText = SerializeAsXml(new List<object> { new MyTypeA_V2() });
@@ -82,7 +84,7 @@ namespace NSerializer.UATs.Migration
 
             public void Build(IMigrationRules rules)
             {
-                rules.From(new Version(1,4))
+                rules.From(new Version(1, 4))
                     .MigrateUsing(new From1V4MigrationRulesBuilder())
                     .AllPriorVersions().NotSupported();
 
@@ -97,8 +99,8 @@ namespace NSerializer.UATs.Migration
         {
             public void Build(IMigrationRules rules)
             {
-                rules.ForType<MyTypeA_V1>()
-                    .MatchesTypeName("NSerializer.UATs.Migration.FieldMigrationUATs+MyTypeA_V1");
+                rules.ForType<MyTypeA_V2>()
+                    .MatchesTypeName("NSerializer.UATs.Migration.VersionMigrationManagementUATs+MyTypeA_V1");
             }
         }
     }

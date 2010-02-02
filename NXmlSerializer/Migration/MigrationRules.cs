@@ -18,6 +18,8 @@
 
 #endregion
 
+// Project site: http://code.google.com/p/nserializer/
+
 using System;
 using NSerializer.Migration.Types;
 
@@ -26,14 +28,14 @@ namespace NSerializer.Migration
 {
     public class MigrationRules : IMigrationRules
     {
-        private readonly Version currentVersion;
+        private readonly Version fromVersion;
         private readonly IMigrationDefinition definition;
         private readonly VersionComparer versionComparer = new VersionComparer();
 
-        internal MigrationRules(IMigrationDefinition definition, Version currentVersion)
+        internal MigrationRules(IMigrationDefinition definition, Version fromVersion)
         {
             this.definition = definition;
-            this.currentVersion = currentVersion;
+            this.fromVersion = fromVersion;
         }
 
         public void NotSupported(string message)
@@ -52,25 +54,15 @@ namespace NSerializer.Migration
 
         IMigrationRulesVerb IMigrationRules.From(Version version)
         {
-            Validate(version);
-            return new MigrationScopeRulesVerb(this, definition, new FromVersionQualifier(version));
+            var versionQualifier = new FromVersionQualifier(version);
+            definition.AddChild(versionQualifier, new MigrationDefinition(definition, version));
+            return new MigrationScopeRulesVerb(this, definition, versionQualifier);
         }
 
         IMigrationRulesVerb IMigrationRules.AllPriorVersions()
         {
-            Validate(new Version(0, 0, 0));
-            return new MigrationScopeRulesVerb(this, definition, new PriorToAndIncludingVersionQualifier());
-        }
-
-        private void Validate(Version version)
-        {
-            if (versionComparer.Compare(currentVersion, version) < 0)
-            {
-                throw new FileVersionNotSupportedException(
-                    string.Format(
-                        "Cannot migrate from version {0} as versions prior {1} are not supported",
-                        currentVersion, version));
-            }
+            var versionQualifier = new PriorToAndIncludingVersionQualifier();
+            return new MigrationScopeRulesVerb(this, definition, versionQualifier);
         }
     }
 }
