@@ -51,6 +51,7 @@ namespace NSerializer.Migration
 
         public IMigrationRules NoMigrationRequired()
         {
+            // to do
             return rules;
         }
     }

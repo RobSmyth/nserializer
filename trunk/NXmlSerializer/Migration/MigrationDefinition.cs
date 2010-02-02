@@ -21,6 +21,7 @@
 // Project site: http://code.google.com/p/nserializer/
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using NSerializer.Framework.Types;
 using NSerializer.Migration.Types;
@@ -116,7 +117,7 @@ namespace NSerializer.Migration
         public void AddChild(IVersionQualifier qualifier, IMigrationDefinition childDefinition)
         {
             var childList =
-                (versionComparer.Compare(fromVersion, qualifier.StartVersion) <= 0)
+                (versionComparer.Compare(fromVersion, qualifier.StartVersion) >= 0)
                     ? childDefinitions
                     : outOfScopeChildDefinitions;
 
