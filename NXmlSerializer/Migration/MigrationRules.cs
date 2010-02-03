@@ -40,7 +40,7 @@ namespace NSerializer.Migration
 
         public void NotSupported(string message)
         {
-            throw new InvalidOperationException("Cannot mark a rules definition as not supported when it has rules.");
+            throw new MigrationConfigurationException("Cannot mark a rules definition as not supported when it has rules.");
         }
 
         ITypeMigrationRules ITypeMigrationRulesVerb.ForType<T>()
