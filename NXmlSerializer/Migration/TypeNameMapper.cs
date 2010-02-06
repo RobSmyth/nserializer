@@ -37,7 +37,9 @@ namespace NSerializer.Migration
 
         public bool CanHandle(Type type)
         {
-            return migrationDefinition.GetTypeDefinition(type) != null;
+            //Console.WriteLine("CanHandle({0})", type.Name);//>>>
+            return migrationDefinition.HasTypeDefinition(type);//>>>
+//            return migrationDefinition.GetTypeDefinition(type) != null;
         }
 
         public string GetTypeName(Type type)

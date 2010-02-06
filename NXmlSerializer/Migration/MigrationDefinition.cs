@@ -67,7 +67,7 @@ namespace NSerializer.Migration
 
         public bool HasTypeDefinition(Type soughtType)
         {
-            return typeDefinitions.ContainsKey(soughtType);
+            return typeDefinitions.ContainsKey(soughtType) || parentDefinition.HasTypeDefinition(soughtType);//>>>
         }
 
         public void CreateTypeDefinition<T>(ITypeDefinition parentTypeDefinition)
