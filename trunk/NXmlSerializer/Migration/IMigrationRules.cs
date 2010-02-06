@@ -31,5 +31,6 @@ namespace NSerializer.Migration
         void NotSupported(string messsage);
         IMigrationRulesVerb From(int major, int minor);
         IMigrationRulesVerb From(int major, int minor, int build);
+        IMigrationRulesVerb From(int major, int minor, int build, int revision);
     }
 }

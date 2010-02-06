@@ -63,6 +63,11 @@ namespace NSerializer.Migration
             return ((IMigrationRules)this).From(new Version(major, minor, build));
         }
 
+        IMigrationRulesVerb IMigrationRules.From(int major, int minor, int build, int revision)
+        {
+            return ((IMigrationRules)this).From(new Version(major, minor, build, revision));
+        }
+
         IMigrationRulesVerb IMigrationRules.From(Version version)
         {
             if (versionComparer.Compare(version, fromVersion) > 0)
