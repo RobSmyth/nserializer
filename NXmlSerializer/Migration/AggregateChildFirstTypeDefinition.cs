@@ -26,12 +26,12 @@ using NSerializer.Migration.Types;
 
 namespace NSerializer.Migration
 {
-    internal class AggregateTypeDefinition : ITypeDefinition
+    internal class AggregateChildFirstTypeDefinition : ITypeDefinition
     {
         private readonly ITypeDefinition childTypeDefinition;
         private readonly ITypeDefinition typeDefinition;
 
-        public AggregateTypeDefinition(ITypeDefinition typeDefinition, ITypeDefinition childTypeDefinition)
+        public AggregateChildFirstTypeDefinition(ITypeDefinition typeDefinition, ITypeDefinition childTypeDefinition)
         {
             this.typeDefinition = typeDefinition;
             this.childTypeDefinition = childTypeDefinition;
@@ -49,7 +49,7 @@ namespace NSerializer.Migration
 
         public bool HasFieldDefinition(string fieldName)
         {
-            return typeDefinition.HasFieldDefinition(fieldName) || childTypeDefinition.HasFieldDefinition(fieldName);
+            return childTypeDefinition.HasFieldDefinition(fieldName) || typeDefinition.HasFieldDefinition(fieldName);
         }
 
         public void CreateFieldDefinition(string fieldName, IFieldDefinition parentFieldDefinition)
@@ -64,6 +64,10 @@ namespace NSerializer.Migration
 
         public bool Matches(string name)
         {
+            if (childTypeDefinition.Matches(name))
+            {
+                name = childTypeDefinition.GetTypeName();
+            }
             return typeDefinition.Matches(name);
         }
 
