@@ -18,6 +18,8 @@
 
 #endregion
 
+// Project site: http://code.google.com/p/nserializer/
+
 namespace NSerializer.Migration.Fields
 {
     internal class FieldMigrator : IFieldMigrator

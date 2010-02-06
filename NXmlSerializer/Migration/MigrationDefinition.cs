@@ -23,6 +23,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using NSerializer.Exceptions;
 using NSerializer.Framework.Types;
 using NSerializer.Migration.Types;
 
@@ -76,16 +77,7 @@ namespace NSerializer.Migration
 
         public ITypeDefinition GetTypeDefinition<T>()
         {
-            ITypeDefinition typeDefinition;
-            if (HasTypeDefinition<T>())
-            {
-                typeDefinition = typeDefinitions[typeof (T)];
-            }
-            else
-            {
-                typeDefinition = parentDefinition.GetTypeDefinition<T>();
-            }
-            return typeDefinition;
+            return HasTypeDefinition<T>() ? typeDefinitions[typeof (T)] : parentDefinition.GetTypeDefinition<T>();
         }
 
         public ITypeDefinition GetTypeDefinition(string name)

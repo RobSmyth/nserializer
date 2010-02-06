@@ -22,6 +22,7 @@
 
 using System;
 using System.Linq;
+using NSerializer.Exceptions;
 using NSerializer.Migration;
 using NSerializer.UATs.Contexts;
 using NUnit.Framework;
