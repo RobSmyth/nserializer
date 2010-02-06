@@ -25,8 +25,15 @@ using NSerializer.Migration.Types;
 
 namespace NSerializer.Migration
 {
-    internal class NullFoundDefinition : ITypeDefinition
+    internal class NullTypeDefinition : ITypeDefinition
     {
+        private readonly string typeName;
+
+        public NullTypeDefinition(string typeName)
+        {
+            this.typeName = typeName;
+        }
+
         public void SetAlias(string alias)
         {
             throw new NotImplementedException();
@@ -54,22 +61,22 @@ namespace NSerializer.Migration
 
         public bool Matches(string name)
         {
-            return true;
+            return typeName == name;
         }
 
         public string GetTypeName()
         {
-            throw new NotImplementedException();
+            return typeName;
         }
 
-        public IFieldDefinition GetFieldDefinition(string name)
+        public IFieldDefinition GetFieldDefinition(string fieldName)
         {
-            throw new NotImplementedException();
+            return new NullFieldDefinition(fieldName);
         }
 
         public string GetMappedName()
         {
-            throw new NotImplementedException();
+            return typeName;
         }
     }
 }
