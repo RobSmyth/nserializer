@@ -61,6 +61,7 @@
     <Compile Include="Framework\Readers\Values\MetaDataTypeNameReader.cs" />
     <Compile Include="Framework\Types\MetaDataTypeName.cs" />
     <Compile Include="Framework\Writers\Values\MetaDataTypeNameWriter.cs" />
+    <Compile Include="Migration\AggregateTypeDefinition.cs" />
     <Compile Include="Migration\Fields\IMigrationConverter.cs" />
     <Compile Include="Migration\Fields\NullValueConverter.cs" />
     <Compile Include="Exceptions\FileVersionNotSupportedException.cs" />
