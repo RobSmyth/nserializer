@@ -49,9 +49,7 @@ namespace NSerializer.Migration
 
         public ITypeDefinition GetTypeDefinition(string name)
         {
-            //Console.WriteLine("GetTypeDefinition({0})", name);//>>>
-            return null;
-            //return new NullTypeDefinition(name);
+            return new NullTypeDefinition(name);
         }
 
         public ITypeDefinition GetTypeDefinition<T>()

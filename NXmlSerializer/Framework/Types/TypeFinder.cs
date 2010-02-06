@@ -38,7 +38,6 @@ namespace NSerializer.Framework.Types
 
         public IDataType GetType(string typeName)
         {
-            //Console.WriteLine("GetType: {0}", typeName);//>>>
             IDataType foundType = null;
 
             foreach (var finder in typeFinders)
@@ -46,7 +45,6 @@ namespace NSerializer.Framework.Types
                 foundType = finder.GetType(typeName);
                 if (foundType != null && foundType.GetTargetType() != null)
                 {
-                    //Console.WriteLine("GetType: {0}", typeName);//>>>
                     break;
                 }
             }
