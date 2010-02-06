@@ -72,8 +72,8 @@ namespace NSerializer.Migration
         {
             if (versionComparer.Compare(version, fromVersion) > 0)
             {
-                throw new MigrationConfigurationException(
-                    string.Format("Cannot add rules for version {0} within rules for version {1}. Must be earlier version.", version, fromVersion));
+                //throw new MigrationConfigurationException(
+                //    string.Format("Cannot add rules for version {0} within rules for version {1}. Must be earlier version.", version, fromVersion));
             }
 
             var versionQualifier = new FromVersionQualifier(version);
