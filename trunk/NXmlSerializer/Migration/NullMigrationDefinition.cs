@@ -50,16 +50,17 @@ namespace NSerializer.Migration
         public ITypeDefinition GetTypeDefinition(string name)
         {
             return null;
+            //return new NullTypeDefinition(name);
         }
 
         public ITypeDefinition GetTypeDefinition<T>()
         {
-            return null;
+            return GetTypeDefinition(typeof(T).Name);
         }
 
         public ITypeDefinition GetTypeDefinition(Type type)
         {
-            return null;
+            return GetTypeDefinition(type.Name);
         }
 
         public ITypeNameMapper GetTypeNameMapper()
