@@ -21,6 +21,7 @@
 // Project site: http://code.google.com/p/nserializer/
 
 using System;
+using NSerializer.Exceptions;
 using NSerializer.Migration.Types;
 
 
@@ -54,6 +55,14 @@ namespace NSerializer.Migration
 
         IMigrationRulesVerb IMigrationRules.From(Version version)
         {
+            if (versionComparer.Compare(version, fromVersion) > 0)
+            {
+                throw new MigrationConfigurationException(
+                    string.Format("Cannot add rules for version {0} within rules for version {1}. Must be earlier version.", version, fromVersion));
+            }
+
+            Console.WriteLine("From {0} to {1}", version, fromVersion);//>>>
+
             var versionQualifier = new FromVersionQualifier(version);
             definition.AddChild(versionQualifier, new MigrationDefinition(definition, version));
             return new MigrationScopeRulesVerb(this, definition, versionQualifier);

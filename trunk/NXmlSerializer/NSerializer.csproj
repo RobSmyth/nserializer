@@ -63,7 +63,7 @@
     <Compile Include="Framework\Writers\Values\MetaDataTypeNameWriter.cs" />
     <Compile Include="Migration\Fields\IMigrationConverter.cs" />
     <Compile Include="Migration\Fields\NullValueConverter.cs" />
-    <Compile Include="Migration\FileVersionNotSupportedException.cs" />
+    <Compile Include="Exceptions\FileVersionNotSupportedException.cs" />
     <Compile Include="XML\Readers\Members\DataType.cs" />
     <Compile Include="XML\Readers\Members\DataTypeFactory.cs" />
     <Compile Include="XML\Readers\Members\Field.cs" />
@@ -82,7 +82,7 @@
     <Compile Include="Migration\Fields\IFieldMigrator.cs" />
     <Compile Include="Migration\TypeNameMapper.cs" />
     <Compile Include="Migration\Types\ITypeMigrator.cs" />
-    <Compile Include="Migration\MigrationConfigurationException.cs" />
+    <Compile Include="Exceptions\MigrationConfigurationException.cs" />
     <Compile Include="Migration\Fields\RenameFieldAction.cs" />
     <Compile Include="Migration\Types\TypeMigrator.cs" />
     <Compile Include="Migration\NullFoundDefinition.cs" />

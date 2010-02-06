@@ -1,4 +1,4 @@
-﻿#region Copyright
+#region Copyright
 
 // The contents of this file are subject to the Mozilla Public License
 //  Version 1.1 (the "License"); you may not use this file except in compliance
@@ -23,17 +23,12 @@
 using System;
 
 
-namespace NSerializer.Migration
+namespace NSerializer.Exceptions
 {
-    public class MigrationConfigurationException : Exception
+    public class FileVersionNotSupportedException : Exception
     {
-        public MigrationConfigurationException(string message)
+        public FileVersionNotSupportedException(string message)
             : base(message)
-        {
-        }
-
-        public MigrationConfigurationException(string message, Exception innerException)
-            : base(message, innerException)
         {
         }
     }
