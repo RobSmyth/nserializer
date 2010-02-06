@@ -18,14 +18,33 @@
 
 #endregion
 
+using System;
 using NSerializer.Framework.Types;
 using NSerializer.Migration.Fields;
+using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer.Migration.Types
 {
-    internal interface ITypeMigrator : ITypeFinder
+    internal class MigrationTypeFinder : ITypeFinder
     {
-        IFieldMigrator GetFieldMigrator();
+        private readonly IMigrationDefinition migrationDefinition;
+        private readonly ITypeFinder typeFinder;
+
+        public MigrationTypeFinder(ITypeFinder typeFinder, IMigrationDefinition migrationDefinition)
+        {
+            this.typeFinder = typeFinder;
+            this.migrationDefinition = migrationDefinition;
+        }
+
+        public IDataType GetType(string typeName)
+        {
+            var typeDefinition = migrationDefinition.GetTypeDefinition(typeName);
+            if (typeDefinition != null)
+            {
+                typeName = typeDefinition.GetTypeName();
+            }
+            return typeFinder.GetType(typeName);
+        }
     }
 }
