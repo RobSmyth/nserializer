@@ -88,8 +88,8 @@ namespace NSerializer.Migration
             {
                 if (item.Value.Matches(name))
                 {
-                    foundDefinition = new AggregateTypeDefinition(item.Value,
-                                                                  parentDefinition.GetTypeDefinition(name));
+                    var childDefinition = parentDefinition.GetTypeDefinition(name) ?? new NullTypeDefinition(name);
+                    foundDefinition = new AggregateTypeDefinition(item.Value, childDefinition);
                     break;
                 }
             }

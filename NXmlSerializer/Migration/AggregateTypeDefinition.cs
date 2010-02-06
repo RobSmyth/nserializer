@@ -49,7 +49,7 @@ namespace NSerializer.Migration
 
         public bool HasFieldDefinition(string fieldName)
         {
-            return typeDefinition.HasFieldDefinition(fieldName);
+            return typeDefinition.HasFieldDefinition(fieldName) || childTypeDefinition.HasFieldDefinition(fieldName);
         }
 
         public void CreateFieldDefinition(string fieldName, IFieldDefinition parentFieldDefinition)

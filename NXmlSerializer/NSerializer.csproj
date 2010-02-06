@@ -85,7 +85,7 @@
     <Compile Include="Exceptions\MigrationConfigurationException.cs" />
     <Compile Include="Migration\Fields\RenameFieldAction.cs" />
     <Compile Include="Migration\Types\MigrationTypeFinder.cs" />
-    <Compile Include="Migration\NullFoundDefinition.cs" />
+    <Compile Include="Migration\NullTypeDefinition.cs" />
     <Compile Include="Migration\VersionComparer.cs" />
     <Compile Include="Migration\VersionQualifierComparer.cs" />
     <Compile Include="Properties\AssemblyInfoLocal.cs" />
