@@ -44,11 +44,8 @@ namespace NSerializer.Migration.Types
             var typeDefinition = migrationDefinition.GetTypeDefinition(typeName);
             if (typeDefinition != null)
             {
-                //Console.WriteLine("was {0}", typeName);//>>>
                 typeName = typeDefinition.GetTypeName();
-                //Console.WriteLine("\tnow {0}", typeName);//>>>
             }
-            //Console.WriteLine("get {0}", typeName);//>>>
             return typeFinder.GetType(typeName);
         }
     }
