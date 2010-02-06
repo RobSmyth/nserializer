@@ -27,7 +27,7 @@ namespace NSerializer.Migration
 {
     internal class NotSupportedMigrationDefinition : IMigrationDefinition
     {
-        public ITypeMigrator GetTypeMigrator(ITypeFinder typeFinder)
+        public ITypeFinder GetTypeMigrator(ITypeFinder typeFinder)
         {
             throw new InvalidOperationException();
         }

@@ -50,9 +50,9 @@ namespace NSerializer.Migration
             this.fromVersion = fromVersion;
         }
 
-        public ITypeMigrator GetTypeMigrator(ITypeFinder typeFinder)
+        public ITypeFinder GetTypeMigrator(ITypeFinder typeFinder)
         {
-            return new TypeMigrator(typeFinder, this);
+            return new MigrationTypeFinder(typeFinder, this);
         }
 
         public ITypeNameMapper GetTypeNameMapper()

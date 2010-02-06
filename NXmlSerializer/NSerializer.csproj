@@ -82,10 +82,9 @@
     <Compile Include="Migration\Fields\SetFieldAction.cs" />
     <Compile Include="Migration\Fields\IFieldMigrator.cs" />
     <Compile Include="Migration\TypeNameMapper.cs" />
-    <Compile Include="Migration\Types\ITypeMigrator.cs" />
     <Compile Include="Exceptions\MigrationConfigurationException.cs" />
     <Compile Include="Migration\Fields\RenameFieldAction.cs" />
-    <Compile Include="Migration\Types\TypeMigrator.cs" />
+    <Compile Include="Migration\Types\MigrationTypeFinder.cs" />
     <Compile Include="Migration\NullFoundDefinition.cs" />
     <Compile Include="Migration\VersionComparer.cs" />
     <Compile Include="Migration\VersionQualifierComparer.cs" />

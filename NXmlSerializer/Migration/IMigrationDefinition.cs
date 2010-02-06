@@ -29,7 +29,7 @@ namespace NSerializer.Migration
 {
     internal interface IMigrationDefinition
     {
-        ITypeMigrator GetTypeMigrator(ITypeFinder typeFinder);
+        ITypeFinder GetTypeMigrator(ITypeFinder typeFinder);
 
         bool HasTypeDefinition<T>();
         void CreateTypeDefinition<T>(ITypeDefinition parentTypeDefinition);
