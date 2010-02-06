@@ -53,6 +53,16 @@ namespace NSerializer.Migration
             return new TypeMigrationRules<T>(definition.GetTypeDefinition<T>());
         }
 
+        IMigrationRulesVerb IMigrationRules.From(int major, int minor)
+        {
+            return ((IMigrationRules) this).From(new Version(major, minor));
+        }
+
+        IMigrationRulesVerb IMigrationRules.From(int major, int minor, int build)
+        {
+            return ((IMigrationRules)this).From(new Version(major, minor, build));
+        }
+
         IMigrationRulesVerb IMigrationRules.From(Version version)
         {
             if (versionComparer.Compare(version, fromVersion) > 0)
@@ -60,8 +70,6 @@ namespace NSerializer.Migration
                 throw new MigrationConfigurationException(
                     string.Format("Cannot add rules for version {0} within rules for version {1}. Must be earlier version.", version, fromVersion));
             }
-
-            Console.WriteLine("From {0} to {1}", version, fromVersion);//>>>
 
             var versionQualifier = new FromVersionQualifier(version);
             definition.AddChild(versionQualifier, new MigrationDefinition(definition, version));
