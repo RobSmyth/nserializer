@@ -20,7 +20,6 @@
 
 // Project site: http://code.google.com/p/nserializer/
 
-using System;
 using NSerializer.Exceptions;
 using NSerializer.XML.Readers.Members;
 

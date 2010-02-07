@@ -20,9 +20,7 @@
 
 // Project site: http://code.google.com/p/nserializer/
 
-using System;
 using NSerializer.Framework.Types;
-using NSerializer.Migration.Fields;
 using NSerializer.XML.Readers.Members;
 
 

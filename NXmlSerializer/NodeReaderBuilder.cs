@@ -66,7 +66,7 @@ namespace NSerializer
                 .Provides<IObjectReader[]>();
 
             system.HasCollection(
-                new MemberReaderBuilder<FieldReader>() 
+                new MemberReaderBuilder<FieldReader>()
                 )
                 .Provides<IMemberReader[]>();
 

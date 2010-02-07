@@ -19,12 +19,8 @@
 #endregion
 
 using NSerializer.Exceptions;
-using NSerializer.Framework;
 using NSerializer.Framework.Document;
 using NSerializer.Framework.Readers;
-using NSerializer.Framework.Types;
-using NSerializer.XML.Readers.Values;
-using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer.XML.Readers
@@ -46,7 +42,7 @@ namespace NSerializer.XML.Readers
             {
                 using (var nodeReader = new XmlElementReaderFactory(inputStream).Create())
                 {
-                    metaData = (MetaData)objectReader.Get(nodeReader);
+                    metaData = (MetaData) objectReader.Get(nodeReader);
                 }
             }
             else

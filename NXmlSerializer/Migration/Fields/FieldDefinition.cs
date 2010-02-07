@@ -28,8 +28,8 @@ namespace NSerializer.Migration.Fields
 {
     internal class FieldDefinition : IFieldDefinition
     {
-        private string fieldName;
         private readonly List<string> aliases = new List<string>();
+        private string fieldName;
         private bool renamed;
         private IMigrationConverter valueConverter = new NullValueConverter();
 
@@ -37,6 +37,13 @@ namespace NSerializer.Migration.Fields
         {
             this.fieldName = fieldName;
         }
+
+        public string Name
+        {
+            get { return fieldName; }
+        }
+
+        public bool Ignored { get; set; }
 
         public void Rename(string newName)
         {
@@ -68,13 +75,6 @@ namespace NSerializer.Migration.Fields
         {
             throw new NotImplementedException();
         }
-
-        public string Name
-        {
-            get { return fieldName; }
-        }
-
-        public bool Ignored { get; set;}
 
         public bool Matches(string name)
         {

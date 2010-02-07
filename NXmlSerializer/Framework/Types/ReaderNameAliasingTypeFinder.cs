@@ -20,7 +20,6 @@
 
 // Project site: http://code.google.com/p/nserializer/
 
-using System;
 using System.Text.RegularExpressions;
 using NSerializer.Framework.Document;
 using NSerializer.XML.Readers.Members;

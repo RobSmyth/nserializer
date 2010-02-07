@@ -20,9 +20,6 @@
 
 // Project site: http://code.google.com/p/nserializer/
 
-using System;
-
-
 namespace NSerializer.Migration.Fields
 {
     internal class NullValueConverter : IMigrationConverter

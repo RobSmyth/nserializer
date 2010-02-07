@@ -20,7 +20,6 @@
 
 // Project site: http://code.google.com/p/nserializer/
 
-using System;
 using System.Reflection;
 using NSerializer.XML.Readers.Members;
 
@@ -38,7 +37,8 @@ namespace NSerializer.Framework.Types
             var typesCache = new CachedTypesFinder(dataTypeFactory);
             ITypeFinder genericTypeFinder = new GenericTypeFinder(typesCache, typeFinderConduit, dataTypeFactory);
             ITypeFinder typeInAssemblyFinder = new TypeInAssemblyFinder(seedAssembly, typesCache, dataTypeFactory);
-            ITypeFinder typeInReferencedAssemblyFinder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache, typeFinder, dataTypeFactory);
+            ITypeFinder typeInReferencedAssemblyFinder = new TypeInReferencedAssemblyFinder(seedAssembly, typesCache,
+                                                                                            typeFinder, dataTypeFactory);
 
             typeFinder =
                 new TypeFinder(typesCache, genericTypeFinder, typeInAssemblyFinder, typeInReferencedAssemblyFinder);

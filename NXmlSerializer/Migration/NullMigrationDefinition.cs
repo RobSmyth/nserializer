@@ -54,7 +54,7 @@ namespace NSerializer.Migration
 
         public ITypeDefinition GetTypeDefinition<T>()
         {
-            return GetTypeDefinition(typeof(T).Name);
+            return GetTypeDefinition(typeof (T).Name);
         }
 
         public ITypeDefinition GetTypeDefinition(Type type)

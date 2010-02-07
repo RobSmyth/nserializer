@@ -22,10 +22,10 @@ namespace NSerializer.Migration.Fields
 {
     public interface IFieldDefinition
     {
-        void AddAction(IFieldAction action);
-        void SetField(object instance, object value);
         string Name { get; }
         bool Ignored { get; set; }
+        void AddAction(IFieldAction action);
+        void SetField(object instance, object value);
         bool Matches(string fieldName);
         void Rename(string newName);
         object Convert(object value);

@@ -21,8 +21,8 @@
 // Project site: http://code.google.com/p/nserializer/
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using NSerializer.Migration.Fields;
 
 
@@ -71,7 +71,7 @@ namespace NSerializer.Migration.Types
             {
                 fieldDefinition = fieldDefinitions.First(definition => definition.Matches(fieldName));
             }
-            else if(parentTypeDefinition != null)
+            else if (parentTypeDefinition != null)
             {
                 fieldDefinition = parentTypeDefinition.FindFieldDefinition(fieldName);
             }

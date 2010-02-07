@@ -18,7 +18,6 @@
 
 #endregion
 
-using System;
 using System.Collections;
 using NSerializer.Framework;
 using NSerializer.Framework.Readers;
@@ -59,7 +58,7 @@ namespace NSerializer.XML.Readers.Values
             var instance = typeAccessor.GetInstance();
             readObjects.Add(nodeReader.Attributes.GetInteger("ID"), instance);
 
-            ((IBaseTypeMembersReader)this).ReadMembers(instance, nodeReader, type);
+            ((IBaseTypeMembersReader) this).ReadMembers(instance, nodeReader, type);
 
             return instance;
         }

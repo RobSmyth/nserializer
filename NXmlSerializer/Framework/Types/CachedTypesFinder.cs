@@ -28,8 +28,8 @@ namespace NSerializer.Framework.Types
 {
     internal class CachedTypesFinder : ITypesCache, ITypeFinder
     {
-        private readonly IDataTypeFactory dataTypeFactory;
         private readonly Dictionary<string, IDataType> cachedTypes = new Dictionary<string, IDataType>();
+        private readonly IDataTypeFactory dataTypeFactory;
 
         public CachedTypesFinder(IDataTypeFactory dataTypeFactory)
         {

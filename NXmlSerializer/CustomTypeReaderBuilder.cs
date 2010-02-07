@@ -18,7 +18,6 @@
 
 #endregion
 
-using System;
 using NDependencyInjection.interfaces;
 using NSerializer.Framework.Readers;
 using NSerializer.XML.Readers.Values;

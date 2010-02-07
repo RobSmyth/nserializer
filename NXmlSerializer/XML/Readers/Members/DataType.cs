@@ -74,7 +74,9 @@ namespace NSerializer.XML.Readers.Members
             }
 
             return
-                new Field(type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance), fieldDefinition);
+                new Field(
+                    type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance),
+                    fieldDefinition);
         }
 
         public Type GetTargetType()

@@ -21,7 +21,6 @@
 // Project site: http://code.google.com/p/nserializer/
 
 using System;
-using System.Reflection;
 
 
 namespace NSerializer.XML.Readers.Members

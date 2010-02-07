@@ -21,7 +21,6 @@
 // Project site: http://code.google.com/p/nserializer/
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using NSerializer.Exceptions;
 using NSerializer.Framework.Types;
@@ -67,7 +66,7 @@ namespace NSerializer.Migration
 
         public bool HasTypeDefinition(Type soughtType)
         {
-            return typeDefinitions.ContainsKey(soughtType) || parentDefinition.HasTypeDefinition(soughtType);//>>>
+            return typeDefinitions.ContainsKey(soughtType) || parentDefinition.HasTypeDefinition(soughtType); //>>>
         }
 
         public void CreateTypeDefinition<T>(ITypeDefinition parentTypeDefinition)
@@ -110,7 +109,7 @@ namespace NSerializer.Migration
         public void AddChild(IVersionQualifier qualifier, IMigrationDefinition childDefinition)
         {
             var childList =
-               (versionComparer.Compare(qualifier.StartVersion, fromVersion) >= 0)
+                (versionComparer.Compare(qualifier.StartVersion, fromVersion) >= 0)
                     ? childDefinitions
                     : outOfScopeChildDefinitions;
 
