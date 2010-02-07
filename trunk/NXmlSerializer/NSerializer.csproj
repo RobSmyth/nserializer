@@ -70,7 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultClientDependencyInjection.cs" />
+    <Compile Include="DefaultPluginsBuilder.cs" />
     <Compile Include="Framework\Readers\Values\MetaDataTypeNameReader.cs" />
     <Compile Include="Framework\Types\MetaDataTypeName.cs" />
     <Compile Include="Framework\Writers\Values\MetaDataTypeNameWriter.cs" />

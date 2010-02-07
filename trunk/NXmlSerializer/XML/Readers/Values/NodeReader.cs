@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using NSerializer.Framework;
 using NSerializer.Framework.Readers;
 using NSerializer.Framework.Types;
+using NSerializer.Logging;
 using NSerializer.XML.Readers.Members;
 
 
@@ -30,12 +31,14 @@ namespace NSerializer.XML.Readers.Values
     public class NodeReader : IObjectReader, IBaseTypeMembersReader
     {
         private readonly IBaseTypeMembersReader[] baseTypeReaders;
+        private readonly ILogger logger;
         private readonly IObjectReader[] objectReaders;
 
         public NodeReader(ITypeFinder typeFinder, IDocumentObjectsRepository docObjectRepository,
-                          IReadObjectsCache readObjects, IMemberReader memberReader,
+                          IReadObjectsCache readObjects, IMemberReader memberReader, ILogger logger,
                           params IObjectReader[] objectReaders)
         {
+            this.logger = logger;
             this.objectReaders = objectReaders;
 
             var baseTypeReadersList = new List<IBaseTypeMembersReader>
@@ -69,6 +72,7 @@ namespace NSerializer.XML.Readers.Values
             {
                 if (reader.CanRead(nodeReader))
                 {
+                    logger.Debug("Reading node using {0}", nodeReader);
                     readObject = reader.Get(nodeReader);
                     break;
                 }

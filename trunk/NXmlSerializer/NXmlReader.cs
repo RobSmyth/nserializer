@@ -125,8 +125,14 @@ namespace NSerializer
             system.HasInstance(migrationRulesBuilder ?? new NullMigrationRulesBuilder())
                 .Provides<IMigrationRulesBuilder>();
 
-            new DefaultClientDependencyInjection().Build(system);
-            system.HasSubsystem(new ReaderBuilder(pluginsBuilder, typeSeedAssembly))
+            new DefaultPluginsBuilder().Build(system);
+
+            if (pluginsBuilder != null)
+            {
+                system = system.CreateSubsystem(pluginsBuilder);
+            }
+
+            system.HasSubsystem(new ReaderBuilder(typeSeedAssembly))
                 .Provides<IDataTypeFactory>()
                 .Provides<ITypeFinder>();
 
