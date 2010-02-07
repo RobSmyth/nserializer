@@ -28,22 +28,15 @@ namespace NSerializer
 {
     public class ReaderBuilder : ISubsystemBuilder
     {
-        private readonly ISubsystemBuilder pluginsBuilder;
         private readonly Assembly typeSeedAssembly;
 
-        public ReaderBuilder(ISubsystemBuilder pluginsBuilder, Assembly typeSeedAssembly)
+        public ReaderBuilder(Assembly typeSeedAssembly)
         {
-            this.pluginsBuilder = pluginsBuilder;
             this.typeSeedAssembly = typeSeedAssembly;
         }
 
         public void Build(ISystemDefinition system)
         {
-            if (pluginsBuilder != null)
-            {
-                pluginsBuilder.Build(system);
-            }
-
             system.HasInstance(typeSeedAssembly)
                 .Provides<Assembly>();
 

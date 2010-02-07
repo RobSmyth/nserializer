@@ -24,7 +24,7 @@ using NSerializer.Logging;
 
 namespace NSerializer
 {
-    public class DefaultClientDependencyInjection : ISubsystemBuilder
+    public class DefaultPluginsBuilder : ISubsystemBuilder
     {
         public void Build(ISystemDefinition system)
         {
