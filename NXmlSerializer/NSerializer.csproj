@@ -49,6 +49,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LinFu.DynamicProxy, Version=1.0.2946.19275, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\LinFu.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="NDependencyInjection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\NDependencyInjection.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -58,13 +66,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultClientDependencyInjection.cs" />
     <Compile Include="Framework\Readers\Values\MetaDataTypeNameReader.cs" />
     <Compile Include="Framework\Types\MetaDataTypeName.cs" />
     <Compile Include="Framework\Writers\Values\MetaDataTypeNameWriter.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\NullLogger.cs" />
+    <Compile Include="MemberReaderBuilder.cs" />
+    <Compile Include="MetadataReaderBuilder.cs" />
+    <Compile Include="MigrationDefinitionFactoryBuilder.cs" />
     <Compile Include="Migration\AggregateChildFirstTypeDefinition.cs" />
     <Compile Include="Migration\Fields\IMigrationConverter.cs" />
     <Compile Include="Migration\Fields\NullValueConverter.cs" />
     <Compile Include="Exceptions\FileVersionNotSupportedException.cs" />
+    <Compile Include="CustomTypeReaderBuilder.cs" />
+    <Compile Include="NodeReaderBuilder.cs" />
+    <Compile Include="ObjectReaderBuilder.cs" />
+    <Compile Include="PayloadReaderBuilder.cs" />
+    <Compile Include="ReaderBuilder.cs" />
     <Compile Include="XML\Readers\Members\DataType.cs" />
     <Compile Include="XML\Readers\Members\DataTypeFactory.cs" />
     <Compile Include="XML\Readers\Members\Field.cs" />

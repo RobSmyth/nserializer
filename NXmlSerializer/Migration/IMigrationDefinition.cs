@@ -27,7 +27,7 @@ using NSerializer.Migration.Types;
 
 namespace NSerializer.Migration
 {
-    internal interface IMigrationDefinition
+    public interface IMigrationDefinition
     {
         ITypeFinder GetTypeMigrator(ITypeFinder typeFinder);
 

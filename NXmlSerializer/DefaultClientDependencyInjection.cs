@@ -18,17 +18,17 @@
 
 #endregion
 
-namespace NSerializer.Migration.Fields
+using NDependencyInjection.interfaces;
+using NSerializer.Logging;
+
+
+namespace NSerializer
 {
-    public interface IFieldDefinition
+    public class DefaultClientDependencyInjection : ISubsystemBuilder
     {
-        void AddAction(IFieldAction action);
-        void SetField(object instance, object value);
-        string Name { get; }
-        bool Ignored { get; set; }
-        bool Matches(string fieldName);
-        void Rename(string newName);
-        object Convert(object value);
-        void ConvertUsing(IMigrationConverter converter);
+        public void Build(ISystemDefinition system)
+        {
+            system.HasSingleton<NullLogger>().Provides<ILogger>();
+        }
     }
 }

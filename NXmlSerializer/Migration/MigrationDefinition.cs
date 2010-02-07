@@ -110,7 +110,7 @@ namespace NSerializer.Migration
         public void AddChild(IVersionQualifier qualifier, IMigrationDefinition childDefinition)
         {
             var childList =
-                (versionComparer.Compare(fromVersion, qualifier.StartVersion) >= 0)
+               (versionComparer.Compare(qualifier.StartVersion, fromVersion) >= 0)
                     ? childDefinitions
                     : outOfScopeChildDefinitions;
 

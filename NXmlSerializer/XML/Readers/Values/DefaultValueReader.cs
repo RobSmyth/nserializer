@@ -18,32 +18,18 @@
 
 #endregion
 
-using System.Reflection;
-using NSerializer.Framework;
 using NSerializer.Framework.Readers;
-using NSerializer.Framework.Types;
-using NSerializer.XML.Readers.Members;
 
 
 namespace NSerializer.XML.Readers.Values
 {
     public class DefaultValueReader : IObjectReader
     {
-        private readonly IDataTypeFactory dataTypeFactory;
         private readonly NodeReader reader;
 
-        public DefaultValueReader(ITypeFinder typeFinder, IApplicationObjectsRepository appObjectRepository,
-                                  IDocumentObjectsRepository docObjectRepository, IDataTypeFactory dataTypeFactory)
+        public DefaultValueReader(NodeReader reader)
         {
-            this.dataTypeFactory = dataTypeFactory;
-            reader = new NodeReader(typeFinder, appObjectRepository, docObjectRepository);
-        }
-
-        public DefaultValueReader(Assembly seedAssembly, IApplicationObjectsRepository appObjectRepository,
-                                  IDocumentObjectsRepository docObjectRepository)
-        {
-            reader = new NodeReader(new DefaultTypeFinder(seedAssembly, dataTypeFactory), appObjectRepository,
-                                    docObjectRepository);
+            this.reader = reader;
         }
 
         public bool CanRead(INXmlElementReader nodeReader)

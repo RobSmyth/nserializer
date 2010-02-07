@@ -22,5 +22,6 @@ namespace NSerializer.Framework.Document
 {
     public interface IMetaData
     {
+        string[] TypeNames { get; }
     }
 }

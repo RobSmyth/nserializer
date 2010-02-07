@@ -18,17 +18,9 @@
 
 #endregion
 
-namespace NSerializer.Migration.Fields
+namespace NSerializer.Logging
 {
-    public interface IFieldDefinition
+    public class NullLogger : ILogger
     {
-        void AddAction(IFieldAction action);
-        void SetField(object instance, object value);
-        string Name { get; }
-        bool Ignored { get; set; }
-        bool Matches(string fieldName);
-        void Rename(string newName);
-        object Convert(object value);
-        void ConvertUsing(IMigrationConverter converter);
     }
 }

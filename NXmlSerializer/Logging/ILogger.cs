@@ -1,4 +1,4 @@
-#region Copyright
+﻿#region Copyright
 
 // The contents of this file are subject to the Mozilla Public License
 //  Version 1.1 (the "License"); you may not use this file except in compliance
@@ -18,17 +18,9 @@
 
 #endregion
 
-namespace NSerializer.Migration.Fields
+namespace NSerializer.Logging
 {
-    public interface IFieldDefinition
+    public interface ILogger
     {
-        void AddAction(IFieldAction action);
-        void SetField(object instance, object value);
-        string Name { get; }
-        bool Ignored { get; set; }
-        bool Matches(string fieldName);
-        void Rename(string newName);
-        object Convert(object value);
-        void ConvertUsing(IMigrationConverter converter);
     }
 }

@@ -57,7 +57,7 @@ namespace NSerializer.UATs.Contexts
         {
             var stringReader = new StringReader(xmlText);
             var reader = new NXmlReader(typeSeedAssembly, appObjectRepository, docObjectRepository,
-                                        migrationRulesBuilder);
+                                        migrationRulesBuilder, new TestPlugins());
             return reader.Read<T>(GetStream(xmlText));
         }
 

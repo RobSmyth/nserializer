@@ -23,7 +23,7 @@ using NSerializer.Migration.Fields;
 
 namespace NSerializer.Migration.Types
 {
-    internal interface ITypeDefinition
+    public interface ITypeDefinition
     {
         void SetAlias(string alias);
         void AddName(string matchingTypeName);

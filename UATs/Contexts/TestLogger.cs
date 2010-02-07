@@ -18,17 +18,14 @@
 
 #endregion
 
-namespace NSerializer.Migration.Fields
+// Project site: http://code.google.com/p/nserializer/
+
+using NSerializer.Logging;
+
+
+namespace NSerializer.UATs.Contexts
 {
-    public interface IFieldDefinition
+    public class TestLogger : ILogger
     {
-        void AddAction(IFieldAction action);
-        void SetField(object instance, object value);
-        string Name { get; }
-        bool Ignored { get; set; }
-        bool Matches(string fieldName);
-        void Rename(string newName);
-        object Convert(object value);
-        void ConvertUsing(IMigrationConverter converter);
     }
 }

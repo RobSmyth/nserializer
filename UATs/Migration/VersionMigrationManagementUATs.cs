@@ -49,8 +49,8 @@ namespace NSerializer.UATs.Migration
             var xmlText = SerializeAsXml(new List<object> { new MyTypeA_V1() });
 
             //Console.WriteLine(xmlText);//>>>
-            xmlText = xmlText.Replace("version value=\"2.0.0.0\"", "version value=\"1.4.0.0\"");
-            Assert.IsTrue(xmlText.Contains("version value=\"1.4.0.0\""));
+            xmlText = xmlText.Replace("version value=\"2.0.0.0\"", "version value=\"1.3.0.0\"");
+            Assert.IsTrue(xmlText.Contains("version value=\"1.3.0.0\""));
 
             var destination = ReadXmlText<List<object>>(xmlText, null, null, new MigrationRulesBuilder())[0];
             Assert.AreEqual(typeof(MyTypeA_V2), destination.GetType());

@@ -20,7 +20,7 @@
 
 namespace NSerializer.Migration.Fields
 {
-    internal interface IFieldAction
+    public interface IFieldAction
     {
     }
 }

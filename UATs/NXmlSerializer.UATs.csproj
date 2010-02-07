@@ -60,6 +60,8 @@
   <ItemGroup>
     <Compile Include="ApplicationObjectRepositoryUATs.cs" />
     <Compile Include="BinaryFormatting\SaveAsBinaryUATs.cs" />
+    <Compile Include="Contexts\TestLogger.cs" />
+    <Compile Include="Contexts\TestPlugins.cs" />
     <Compile Include="Migration\FieldMigrationUATs.cs" />
     <Compile Include="Migration\TypeMigrationUATs.cs" />
     <Compile Include="DependencyInjectTests.cs" />

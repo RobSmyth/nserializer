@@ -24,6 +24,7 @@ using NMock2;
 using NSerializer.Framework.Types;
 using NSerializer.XML.Readers.Members;
 using NUnit.Framework;
+using NSerializer.Framework.Document;
 
 
 namespace NSerializer.Tests.Framework.Types
@@ -43,7 +44,9 @@ namespace NSerializer.Tests.Framework.Types
                             "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeA", "!0[]",
                             "NSerializer.Tests.Framework.Types.ReaderNameMappingTypeFinderTests+MyTypeC"
                         };
-            finder = new ReaderNameAliasingTypeFinder(typeFinder, names);
+            var metaData = NewMock<IMetaData>();
+            Stub.On(metaData).GetProperty("TypeNames").Will(Return.Value(names));
+            finder = new ReaderNameAliasingTypeFinder(typeFinder, metaData);
         }
 
         [Test]
