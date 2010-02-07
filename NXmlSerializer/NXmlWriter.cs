@@ -25,6 +25,7 @@ using System.IO;
 using NSerializer.Framework;
 using NSerializer.Framework.Document;
 using NSerializer.Framework.Types;
+using NSerializer.Logging;
 using NSerializer.Migration;
 using NSerializer.XML.Document;
 using NSerializer.XML.Writers.Values;
@@ -68,7 +69,7 @@ namespace NSerializer
             var version = value.GetType().Assembly.GetName().Version;
 
             var typeNameMapper =
-                new MigrationDefinitionFactory(version, migrationRulesBuilder).Create().GetTypeNameMapper();
+                new MigrationDefinitionFactory(version, migrationRulesBuilder, new NullLogger()).Create().GetTypeNameMapper();
 
             var typeNamesCache = new TypeNamesCache(typeNameMapper);
             var valueWriterFactory = new DefaultValueWriterFactory(document, appObjectRepository,
