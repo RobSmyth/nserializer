@@ -31,13 +31,11 @@ namespace NSerializer.XML.Readers
 {
     public class MetaDataReader
     {
-        private readonly ITypeFinder typeFinder;
-        private readonly IDataTypeFactory dataTypeFactory;
+        private readonly IObjectReader objectReader;
 
-        public MetaDataReader(ITypeFinder typeFinder, IDataTypeFactory dataTypeFactory)
+        public MetaDataReader(IObjectReader objectReader)
         {
-            this.typeFinder = typeFinder;
-            this.dataTypeFactory = dataTypeFactory;
+            this.objectReader = objectReader;
         }
 
         public MetaData Read(XmlStreamReader inputStream)
@@ -48,12 +46,7 @@ namespace NSerializer.XML.Readers
             {
                 using (var nodeReader = new XmlElementReaderFactory(inputStream).Create())
                 {
-                    IObjectReader objectReader =
-                        new DefaultValueReader(typeFinder,
-                                               new NullApplicationObjectRepository(),
-                                               new NullDocumentObjectRepository(), dataTypeFactory);
-
-                    metaData = (MetaData) objectReader.Get(nodeReader);
+                    metaData = (MetaData)objectReader.Get(nodeReader);
                 }
             }
             else

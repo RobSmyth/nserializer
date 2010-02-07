@@ -35,7 +35,7 @@ namespace NSerializer.XML.Readers.Members
             return new DataType(type, migrationDefiniton);
         }
 
-        internal void SetMigration(IMigrationDefinition definition)
+        public void SetMigration(IMigrationDefinition definition)
         {
             migrationDefiniton = definition;
         }

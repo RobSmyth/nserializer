@@ -18,25 +18,35 @@
 
 #endregion
 
+// Project site: http://code.google.com/p/nserializer/
+
 using System;
+using NDependencyInjection.Attributes;
+using NSerializer.Framework.Document;
 
 
 namespace NSerializer.Migration
 {
     internal class MigrationDefinitionFactory
     {
-        private readonly Version fromVersion;
+        private readonly Version payloadVersion;
         private readonly IMigrationRulesBuilder rulesBuilder;
 
-        public MigrationDefinitionFactory(Version fromVersion, IMigrationRulesBuilder rulesBuilder)
+        [InjectionConstructor]
+        public MigrationDefinitionFactory(MetaData metaData, IMigrationRulesBuilder rulesBuilder)
+            : this(metaData.PayloadVersion, rulesBuilder)
         {
-            this.fromVersion = fromVersion;
+        }
+
+        public MigrationDefinitionFactory(Version payloadVersion, IMigrationRulesBuilder rulesBuilder)
+        {
+            this.payloadVersion = payloadVersion;
             this.rulesBuilder = rulesBuilder;
         }
 
         public IMigrationDefinition Create()
         {
-            var migrationDefinition = new MigrationDefinition(new NullMigrationDefinition(), fromVersion);
+            var migrationDefinition = new MigrationDefinition(new NullMigrationDefinition(), payloadVersion);
             migrationDefinition.AddRules(rulesBuilder);
             return migrationDefinition;
         }

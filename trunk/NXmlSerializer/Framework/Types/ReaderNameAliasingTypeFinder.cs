@@ -22,6 +22,7 @@
 
 using System;
 using System.Text.RegularExpressions;
+using NSerializer.Framework.Document;
 using NSerializer.XML.Readers.Members;
 
 
@@ -32,10 +33,10 @@ namespace NSerializer.Framework.Types
         private readonly string[] names;
         private readonly ITypeFinder typeFinder;
 
-        public ReaderNameAliasingTypeFinder(ITypeFinder typeFinder, string[] names)
+        public ReaderNameAliasingTypeFinder(ITypeFinder typeFinder, IMetaData metaData)
         {
             this.typeFinder = typeFinder;
-            this.names = names;
+            names = metaData.TypeNames;
         }
 
         public IDataType GetType(string typeName)

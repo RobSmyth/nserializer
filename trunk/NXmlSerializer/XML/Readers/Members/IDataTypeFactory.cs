@@ -19,6 +19,7 @@
 #endregion
 
 using System;
+using NSerializer.Migration;
 
 
 namespace NSerializer.XML.Readers.Members
@@ -26,5 +27,6 @@ namespace NSerializer.XML.Readers.Members
     public interface IDataTypeFactory
     {
         IDataType Create(Type type);
+        void SetMigration(IMigrationDefinition migrationDefinition);
     }
 }

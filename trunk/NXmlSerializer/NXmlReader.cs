@@ -23,6 +23,8 @@
 using System;
 using System.IO;
 using System.Reflection;
+using NDependencyInjection;
+using NDependencyInjection.interfaces;
 using NSerializer.Exceptions;
 using NSerializer.Framework;
 using NSerializer.Framework.Types;
@@ -35,10 +37,7 @@ namespace NSerializer
 {
     public class NXmlReader
     {
-        private readonly IApplicationObjectsRepository appObjectRepository;
-        private readonly IDocumentObjectsRepository docObjectRepository;
-        private readonly IMigrationRulesBuilder migrationRulesBuilder;
-        private readonly Assembly typeSeedAssembly;
+        private readonly ISystemDefinition system;
 
         /// <summary>
         /// XML text reader constructor.
@@ -51,6 +50,21 @@ namespace NSerializer
         /// parameter is null.
         /// </param>
         public NXmlReader(Assembly typeSeedAssembly)
+            : this(typeSeedAssembly, null)
+        {
+        }
+
+        /// <summary>
+        /// XML text reader constructor.
+        /// Project site: http://code.google.com/p/nserializer/
+        /// </summary>
+        /// <param name="typeSeedAssembly">
+        /// Seed assembly used for type discovery. 
+        /// All types used in the XML file must be in this assembly or referenced assemblies.
+        /// The reader will recursively search referenced assemblies. Only used if the xmlNodeReader
+        /// parameter is null.
+        /// </param>
+        public NXmlReader(Assembly typeSeedAssembly, ISubsystemBuilder pluginsBuilder)
             : this(typeSeedAssembly, null, null, null)
         {
         }
@@ -72,8 +86,8 @@ namespace NSerializer
         /// Optional external repository. Used to provide instances of document scope objects.
         /// </param>
         public NXmlReader(Assembly typeSeedAssembly, IApplicationObjectsRepository appObjectRepository,
-                          IDocumentObjectsRepository docObjectRepository)
-            : this(typeSeedAssembly, appObjectRepository, docObjectRepository, null)
+                          IDocumentObjectsRepository docObjectRepository, ISubsystemBuilder dependencyInjectionBuilder)
+            : this(typeSeedAssembly, appObjectRepository, docObjectRepository, null, dependencyInjectionBuilder)
         {
         }
 
@@ -97,12 +111,26 @@ namespace NSerializer
         /// Optional migration rules builder.
         /// </param>
         public NXmlReader(Assembly typeSeedAssembly, IApplicationObjectsRepository appObjectRepository,
-                          IDocumentObjectsRepository docObjectRepository, IMigrationRulesBuilder migrationRulesBuilder)
+                          IDocumentObjectsRepository docObjectRepository, IMigrationRulesBuilder migrationRulesBuilder, ISubsystemBuilder pluginsBuilder)
         {
-            this.typeSeedAssembly = typeSeedAssembly;
-            this.appObjectRepository = appObjectRepository ?? new NullApplicationObjectRepository();
-            this.docObjectRepository = docObjectRepository ?? new NullDocumentObjectRepository();
-            this.migrationRulesBuilder = migrationRulesBuilder ?? new NullMigrationRulesBuilder();
+            system = new SystemDefinition();
+
+            system.HasInstance(appObjectRepository ?? new NullApplicationObjectRepository())
+                .Provides<IApplicationObjectsRepository>();
+
+            system.HasInstance(docObjectRepository ?? new NullDocumentObjectRepository())
+                .Provides<IDocumentObjectsRepository>();
+
+            system.HasInstance(migrationRulesBuilder ?? new NullMigrationRulesBuilder())
+                .Provides<IMigrationRulesBuilder>();
+
+            new DefaultClientDependencyInjection().Build(system);
+            system.HasSubsystem(new ReaderBuilder(pluginsBuilder, typeSeedAssembly))
+                .Provides<IDataTypeFactory>()
+                .Provides<ITypeFinder>();
+
+            system.HasSubsystem(new MetadataReaderBuilder())
+                .Provides<MetaDataReader>();
         }
 
         /// <summary>
@@ -111,29 +139,29 @@ namespace NSerializer
         /// </summary>
         public T Read<T>(Stream inputStream)
         {
-            appObjectRepository.Initialize();
-            docObjectRepository.Initialize();
+            system.Get<IApplicationObjectsRepository>().Initialize();
+            system.Get<IDocumentObjectsRepository>().Initialize();
 
             T valueRead;
 
             try
             {
-                var dataTypeFactory = new DataTypeFactory();
+                var typeFinder = system.Get<ITypeFinder>();
+                var metaDataReader = system.Get<MetaDataReader>();
 
-                ITypeFinder typeFinder = new DefaultTypeFinder(typeSeedAssembly, dataTypeFactory);
-
-                var metaDataReader = new MetaDataReader(typeFinder, dataTypeFactory);
                 var metaData = metaDataReader.Read(new XmlStreamReader(inputStream));
 
-                var migrationDefinition =
-                    new MigrationDefinitionFactory(metaData.PayloadVersion, migrationRulesBuilder).Create();
-                dataTypeFactory.SetMigration(migrationDefinition);
+                system.HasSubsystem(new MigrationDefinitionFactoryBuilder(metaData))
+                    .Provides<MigrationDefinitionFactory>();
+
+                var migrationDefinition = system.Get<MigrationDefinitionFactory>().Create();
+                system.Get<IDataTypeFactory>().SetMigration(migrationDefinition);
                 typeFinder = migrationDefinition.GetTypeMigrator(typeFinder);
 
-                var payloadReader = new PayloadReader(new ReaderNameAliasingTypeFinder(typeFinder,
-                                                                                       metaData.TypeNames),
-                                                      appObjectRepository, docObjectRepository, dataTypeFactory);
-                var payLoad = payloadReader.Read(new XmlStreamReader(inputStream));
+                system.HasSubsystem(new PayloadReaderBuilder(metaData, new ReaderNameAliasingTypeFinder(typeFinder, metaData)))
+                    .Provides<PayloadReader>();
+
+                var payLoad = system.Get<PayloadReader>().Read(new XmlStreamReader(inputStream));
 
                 valueRead = (T) payLoad.Target;
             }

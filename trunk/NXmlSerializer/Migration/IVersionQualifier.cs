@@ -23,7 +23,7 @@ using System;
 
 namespace NSerializer.Migration
 {
-    internal interface IVersionQualifier
+    public interface IVersionQualifier
     {
         Version StartVersion { get; }
     }

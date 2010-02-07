@@ -18,17 +18,21 @@
 
 #endregion
 
-namespace NSerializer.Migration.Fields
+// Project site: http://code.google.com/p/nserializer/
+
+using System;
+using NDependencyInjection.interfaces;
+using NSerializer.Logging;
+
+
+namespace NSerializer.UATs.Contexts
 {
-    public interface IFieldDefinition
+    public class TestPlugins : ISubsystemBuilder
     {
-        void AddAction(IFieldAction action);
-        void SetField(object instance, object value);
-        string Name { get; }
-        bool Ignored { get; set; }
-        bool Matches(string fieldName);
-        void Rename(string newName);
-        object Convert(object value);
-        void ConvertUsing(IMigrationConverter converter);
+        public void Build(ISystemDefinition system)
+        {
+            system.HasSingleton<TestLogger>()
+                .Provides<ILogger>();
+        }
     }
 }

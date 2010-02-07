@@ -36,7 +36,7 @@ namespace NSerializer.XML.Readers.Values
         private readonly IReadObjectsCache readObjects;
         private readonly ITypeFinder typeFinder;
 
-        public DictionaryReader(IReadObjectsCache readObjects, IInstanceRepository docObjectRepository,
+        public DictionaryReader(IReadObjectsCache readObjects, IDocumentObjectsRepository docObjectRepository,
                                 IObjectReader objectReader, ITypeFinder typeFinder)
         {
             this.readObjects = readObjects;

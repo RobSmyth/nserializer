@@ -24,6 +24,7 @@ using NSerializer.Framework;
 using NSerializer.Framework.Readers;
 using NSerializer.Framework.Readers.Values;
 using NSerializer.Framework.Types;
+using NSerializer.Logging;
 using NSerializer.XML.Readers.Members;
 
 
@@ -33,34 +34,13 @@ namespace NSerializer.XML.Readers.Values
     {
         private readonly List<IBaseTypeMembersReader> baseTypeReaders = new List<IBaseTypeMembersReader>();
         private readonly List<IObjectReader> readers = new List<IObjectReader>();
-        private readonly IReadObjectsCache readObjects = new ReadObjectsCache();
 
-        public NodeReader(ITypeFinder typeFinder, IApplicationObjectsRepository appObjectRepository,
-                          IDocumentObjectsRepository docObjectRepository)
+        public NodeReader(ITypeFinder typeFinder, IDocumentObjectsRepository docObjectRepository, IReadObjectsCache readObjects, IMemberReader memberReader, params IObjectReader[] objectReaders)
         {
-            var memberReader = new MemberReader(new FieldReader(this));
-
-            readers.Add(new CustomTypeReader<String>("string"));
-            readers.Add(new CustomTypeReader<Int32>("Int32"));
-            readers.Add(new CustomTypeReader<Int64>("Int64"));
-            readers.Add(new CustomTypeReader<UInt32>("UInt32"));
-            readers.Add(new CustomTypeReader<UInt64>("UInt64"));
-            readers.Add(new DoubleReader());
-            readers.Add(new CustomTypeReader<Single>("single"));
-            readers.Add(new CustomTypeReader<Boolean>("bool"));
-            readers.Add(new CustomTypeReader<Char>("char"));
-            readers.Add(new PrimitiveValueTypeReader(typeFinder));
-            readers.Add(new EnumReader(typeFinder));
-            readers.Add(new GuidReader());
-            readers.Add(new TimeSpanReader());
-            readers.Add(new DateTimeReader());
-            readers.Add(new ObjectReferenceReader(readObjects));
-            readers.Add(new ArrayOfDoublesReader(readObjects, typeFinder));
-            readers.Add(new ArrayOfObjectsReader(readObjects, this, typeFinder));
-            readers.Add(new ListReader(readObjects, docObjectRepository, this, typeFinder));
-            readers.Add(new DictionaryReader(readObjects, docObjectRepository, this, typeFinder));
-            readers.Add(new AppObjectReader(readObjects, appObjectRepository, typeFinder));
-            readers.Add(new MetaDataTypeNameReader());
+            foreach (var objectReader in objectReaders)
+            {
+                readers.Add(objectReader);
+            }
             readers.Add(new ClassReader(readObjects, memberReader, typeFinder, docObjectRepository, this, this));
             readers.Add(new ValueTypeReader(memberReader, typeFinder));
             readers.Add(new VersionReader());

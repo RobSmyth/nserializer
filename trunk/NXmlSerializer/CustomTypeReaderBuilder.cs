@@ -18,17 +18,30 @@
 
 #endregion
 
-namespace NSerializer.Migration.Fields
+using System;
+using NDependencyInjection.interfaces;
+using NSerializer.Framework.Readers;
+using NSerializer.XML.Readers.Values;
+
+
+namespace NSerializer
 {
-    public interface IFieldDefinition
+    public class CustomTypeReaderBuilder<T> : ISubsystemBuilder
     {
-        void AddAction(IFieldAction action);
-        void SetField(object instance, object value);
-        string Name { get; }
-        bool Ignored { get; set; }
-        bool Matches(string fieldName);
-        void Rename(string newName);
-        object Convert(object value);
-        void ConvertUsing(IMigrationConverter converter);
+        private readonly string nodeName;
+
+        public CustomTypeReaderBuilder(string nodeName)
+        {
+            this.nodeName = nodeName;
+        }
+
+        public void Build(ISystemDefinition system)
+        {
+            system.HasInstance(nodeName)
+                .Provides<string>();
+
+            system.HasSingleton<CustomTypeReader<T>>()
+                .Provides<IObjectReader>();
+        }
     }
 }

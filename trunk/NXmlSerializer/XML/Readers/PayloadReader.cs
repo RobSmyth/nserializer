@@ -20,30 +20,19 @@
 
 using System.IO;
 using NSerializer.Exceptions;
-using NSerializer.Framework;
 using NSerializer.Framework.Document;
 using NSerializer.Framework.Readers;
-using NSerializer.Framework.Types;
-using NSerializer.XML.Readers.Members;
-using NSerializer.XML.Readers.Values;
 
 
 namespace NSerializer.XML.Readers
 {
     public class PayloadReader
     {
-        private readonly IApplicationObjectsRepository appObjectRepository;
-        private readonly IDocumentObjectsRepository docObjectRepository;
-        private readonly IDataTypeFactory dataTypeFactory;
-        private readonly ITypeFinder typeFinder;
+        private readonly IObjectReader objectReader;
 
-        public PayloadReader(ITypeFinder typeFinder, IApplicationObjectsRepository appObjectRepository,
-                             IDocumentObjectsRepository docObjectRepository, IDataTypeFactory dataTypeFactory)
+        public PayloadReader(IObjectReader objectReader)
         {
-            this.typeFinder = typeFinder;
-            this.appObjectRepository = appObjectRepository;
-            this.docObjectRepository = docObjectRepository;
-            this.dataTypeFactory = dataTypeFactory;
+            this.objectReader = objectReader;
         }
 
         public Payload Read(XmlStreamReader inputStream)
@@ -55,11 +44,6 @@ namespace NSerializer.XML.Readers
             {
                 using (var nodeReader = new XmlElementReaderFactory(inputStream).Create())
                 {
-                    IObjectReader objectReader =
-                        new DefaultValueReader(typeFinder,
-                                               appObjectRepository,
-                                               docObjectRepository, dataTypeFactory);
-
                     payload = (Payload) objectReader.Get(nodeReader);
                 }
             }
