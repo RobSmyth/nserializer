@@ -22,6 +22,7 @@
 
 using System;
 using NSerializer.Exceptions;
+using NSerializer.Logging;
 using NSerializer.Migration.Types;
 
 
@@ -31,12 +32,14 @@ namespace NSerializer.Migration
     {
         private readonly IMigrationDefinition definition;
         private readonly Version fromVersion;
+        private readonly ILogger logger;
         private readonly VersionComparer versionComparer = new VersionComparer();
 
-        internal MigrationRules(IMigrationDefinition definition, Version fromVersion)
+        internal MigrationRules(IMigrationDefinition definition, Version fromVersion, ILogger logger)
         {
             this.definition = definition;
             this.fromVersion = fromVersion;
+            this.logger = logger;
         }
 
         public void NotSupported(string message)
@@ -78,14 +81,14 @@ namespace NSerializer.Migration
             }
 
             var versionQualifier = new FromVersionQualifier(version);
-            definition.AddChild(versionQualifier, new MigrationDefinition(definition, version));
-            return new MigrationScopeRulesVerb(this, definition, versionQualifier);
+            definition.AddChild(versionQualifier, new MigrationDefinition(definition, version, logger));
+            return new MigrationScopeRulesVerb(this, definition, versionQualifier, logger);
         }
 
         IMigrationRulesVerb IMigrationRules.AllPriorVersions()
         {
             var versionQualifier = new PriorToAndIncludingVersionQualifier();
-            return new MigrationScopeRulesVerb(this, definition, versionQualifier);
+            return new MigrationScopeRulesVerb(this, definition, versionQualifier, logger);
         }
     }
 }

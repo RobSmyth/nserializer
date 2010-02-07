@@ -23,6 +23,7 @@
 using System;
 using NDependencyInjection.Attributes;
 using NSerializer.Framework.Document;
+using NSerializer.Logging;
 
 
 namespace NSerializer.Migration
@@ -31,22 +32,24 @@ namespace NSerializer.Migration
     {
         private readonly Version payloadVersion;
         private readonly IMigrationRulesBuilder rulesBuilder;
+        private readonly ILogger logger;
 
         [InjectionConstructor]
-        public MigrationDefinitionFactory(MetaData metaData, IMigrationRulesBuilder rulesBuilder)
-            : this(metaData.PayloadVersion, rulesBuilder)
+        public MigrationDefinitionFactory(MetaData metaData, IMigrationRulesBuilder rulesBuilder, ILogger logger)
+            : this(metaData.PayloadVersion, rulesBuilder, logger)
         {
         }
 
-        public MigrationDefinitionFactory(Version payloadVersion, IMigrationRulesBuilder rulesBuilder)
+        public MigrationDefinitionFactory(Version payloadVersion, IMigrationRulesBuilder rulesBuilder, ILogger logger)
         {
             this.payloadVersion = payloadVersion;
             this.rulesBuilder = rulesBuilder;
+            this.logger = logger;
         }
 
         public IMigrationDefinition Create()
         {
-            var migrationDefinition = new MigrationDefinition(new NullMigrationDefinition(), payloadVersion);
+            var migrationDefinition = new MigrationDefinition(new NullMigrationDefinition(), payloadVersion, logger);
             migrationDefinition.AddRules(rulesBuilder);
             return migrationDefinition;
         }

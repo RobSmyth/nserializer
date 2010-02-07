@@ -18,6 +18,9 @@
 
 #endregion
 
+using NSerializer.Logging;
+
+
 namespace NSerializer.Migration
 {
     internal class MigrationScopeRulesVerb : IMigrationRulesVerb
@@ -25,20 +28,21 @@ namespace NSerializer.Migration
         private readonly IMigrationDefinition definition;
         private readonly IMigrationRules rules;
         private readonly IVersionQualifier versionQualifier;
+        private readonly ILogger logger;
 
-        public MigrationScopeRulesVerb(IMigrationRules rules, IMigrationDefinition definition,
-                                       IVersionQualifier versionQualifier)
+        public MigrationScopeRulesVerb(IMigrationRules rules, IMigrationDefinition definition, IVersionQualifier versionQualifier, ILogger logger)
         {
             this.rules = rules;
             this.definition = definition;
             this.versionQualifier = versionQualifier;
+            this.logger = logger;
         }
 
         public IMigrationRules MigrateUsing(IMigrationRulesBuilder rulesBuilder)
         {
             IMigrationRules newRules =
-                new MigrationRules(new MigrationDefinition(definition, versionQualifier.StartVersion),
-                                   versionQualifier.StartVersion);
+                new MigrationRules(new MigrationDefinition(definition, versionQualifier.StartVersion, logger),
+                                   versionQualifier.StartVersion, logger);
             rulesBuilder.Build(newRules);
             return rules;
         }

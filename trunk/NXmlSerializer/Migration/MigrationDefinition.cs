@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using NSerializer.Exceptions;
 using NSerializer.Framework.Types;
+using NSerializer.Logging;
 using NSerializer.Migration.Types;
 
 
@@ -35,6 +36,7 @@ namespace NSerializer.Migration
             new SortedList<IVersionQualifier, IMigrationDefinition>(new VersionQualifierComparer());
 
         private readonly Version fromVersion;
+        private readonly ILogger logger;
 
         private readonly SortedList<IVersionQualifier, IMigrationDefinition> outOfScopeChildDefinitions =
             new SortedList<IVersionQualifier, IMigrationDefinition>(new VersionQualifierComparer());
@@ -43,10 +45,11 @@ namespace NSerializer.Migration
         private readonly Dictionary<Type, ITypeDefinition> typeDefinitions = new Dictionary<Type, ITypeDefinition>();
         private readonly IComparer<Version> versionComparer = new VersionComparer();
 
-        public MigrationDefinition(IMigrationDefinition parentDefinition, Version fromVersion)
+        public MigrationDefinition(IMigrationDefinition parentDefinition, Version fromVersion, ILogger logger)
         {
             this.parentDefinition = parentDefinition;
             this.fromVersion = fromVersion;
+            this.logger = logger;
         }
 
         public ITypeFinder GetTypeMigrator(ITypeFinder typeFinder)
@@ -126,7 +129,7 @@ namespace NSerializer.Migration
 
         public void AddRules(IMigrationRulesBuilder migrationRulesBuilder)
         {
-            IMigrationRules migrationRules = new MigrationRules(this, fromVersion);
+            IMigrationRules migrationRules = new MigrationRules(this, fromVersion, logger);
             migrationRulesBuilder.Build(migrationRules);
         }
     }
