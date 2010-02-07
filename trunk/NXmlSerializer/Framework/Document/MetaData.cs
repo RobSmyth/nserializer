@@ -29,9 +29,9 @@ namespace NSerializer.Framework.Document
     {
         private readonly DateTime dateTimeCreated;
         private readonly string machineName;
+        private readonly MetaDataTypeName[] metaDataTypeNames;
         private readonly Version serializerVersion;
         private readonly Version targetVersion;
-        private readonly MetaDataTypeName[] metaDataTypeNames;
 
         public MetaData(MetaDataTypeName[] metaDataTypeNames, Version targetVersion)
         {

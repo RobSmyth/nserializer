@@ -29,12 +29,13 @@ namespace NSerializer.Framework.Types
 {
     public class TypeInReferencedAssemblyFinder : ITypeFinder
     {
-        private readonly Assembly seedAssembly;
-        private readonly ITypesCache typesCache;
-        private readonly ITypeFinder typeFinder;
         private readonly IDataTypeFactory dataTypeFactory;
+        private readonly Assembly seedAssembly;
+        private readonly ITypeFinder typeFinder;
+        private readonly ITypesCache typesCache;
 
-        public TypeInReferencedAssemblyFinder(Assembly seedAssembly, ITypesCache typesCache, ITypeFinder typeFinder, IDataTypeFactory dataTypeFactory)
+        public TypeInReferencedAssemblyFinder(Assembly seedAssembly, ITypesCache typesCache, ITypeFinder typeFinder,
+                                              IDataTypeFactory dataTypeFactory)
         {
             this.seedAssembly = seedAssembly;
             this.typesCache = typesCache;

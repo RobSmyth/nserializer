@@ -21,6 +21,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
+
 [assembly : AssemblyTitle("NXmlSerialize")]
 [assembly : AssemblyDescription("DotNet serializer")]
 [assembly : AssemblyConfiguration("")]
@@ -31,4 +32,4 @@ using System.Runtime.InteropServices;
 [assembly : AssemblyCulture("")]
 [assembly : ComVisible(false)]
 [assembly : Guid("e4f5acd7-c9d7-495e-b2b3-7fa39c4c1cd7")]
-[assembly : AssemblyVersion("1.0.1.116")]
+[assembly : AssemblyVersion("1.0.1.117")]

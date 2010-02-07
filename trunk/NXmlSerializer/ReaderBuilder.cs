@@ -18,12 +18,9 @@
 
 #endregion
 
-using System;
 using System.Reflection;
 using NDependencyInjection.interfaces;
 using NSerializer.Framework.Types;
-using NSerializer.Migration;
-using NSerializer.XML.Readers;
 using NSerializer.XML.Readers.Members;
 
 

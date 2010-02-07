@@ -18,9 +18,6 @@
 
 #endregion
 
-using System;
-
-
 namespace NSerializer.XML.Readers.Members
 {
     internal class IgnoredField : IField

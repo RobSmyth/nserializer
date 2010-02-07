@@ -23,11 +23,10 @@
 using NDependencyInjection.interfaces;
 using NSerializer.Framework;
 using NSerializer.Framework.Document;
+using NSerializer.Framework.Readers;
 using NSerializer.Framework.Types;
-using NSerializer.Migration;
 using NSerializer.XML.Readers;
 using NSerializer.XML.Readers.Values;
-using NSerializer.Framework.Readers;
 
 
 namespace NSerializer

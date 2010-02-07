@@ -18,13 +18,10 @@
 
 #endregion
 
-using System;
 using System.Collections.Generic;
 using NSerializer.Framework;
 using NSerializer.Framework.Readers;
-using NSerializer.Framework.Readers.Values;
 using NSerializer.Framework.Types;
-using NSerializer.Logging;
 using NSerializer.XML.Readers.Members;
 
 
@@ -32,25 +29,29 @@ namespace NSerializer.XML.Readers.Values
 {
     public class NodeReader : IObjectReader, IBaseTypeMembersReader
     {
-        private readonly List<IBaseTypeMembersReader> baseTypeReaders = new List<IBaseTypeMembersReader>();
-        private readonly List<IObjectReader> readers = new List<IObjectReader>();
+        private readonly IBaseTypeMembersReader[] baseTypeReaders;
+        private readonly IObjectReader[] objectReaders;
 
-        public NodeReader(ITypeFinder typeFinder, IDocumentObjectsRepository docObjectRepository, IReadObjectsCache readObjects, IMemberReader memberReader, params IObjectReader[] objectReaders)
+        public NodeReader(ITypeFinder typeFinder, IDocumentObjectsRepository docObjectRepository,
+                          IReadObjectsCache readObjects, IMemberReader memberReader,
+                          params IObjectReader[] objectReaders)
         {
-            foreach (var objectReader in objectReaders)
-            {
-                readers.Add(objectReader);
-            }
+            this.objectReaders = objectReaders;
 
-            baseTypeReaders.Add(new ListReader(readObjects, docObjectRepository, this, typeFinder));
-            baseTypeReaders.Add(new DictionaryReader(readObjects, docObjectRepository, this, typeFinder));
-            baseTypeReaders.Add(new ClassReader(readObjects, memberReader, typeFinder, docObjectRepository, this, this));
+            var baseTypeReadersList = new List<IBaseTypeMembersReader>
+                                          {
+                                              new ListReader(readObjects, docObjectRepository, this, typeFinder),
+                                              new DictionaryReader(readObjects, docObjectRepository, this, typeFinder),
+                                              new ClassReader(readObjects, memberReader, typeFinder, docObjectRepository,
+                                                              this, this)
+                                          };
+            baseTypeReaders = baseTypeReadersList.ToArray();
         }
 
         public bool CanRead(INXmlElementReader nodeReader)
         {
             var canRead = false;
-            foreach (var reader in readers)
+            foreach (var reader in objectReaders)
             {
                 canRead = reader.CanRead(nodeReader);
                 if (canRead)
@@ -64,7 +65,7 @@ namespace NSerializer.XML.Readers.Values
         public object Get(INXmlElementReader nodeReader)
         {
             object readObject = null;
-            foreach (var reader in readers)
+            foreach (var reader in objectReaders)
             {
                 if (reader.CanRead(nodeReader))
                 {

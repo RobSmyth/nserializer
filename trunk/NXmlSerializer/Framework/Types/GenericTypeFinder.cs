@@ -28,8 +28,8 @@ namespace NSerializer.Framework.Types
 {
     internal class GenericTypeFinder : ITypeFinder
     {
-        private readonly ITypeFinder typeFinder;
         private readonly IDataTypeFactory dataTypeFactory;
+        private readonly ITypeFinder typeFinder;
         private readonly ITypesCache typesCache;
 
         public GenericTypeFinder(ITypesCache typesCache, ITypeFinder typeFinder, IDataTypeFactory dataTypeFactory)

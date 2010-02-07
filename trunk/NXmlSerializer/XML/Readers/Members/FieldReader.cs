@@ -20,8 +20,6 @@
 
 // Project site: http://code.google.com/p/nserializer/
 
-using System;
-using System.Reflection;
 using NSerializer.Exceptions;
 using NSerializer.Framework.Document;
 using NSerializer.Framework.Readers;

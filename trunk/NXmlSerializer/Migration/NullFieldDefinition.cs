@@ -33,6 +33,13 @@ namespace NSerializer.Migration
             this.fieldName = fieldName;
         }
 
+        public string Name
+        {
+            get { return fieldName; }
+        }
+
+        public bool Ignored { get; set; }
+
         public void AddAction(IFieldAction action)
         {
             throw new InvalidOperationException();
@@ -42,13 +49,6 @@ namespace NSerializer.Migration
         {
             throw new NotImplementedException();
         }
-
-        public string Name
-        {
-            get { return fieldName; }
-        }
-
-        public bool Ignored { get; set;}
 
         public bool Matches(string name)
         {

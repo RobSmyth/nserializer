@@ -111,7 +111,8 @@ namespace NSerializer
         /// Optional migration rules builder.
         /// </param>
         public NXmlReader(Assembly typeSeedAssembly, IApplicationObjectsRepository appObjectRepository,
-                          IDocumentObjectsRepository docObjectRepository, IMigrationRulesBuilder migrationRulesBuilder, ISubsystemBuilder pluginsBuilder)
+                          IDocumentObjectsRepository docObjectRepository, IMigrationRulesBuilder migrationRulesBuilder,
+                          ISubsystemBuilder pluginsBuilder)
         {
             system = new SystemDefinition();
 
@@ -158,7 +159,8 @@ namespace NSerializer
                 system.Get<IDataTypeFactory>().SetMigration(migrationDefinition);
                 typeFinder = migrationDefinition.GetTypeMigrator(typeFinder);
 
-                system.HasSubsystem(new PayloadReaderBuilder(metaData, new ReaderNameAliasingTypeFinder(typeFinder, metaData)))
+                system.HasSubsystem(new PayloadReaderBuilder(metaData,
+                                                             new ReaderNameAliasingTypeFinder(typeFinder, metaData)))
                     .Provides<PayloadReader>();
 
                 var payLoad = system.Get<PayloadReader>().Read(new XmlStreamReader(inputStream));

@@ -23,4 +23,4 @@ using System.Runtime.CompilerServices;
 
 [assembly : InternalsVisibleTo("Tests.NSerializer")]
 [assembly : InternalsVisibleTo("NSerializer.SandPit")]
-[assembly: InternalsVisibleTo("UATs.NSerializer")]
+[assembly : InternalsVisibleTo("UATs.NSerializer")]

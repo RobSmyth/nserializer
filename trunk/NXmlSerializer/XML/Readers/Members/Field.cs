@@ -20,7 +20,6 @@
 
 // Project site: http://code.google.com/p/nserializer/
 
-using System;
 using System.Reflection;
 using NSerializer.Migration.Fields;
 
@@ -29,8 +28,8 @@ namespace NSerializer.XML.Readers.Members
 {
     internal class Field : IField
     {
-        private readonly FieldInfo fieldInfo;
         private readonly IFieldDefinition fieldDefinition;
+        private readonly FieldInfo fieldInfo;
 
         public Field(FieldInfo fieldInfo, IFieldDefinition fieldDefinition)
         {

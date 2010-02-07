@@ -20,7 +20,6 @@
 
 // Project site: http://code.google.com/p/nserializer/
 
-using System;
 using NSerializer.Migration.Fields;
 using NSerializer.Migration.Types;
 
@@ -79,15 +78,16 @@ namespace NSerializer.Migration
 
         public IFieldDefinition GetFieldDefinition(string name)
         {
-            return typeDefinition.GetFieldDefinition(name);// >>> always returns something e.g. NullFieldDefintion
+            return typeDefinition.GetFieldDefinition(name); // >>> always returns something e.g. NullFieldDefintion
         }
 
         public string GetMappedName()
         {
             var topMappedName = typeDefinition.GetMappedName();
-            if (string.IsNullOrEmpty(topMappedName)) // >>> will not work as type definition will return alias or type name
+            if (string.IsNullOrEmpty(topMappedName))
+                // >>> will not work as type definition will return alias or type name
             {
-                return topMappedName;                
+                return topMappedName;
             }
             return childTypeDefinition.GetMappedName();
         }

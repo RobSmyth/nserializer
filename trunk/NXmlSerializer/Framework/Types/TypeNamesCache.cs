@@ -21,7 +21,6 @@
 // Project site: http://code.google.com/p/nserializer/
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 
@@ -30,8 +29,8 @@ namespace NSerializer.Framework.Types
     public class TypeNamesCache : ITypeNamesCache
     {
         private readonly SortedList<Type, int> cache;
-        private readonly List<Type> typesCache = new List<Type>();
         private readonly ITypeNameMapper typeNamesMapper;
+        private readonly List<Type> typesCache = new List<Type>();
 
         public TypeNamesCache(ITypeNameMapper typeNamesMapper)
         {
@@ -54,29 +53,6 @@ namespace NSerializer.Framework.Types
             }
         }
 
-        private string GetNormalisedName(Type type)
-        {
-            string typeName;
-            if (typeNamesMapper.CanHandle(type))
-            {
-                typeName = typeNamesMapper.GetTypeName(type);
-            }
-            else
-            {
-                // >>> map embedded types (array and generics) here <<<
-
-                if(type.IsArray)
-                {
-                    typeName = string.Format("{0}[]", GetTypeName(type.GetElementType()));
-                }
-                else
-                {
-                    typeName = new TypeNameDemangler(type).ToString();
-                }
-            }
-            return typeName;
-        }
-
         public string GetTypeName(Type type)
         {
             int id;
@@ -92,6 +68,29 @@ namespace NSerializer.Framework.Types
             }
 
             return string.Format("!{0}", id);
+        }
+
+        private string GetNormalisedName(Type type)
+        {
+            string typeName;
+            if (typeNamesMapper.CanHandle(type))
+            {
+                typeName = typeNamesMapper.GetTypeName(type);
+            }
+            else
+            {
+                // >>> map embedded types (array and generics) here <<<
+
+                if (type.IsArray)
+                {
+                    typeName = string.Format("{0}[]", GetTypeName(type.GetElementType()));
+                }
+                else
+                {
+                    typeName = new TypeNameDemangler(type).ToString();
+                }
+            }
+            return typeName;
         }
     }
 

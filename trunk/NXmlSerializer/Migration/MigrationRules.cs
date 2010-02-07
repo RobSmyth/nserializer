@@ -29,8 +29,8 @@ namespace NSerializer.Migration
 {
     public class MigrationRules : IMigrationRules
     {
-        private readonly Version fromVersion;
         private readonly IMigrationDefinition definition;
+        private readonly Version fromVersion;
         private readonly VersionComparer versionComparer = new VersionComparer();
 
         internal MigrationRules(IMigrationDefinition definition, Version fromVersion)
@@ -41,7 +41,8 @@ namespace NSerializer.Migration
 
         public void NotSupported(string message)
         {
-            throw new MigrationConfigurationException("Cannot mark a rules definition as not supported when it has rules.");
+            throw new MigrationConfigurationException(
+                "Cannot mark a rules definition as not supported when it has rules.");
         }
 
         ITypeMigrationRules ITypeMigrationRulesVerb.ForType<T>()
@@ -60,12 +61,12 @@ namespace NSerializer.Migration
 
         IMigrationRulesVerb IMigrationRules.From(int major, int minor, int build)
         {
-            return ((IMigrationRules)this).From(new Version(major, minor, build));
+            return ((IMigrationRules) this).From(new Version(major, minor, build));
         }
 
         IMigrationRulesVerb IMigrationRules.From(int major, int minor, int build, int revision)
         {
-            return ((IMigrationRules)this).From(new Version(major, minor, build, revision));
+            return ((IMigrationRules) this).From(new Version(major, minor, build, revision));
         }
 
         IMigrationRulesVerb IMigrationRules.From(Version version)

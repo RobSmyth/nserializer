@@ -18,7 +18,6 @@
 
 #endregion
 
-using System;
 using System.Reflection;
 using NSerializer.Types;
 using NSerializer.XML.Readers.Members;
@@ -28,9 +27,9 @@ namespace NSerializer.Framework.Types
 {
     public class TypeInAssemblyFinder : ITypeFinder
     {
+        private readonly IDataTypeFactory dataTypeFactory;
         private readonly Assembly seedAssembly;
         private readonly ITypesCache typesCache;
-        private readonly IDataTypeFactory dataTypeFactory;
 
         public TypeInAssemblyFinder(Assembly seedAssembly, ITypesCache typesCache, IDataTypeFactory dataTypeFactory)
         {
