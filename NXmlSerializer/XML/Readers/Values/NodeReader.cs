@@ -41,10 +41,6 @@ namespace NSerializer.XML.Readers.Values
             {
                 readers.Add(objectReader);
             }
-            readers.Add(new ClassReader(readObjects, memberReader, typeFinder, docObjectRepository, this, this));
-            readers.Add(new ValueTypeReader(memberReader, typeFinder));
-            readers.Add(new VersionReader());
-            readers.Add(new NullReader());
 
             baseTypeReaders.Add(new ListReader(readObjects, docObjectRepository, this, typeFinder));
             baseTypeReaders.Add(new DictionaryReader(readObjects, docObjectRepository, this, typeFinder));
