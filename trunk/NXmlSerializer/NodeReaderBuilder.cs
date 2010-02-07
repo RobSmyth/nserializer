@@ -57,7 +57,11 @@ namespace NSerializer
                 new ObjectReaderBuilder<ListReader>(),
                 new ObjectReaderBuilder<DictionaryReader>(),
                 new ObjectReaderBuilder<AppObjectReader>(),
-                new ObjectReaderBuilder<MetaDataTypeNameReader>()
+                new ObjectReaderBuilder<MetaDataTypeNameReader>(),
+                new ObjectReaderBuilder<ClassReader>(),
+                new ObjectReaderBuilder<ValueTypeReader>(),
+                new ObjectReaderBuilder<VersionReader>(),
+                new ObjectReaderBuilder<NullReader>()
                 )
                 .Provides<IObjectReader[]>();
 
@@ -71,6 +75,7 @@ namespace NSerializer
 
             system.HasSingleton<NodeReader>()
                 .Provides<IObjectReader>()
+                .Provides<IBaseTypeMembersReader>()
                 .Provides<NodeReader>();
         }
     }
