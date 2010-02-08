@@ -39,8 +39,7 @@ namespace NSerializer
     {
         private readonly IApplicationObjectsRepository appObjectRepository;
         private readonly IDocumentWriter document;
-        private readonly IMigrationRulesBuilder migrationRulesBuilder;
-        private ISystemDefinition system;
+        private readonly ISystemDefinition system;
 
         public NXmlWriter(IDocumentWriter document, IApplicationObjectsRepository appObjectRepository)
             : this(document, appObjectRepository, null)
@@ -54,13 +53,18 @@ namespace NSerializer
 
             this.document = document;
             this.appObjectRepository = appObjectRepository;
-            this.migrationRulesBuilder = migrationRulesBuilder ?? new NullMigrationRulesBuilder();
+
+            system.HasInstance(document)
+                .Provides<IDocumentWriter>();
 
             system.HasInstance(appObjectRepository ?? new NullApplicationObjectRepository())
                 .Provides<IApplicationObjectsRepository>();
 
             system.HasInstance(migrationRulesBuilder ?? new NullMigrationRulesBuilder())
                 .Provides<IMigrationRulesBuilder>();
+
+            system.HasInstance(new NullLogger())
+                .Provides<ILogger>();
         }
 
         /// <summary>
@@ -77,21 +81,21 @@ namespace NSerializer
             var version = value.GetType().Assembly.GetName().Version;
 
             var typeNameMapper =
-                new MigrationDefinitionFactory(version, migrationRulesBuilder, new NullLogger()).Create().GetTypeNameMapper();
+                new MigrationDefinitionFactory(version, system.Get<IMigrationRulesBuilder>(), system.Get<ILogger>()).Create().GetTypeNameMapper();
 
             var typeNamesCache = new TypeNamesCache(typeNameMapper);
             var valueWriterFactory = new DefaultValueWriterFactory(document, appObjectRepository,
                                                                    typeNamesCache);
             var objectWriter = valueWriterFactory.Create();
 
-            document.BeginWrite(writer);
+            system.Get<IDocumentWriter>().BeginWrite(writer);
 
             var payload = new Payload(value);
             objectWriter.Write(payload, document.RootNode, payload.GetType());
 
             WriteMetadata(version, typeNamesCache);
 
-            document.EndWrite();
+            system.Get<IDocumentWriter>().EndWrite();
         }
 
         private void WriteMetadata(Version targetVersion, ITypeNamesCache typeNamesCache)
