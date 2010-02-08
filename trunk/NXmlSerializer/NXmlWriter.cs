@@ -74,7 +74,7 @@ namespace NSerializer
 
             if (pluginsBuilder != null)
             {
-                system.CreateSubsystem(pluginsBuilder);
+                system = system.CreateSubsystem(pluginsBuilder);
             }
         }
 
@@ -87,6 +87,8 @@ namespace NSerializer
         /// </param>
         public void Write(object value, TextWriter writer)
         {
+            system.Get<ILogger>().Info("Start write");
+
             system.Get<IApplicationObjectsRepository>().Initialize();
 
             var version = value.GetType().Assembly.GetName().Version;
@@ -107,6 +109,8 @@ namespace NSerializer
             WriteMetadata(version, typeNamesCache);
 
             system.Get<IDocumentWriter>().EndWrite();
+
+            system.Get<ILogger>().Debug("Write completed");
         }
 
         private void WriteMetadata(Version targetVersion, ITypeNamesCache typeNamesCache)
