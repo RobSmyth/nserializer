@@ -18,6 +18,8 @@
 
 #endregion
 
+// Project site: http://code.google.com/p/nserializer/
+
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -76,7 +78,7 @@ namespace NSerializer.UATs.Contexts
         {
             var xmlResult = new StringBuilder();
             IDocumentWriter document = new NXmlDocumentWriter();
-            var xmlWriter = new NXmlWriter(document, repository, migrationRulesBuilder);
+            var xmlWriter = new NXmlWriter(document, repository, migrationRulesBuilder, new TestPlugins());
             xmlWriter.Write(value, new StringWriter(xmlResult));
             return xmlResult.ToString();
         }
