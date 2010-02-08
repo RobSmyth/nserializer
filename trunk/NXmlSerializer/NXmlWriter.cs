@@ -22,6 +22,8 @@
 
 using System;
 using System.IO;
+using NDependencyInjection;
+using NDependencyInjection.interfaces;
 using NSerializer.Framework;
 using NSerializer.Framework.Document;
 using NSerializer.Framework.Types;
@@ -38,6 +40,7 @@ namespace NSerializer
         private readonly IApplicationObjectsRepository appObjectRepository;
         private readonly IDocumentWriter document;
         private readonly IMigrationRulesBuilder migrationRulesBuilder;
+        private ISystemDefinition system;
 
         public NXmlWriter(IDocumentWriter document, IApplicationObjectsRepository appObjectRepository)
             : this(document, appObjectRepository, null)
@@ -47,9 +50,17 @@ namespace NSerializer
         public NXmlWriter(IDocumentWriter document, IApplicationObjectsRepository appObjectRepository,
                           IMigrationRulesBuilder migrationRulesBuilder)
         {
+            system = new SystemDefinition();
+
             this.document = document;
             this.appObjectRepository = appObjectRepository;
             this.migrationRulesBuilder = migrationRulesBuilder ?? new NullMigrationRulesBuilder();
+
+            system.HasInstance(appObjectRepository ?? new NullApplicationObjectRepository())
+                .Provides<IApplicationObjectsRepository>();
+
+            system.HasInstance(migrationRulesBuilder ?? new NullMigrationRulesBuilder())
+                .Provides<IMigrationRulesBuilder>();
         }
 
         /// <summary>
@@ -61,10 +72,7 @@ namespace NSerializer
         /// </param>
         public void Write(object value, TextWriter writer)
         {
-            if (appObjectRepository != null)
-            {
-                appObjectRepository.Initialize();
-            }
+            system.Get<IApplicationObjectsRepository>().Initialize();
 
             var version = value.GetType().Assembly.GetName().Version;
 
