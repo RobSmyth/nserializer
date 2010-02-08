@@ -65,7 +65,7 @@ namespace NSerializer
         /// parameter is null.
         /// </param>
         public NXmlReader(Assembly typeSeedAssembly, ISubsystemBuilder pluginsBuilder)
-            : this(typeSeedAssembly, null, null, null)
+            : this(typeSeedAssembly, null, null, pluginsBuilder)
         {
         }
 
@@ -86,8 +86,8 @@ namespace NSerializer
         /// Optional external repository. Used to provide instances of document scope objects.
         /// </param>
         public NXmlReader(Assembly typeSeedAssembly, IApplicationObjectsRepository appObjectRepository,
-                          IDocumentObjectsRepository docObjectRepository, ISubsystemBuilder dependencyInjectionBuilder)
-            : this(typeSeedAssembly, appObjectRepository, docObjectRepository, null, dependencyInjectionBuilder)
+                          IDocumentObjectsRepository docObjectRepository, ISubsystemBuilder pluginsBuilder)
+            : this(typeSeedAssembly, appObjectRepository, docObjectRepository, null, pluginsBuilder)
         {
         }
 
