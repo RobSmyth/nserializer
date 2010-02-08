@@ -42,12 +42,18 @@ namespace NSerializer
         private readonly ISystemDefinition system;
 
         public NXmlWriter(IDocumentWriter document, IApplicationObjectsRepository appObjectRepository)
-            : this(document, appObjectRepository, null)
+            : this(document, appObjectRepository, null, null)
         {
         }
 
         public NXmlWriter(IDocumentWriter document, IApplicationObjectsRepository appObjectRepository,
                           IMigrationRulesBuilder migrationRulesBuilder)
+            : this(document, appObjectRepository, migrationRulesBuilder, null)
+        {
+        }
+
+        public NXmlWriter(IDocumentWriter document, IApplicationObjectsRepository appObjectRepository,
+                          IMigrationRulesBuilder migrationRulesBuilder, ISubsystemBuilder pluginsBuilder)
         {
             system = new SystemDefinition();
 
@@ -65,6 +71,11 @@ namespace NSerializer
 
             system.HasInstance(new NullLogger())
                 .Provides<ILogger>();
+
+            if (pluginsBuilder != null)
+            {
+                system.CreateSubsystem(pluginsBuilder);
+            }
         }
 
         /// <summary>
@@ -100,8 +111,7 @@ namespace NSerializer
 
         private void WriteMetadata(Version targetVersion, ITypeNamesCache typeNamesCache)
         {
-            var valueWriterFactory = new DefaultValueWriterFactory(document, appObjectRepository,
-                                                                   new NullTypeNamesCache());
+            var valueWriterFactory = new DefaultValueWriterFactory(document, appObjectRepository, new NullTypeNamesCache());
             var metaDataWriter = valueWriterFactory.Create();
             var metaData = new MetaData(typeNamesCache.Names, targetVersion);
             metaDataWriter.Write(metaData, document.RootNode, metaData.GetType());
