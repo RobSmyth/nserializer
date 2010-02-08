@@ -37,7 +37,6 @@ namespace NSerializer
 {
     public class NXmlWriter
     {
-        private readonly IApplicationObjectsRepository appObjectRepository;
         private readonly IDocumentWriter document;
         private readonly ISystemDefinition system;
 
@@ -58,7 +57,6 @@ namespace NSerializer
             system = new SystemDefinition();
 
             this.document = document;
-            this.appObjectRepository = appObjectRepository;
 
             system.HasInstance(document)
                 .Provides<IDocumentWriter>();
@@ -97,7 +95,7 @@ namespace NSerializer
                 new MigrationDefinitionFactory(version, system.Get<IMigrationRulesBuilder>(), system.Get<ILogger>()).Create().GetTypeNameMapper();
 
             var typeNamesCache = new TypeNamesCache(typeNameMapper);
-            var valueWriterFactory = new DefaultValueWriterFactory(document, appObjectRepository,
+            var valueWriterFactory = new DefaultValueWriterFactory(document, system.Get<IApplicationObjectsRepository>(),
                                                                    typeNamesCache);
             var objectWriter = valueWriterFactory.Create();
 
@@ -115,7 +113,7 @@ namespace NSerializer
 
         private void WriteMetadata(Version targetVersion, ITypeNamesCache typeNamesCache)
         {
-            var valueWriterFactory = new DefaultValueWriterFactory(document, appObjectRepository, new NullTypeNamesCache());
+            var valueWriterFactory = new DefaultValueWriterFactory(document, system.Get<IApplicationObjectsRepository>(), new NullTypeNamesCache());
             var metaDataWriter = valueWriterFactory.Create();
             var metaData = new MetaData(typeNamesCache.Names, targetVersion);
             metaDataWriter.Write(metaData, document.RootNode, metaData.GetType());
